@@ -1,0 +1,14 @@
+<html>
+<body>
+<h1> My post</h1>
+
+{% for article in articles %}
+	<div>
+	<h2> <a href="/articles/get/{{ article.id }}/"> 		{{article.title}} </a> </h2>
+	     <p> {{ article.body | truncatewords:"15" }} </p>
+	</div>
+
+{% endfor %}
+</body>
+</html>
+
