@@ -56,6 +56,7 @@ WSGI_APPLICATION = 'djangotest.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'article/templates'),
 )
 
 # Database
