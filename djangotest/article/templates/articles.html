@@ -1,11 +1,15 @@
-<html>
-<body style= "background-color: #F8E0F7">
-<h1> My posts</h1>
+{% extends "base.html" %}
+
+{% block title %} Articles {% endblock %}
+
+{% block content %}
+
 {% if articles.count > 0 %}
 {% for article in articles %}
 	<div>
-	<h2> <a href="/articles/get/{{ article.id }}/"> 		{{article.title}} </a> </h2>
+	<h2> <a href="/articles/get/{{ article.id }}/"> {{article.title}} </a> </h2>
 	     <p> {{ article.body | truncatewords:"15" }} </p>
+	     <br>
 	</div>
 
 {% endfor %}
@@ -16,6 +20,4 @@
 
 {% endif %}
 
-</body>
-</html>
-
+{% endblock %}
