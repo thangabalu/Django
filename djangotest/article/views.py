@@ -26,6 +26,6 @@ def articles(request):
 				{'articles': Article.objects.all()})
 
 #If the url doesn't have the article id, default is 1
-def article (request, article_id=1):
+def article (request, article_title=""):
     return render_to_response('article.html',
-				{'article': Article.objects.get(id=article_id) })
+				{'article': Article.objects.get(title=article_title) })

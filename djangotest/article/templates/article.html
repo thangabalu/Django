@@ -2,11 +2,28 @@
 
 {% block title %}
 
-Article
+Recipe
 
 {% endblock %}
 
 {% block content %}
 <h1> {{ article.title }} </h1>
-<p> {{ article.body|linebreaks }} </p>
+{% if article.photo %}
+<img src="/static/{{article.photo}}" alt="hello", width= "400" </img>
+{% endif %}
+
+<h2> Ingredients Required</h2>
+<p> {{ article.ingredients|linebreaks }} </p>
+<br>
+<h2> Directions </h2>
+<p> {{ article.directions|linebreaks }} </p>
+<br>
+<h2> Note </h2>
+<p> {{ article.note|linebreaks }} </p>
+<br>
+<h2> Tips </h2>
+<p> {{ article.tips|linebreaks }} </p>
+<br>
+<br>
+<h2> Posted by Surekha on {{article.pub_date }} </h2>
 {% endblock %}

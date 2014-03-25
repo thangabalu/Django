@@ -1,6 +1,6 @@
 <html>
 <body>
-<h1> My post</h1>
+<h1> My posts</h1>
 
 {% for article in articles %}
 	<div>

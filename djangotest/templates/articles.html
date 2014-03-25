@@ -1,14 +1,23 @@
-<html>
-<body>
-<h1> My posts</h1>
+{% extends "base.html" %}
 
+{% block title %} Recipes {% endblock %}
+
+{% block content %}
+
+{% if articles.count > 0 %}
 {% for article in articles %}
 	<div>
-	<h2> <a href="/articles/get/{{ article.id }}/"> 		{{article.title}} </a> </h2>
-	     <p> {{ article.body | truncatewords:"15" }} </p>
+	<h2> <a href="/recipes/{{ article.title }}/"> {{article.title}} </a> </h2>
+	     <p> {{ article.directions | truncatewords:"15" }} </p>
+	     <br>
 	</div>
 
 {% endfor %}
-</body>
-</html>
 
+{% else %}
+
+<p> None to show! </p>
+
+{% endif %}
+
+{% endblock %}

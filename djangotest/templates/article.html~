@@ -2,6 +2,6 @@
 <body>
 <h1 style="font-size: 2em; font-style: italic; text-align: left; color: green"> {{ article.title }} </h1>
 
-<p style= "font-size: 1em; font-style: italic; text-align: justify; color: blue"> {{ article.body }} </p>
+<p style= "font-size: 1.25em; font-style: italic; text-align: justify; color: blue"> {{ article.body }} </p>
 </body>
 

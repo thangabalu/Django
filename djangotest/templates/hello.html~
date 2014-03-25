@@ -1,8 +1,0 @@
-<html>
-<body>
-
-Hi {{ name }},
-This template is working. Thank god!
-
-</body>
-</html>

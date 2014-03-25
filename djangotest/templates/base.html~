@@ -49,7 +49,7 @@
         <div class= "right">
 	    <p><strong>Navigation </p></strong>
 	   <ul>
-	       <li><a href="/recipes/all">Recipes</a></li>
+	       <li><a href="/articles/all">Articles</a></li>
 	       <li><a href="/admin/">Admin</a></li>
            <ul>
         </div>
