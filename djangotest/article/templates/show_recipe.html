@@ -1,0 +1,212 @@
+<html>
+<title>Recipe</title>
+<meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+<style type = "text/css">
+   a {text-decoration: none;color: #FF3288; font-weight:bold}
+   * {padding: 0; margin: 0;}
+  .maincontainer {width:1200px; margin-left:auto; margin-right: auto; border: thin solid black; }
+
+  .container  {width:1200px; margin: auto; height:133px; background-color:pink;}
+  .header     {background-color: pink}
+  .header h1  {color: #FE2E9A;font-size: 50px; line-height: 100px}
+  .header img {float: left; height: 90px; width: 100px; padding-left:250px;}
+  .content { padding-left: 20px; color: #A9215A;}  
+
+  .bottom {float:left; width: 850px; padding-left: 350px; margin-top:5px;}
+  .bottomblock {float: left;width: 250px;margin:auto;border: thin solid black;}
+  .bottomblock li { list-style: none; width: 200px;}
+  .footer {clear: left; background-color: pink; height: 95px; width:1200px; margin: auto;}
+  .footer img {float: left; height: 70px; width: 100px; padding: 5px;}
+
+
+
+.navmenu
+{	
+	padding-left: 147px;
+}
+
+.navmenu ul
+{
+	margin:0;
+	padding:0;
+	line-height: 30px;
+
+}
+
+.navmenu li
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+	float:left;
+	position:relative;
+	background: #F781F3;
+}
+
+.navmenu ul li a
+{
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-decoration:none;
+	height:30px;
+	width: 150px;
+	display:block;
+	color: #FFF;
+	border: 1px solid #FFF;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.navmenu ul ul
+{
+	position: absolute;
+	visibility: hidden;
+	top:32px;
+}
+
+.navmenu ul li:hover ul
+{
+	visibility: visible;
+
+}
+
+.navmenu li:hover
+{
+	background: #FE2E9A;
+}
+
+.navmenu ul li:hover ul li a:hover
+{
+	background: #CCC;
+	color: #000;
+}
+
+.navmenu a: hover
+{
+	color: #000;
+}
+
+.clearfloat
+{
+	clear:both;
+	margin:0;
+	padding:0;
+}
+
+
+</style>
+<div class = "maincontainer">
+	<div class = "container">
+	  <div class = "header">
+             {% load static from staticfiles %}
+	     <img src="{% static "img/surekhacook" %}" />
+             <h1> Surekha's Cookhouse </h1>
+	     <div class = "navmenu">
+		<ul>
+			<li><a href="/home">Home </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+
+		<ul>
+			<li><a href="/recipes/all">Recipes</a>
+			<ul> 
+				<li><a href="/recipes/cake">Cakes </a> </li>
+				<li><a href="/recipes/quick">Quick food </a> </li>
+				<li><a href="/recipes/past">Pastries </a> </li>
+				<li><a href="/recipes/variety">Variety rice </a> </li>
+				<li><a href="/recipes/one">One pot cooking </a> </li>
+			</ul>
+			</li>
+		</ul>
+		
+		<ul>
+			<li><a href="#">Cooking Skills </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+		<ul>
+			<li><a href="#">Health Benefits </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+
+		<ul>
+			<li><a href="#">Glossary </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+
+		<ul>
+			<li><a href="#">About us </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+	</div>
+    </div>
+    </div>
+<div class = "content">
+<br>
+<br>
+<h1><u> {{ article.title }} </u></h1>
+{% if article.photo %}
+<img src="/static/{{article.photo}}" alt="hello", width= "400" </img>
+{% endif %}
+{% if article.tips %}
+<p> {{ article.tips|linebreaks }} </p>
+<br>
+{% endif %}
+<h2> Ingredients Required</h2>
+<p> {{ article.ingredients|linebreaks }} </p>
+<br>
+<h2> Directions </h2>
+<p> {{ article.directions|linebreaks }} </p>
+<br>
+<h2> Note </h2>
+<p> {{ article.note|linebreaks }} </p>
+<br>
+<h2> Posted by Surekha on {{article.pub_date }} </h2>
+</div>
+
+        <div class = "bottom">
+	   <div class ="bottomblock">
+	<ul>
+	       <li style= "text-align: center;">Latest recipes</li><br>
+			{% for recipe in latest_recipes_three %}
+			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title }}/"> {{recipe.title}} </a> </li>
+			{% endfor %}
+	    </ul>
+	  </div>
+
+	   <div class ="bottomblock">
+	    <ul>
+	       <li style= "text-align: center;">Popular recipes</li><br>
+			{% for recipe in random_recipes_three %}
+			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title }}/"> {{recipe.title}} </a> </li>
+			{% endfor %}
+
+	    </ul>
+
+
+	  </div>
+	</div>
+
+
+
+
+        <div class= "footer">
+	    <p> © 2014 Surekha's cook house Pvt. Ltd., all rights reserved</p>
+	     {% load static from staticfiles %}
+	     <img src="{% static "img/surekhacook" %}"/>
+        </div>
+
+
+</div>
+</html>
+
+
+

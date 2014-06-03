@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns =patterns('',
-	url(r'^all/$', 'article.views.articles'),
-	#url(r'^get/(?P<article_id>\d+)/$', 'article.views.article'),
+	#url(r'^all/$', 'article.views.articles'),
+	url(r'^all/$', 'article.views.recipes_all'),
 	# P  - passing a parameter
-	#url(r'^get/(?P<article_title>)/$', 'article.views.article'),
-	url(r'^(?P<article_title>[-\w\d]+)/$', 'article.views.article'),
+	url(r'^(?P<recipetype>[-\w\d\s]+)/$', 'article.views.recipetype'),
+	url(r'^[\w]+/(?P<recipetitle>[-\w\d\s()]+)/$', 'article.views.showrecipe'),
 )

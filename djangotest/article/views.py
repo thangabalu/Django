@@ -5,27 +5,25 @@ from django.shortcuts import render_to_response
 from article.models import Article
 
 # Create your views here.
+#Order.objects.order_by('-date')[0]
+def home(request):
+   return render_to_response('home.html', 
+				{'latest_recipes_one' : Article.objects.all().order_by('-pub_date')[:1],
+                              	 'random_recipes_one' : Article.objects.all().order_by('?')[:1]})
 
-def hello(request):
-    name = "Prabhu"
-    html = "<html> <body> Hi %s, this is working. Thank god </body></html>" %name
-    return HttpResponse(html)
+def recipetype (request, recipetype):
+    return render_to_response('recipe_type_new.html',
+				{'type' : recipetype,
+				 'recipes': Article.objects.all()})
 
-def hello_template(request):
-    name = "Balu"
-    t = get_template('hello.html')
-    html = t.render(Context({'name' : name}))
-    return HttpResponse(html)
+def showrecipe (request, recipetitle=""):
+    return render_to_response('show_recipe.html',
+		{'article': Article.objects.get(title=recipetitle.replace("-"," ")),
+		 'latest_recipes_three' : Article.objects.all().order_by('-pub_date')[:5],
+		 'random_recipes_three' : Article.objects.all().order_by('?')[:5],
+		})
 
-def hello_template_simple(request):
-    name = "Surekha"
-    return render_to_response('hello.html', {'name': name})
-
-def articles(request):
-    return render_to_response('articles.html',
+def recipes_all(request):
+    return render_to_response('recipes_all.html',
 				{'articles': Article.objects.all()})
 
-#If the url doesn't have the article id, default is 1
-def article (request, article_title=""):
-    return render_to_response('article.html',
-				{'article': Article.objects.get(title=article_title) })

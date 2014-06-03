@@ -1,0 +1,278 @@
+<html>
+<title>Home page</title>
+<meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+<style type = "text/css">
+   * {padding: 0; margin: 0;}
+   a {text-decoration: none;color: #FF3288; font-weight:bold}
+   p {padding-left: 10px;}
+  .bigcontainer {width:100%; margin-left:auto; margin-right:auto;}
+  .container  {height:159px; border: thin solid black;}
+  .maincontainer {width:980px;margin-left:auto; margin-right: auto; background-color:white;}
+  .header {height:130px;}
+  .header img {float: left;height: 120px; width: 100px; padding-left:250px;}
+  .header h1  {color: #FE2E9A; font-size: 60px; line-height: 50px;padding-top:40px;}
+  .header h2  {color: #FE2E9A; font-size: 16px;}
+  .bigimage {width: 980px; height: 500px; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888;}
+  .firstimage {float:left; height:400px; width: 400px;}
+  .secondimage {float:left; width: 570px; height: 364px;}
+  .firstimage img1  {width: 300px; height: 150px;}
+  .firstimage img2  {width: 400px; height: 200px;}
+  .secondimage img {width: 580px; height: 450px;}
+  .firstimage_first {padding-bottom:40px; padding-left:30px;}
+  .firstimage_second {}
+
+  .nav {width: 234px; float: left; height:420px; margin: auto; border: thin solid black;}
+  .navblock ul {list-style-type: none; height: 246px;}
+  .navblock img{padding-left: 5px; padding-right: 5px;width:224px; height: 150px;}
+  .content {color: #A9215A; float: left; width: 700px; font-size: 15; margin: auto;line-height: 1.4em;background-color:white}
+  .right {float: right; width: 234px; height: 580px; margin: auto; border: thin solid black;}
+  .rightblock ul {list-style-type: none; height: 246px;}
+  .rightblock img{padding-left: 5px; padding-right: 5px;width:224px; height: 150px;}
+  .bottom {float:left;margin:auto; padding-top: 10px;margin-top:5px; }
+  .bottomblock {float: left; width: 265px;margin:auto; padding-left:35px;}
+  .bottomblock img {height: 178px; width: 265px; padding: 5px;}
+  .bottomblock p {color: #A9215A; font-size:16; line-height: 1.4em; text-align: justify}
+  .bottomblock center {font-size:18; font-weight:bold}
+  .footer {clear: left; background-color: pink; height: 115px; margin: auto;}
+  .footer p {vertical-align:middle; line-height:95px; text-align:right;}
+  .footer img {float: right; height: 100px; width: 100px;}
+
+
+.navmenu_block
+{
+        height:29px;
+	background: #FE2E9A; repeat-x;
+        margin:0;
+        padding:0;
+}
+
+.navmenu
+{	
+        width:980px;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:0;
+        margin-bottom:0;
+}
+
+.navmenu ul
+{
+	line-height: 31px;
+}
+
+.navmenu li
+{
+	padding:0;
+        width:auto;
+	list-style:none;
+	float:left;
+	position:relative;
+	background: #FE2E9A;
+        height:29px;
+	border-right: thin solid white;
+}
+
+.navmenu ul li a
+{       
+        margin:0;
+	padding:0; 
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+        font-size: 14px;
+	text-decoration:none;
+	width: 161px;
+	display:block;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.navmenu ul ul
+{
+	position: absolute;
+	visibility: hidden;
+	top:32px;
+}
+
+.navmenu ul li:hover ul
+{
+	visibility: visible;
+
+}
+
+.navmenu li:hover
+{
+	background: #FFC0CB;
+}
+
+.navmenu ul li:hover ul li a:hover
+{
+	background: #FFC0CB;
+}
+
+.navmenu a: hover
+{
+	color: #000;
+}
+
+.clearfloat
+{
+	clear:both;
+	margin:0;
+	padding:0;
+}
+
+</style>
+</head>
+
+<body>
+<div class = "bigcontainer">
+	<div class = "container">
+	  <div class = "header">
+             {% load static from staticfiles %}
+	     <img src="{% static "img/surekhacook" %}" />
+             <h1> Surekha's Cookhouse </h1>
+	     <h2>The House of flavors, tastes, recipes and healthy tips.</h2>
+          </div>
+       <div class = "navmenu_block">
+       	<div class = "navmenu">
+		<ul>
+			<li><a href="/home">Home </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+
+		<ul>
+			<li><a href="/recipes/all">Recipes</a>
+			<ul> 
+				<li><a href="/recipes/cake">Cakes </a> </li>
+				<li><a href="/recipes/quick">Quick food </a> </li>
+				<li><a href="/recipes/past">Pastries </a> </li>
+				<li><a href="/recipes/variety">Variety rice </a> </li>
+				<li><a href="/recipes/one">One pot cooking </a> </li>
+			</ul>
+			</li>
+		</ul>
+		
+		<ul>
+			<li><a href="#">Cooking Skills </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+		<ul>
+			<li><a href="#">Health Benefits </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+
+		<ul>
+			<li><a href="#">Glossary </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+
+		<ul>
+			<li><a href="#">About us </a>
+			<ul>
+			</ul>
+			</li>
+		</ul>
+          </div>
+  </div>
+ </div>
+	
+  <div class = "maincontainer">
+	<div class= "bigimage">
+	     {% load static from staticfiles %}
+		<div class = "firstimage">
+                  <div class= "firstimage_first">
+		     <img class="img1" src="{% static "img/bigpic_home1.jpg" %}"/>	
+                  </div>
+                  <div class = "firstimage_second">
+		     <img class="img2" src="{% static "img/bigpic_home3.jpg" %}"/>
+                  </div>
+		</div>
+
+		<div class = "secondimage">
+		     <img src="{% static "img/bigpic_home2.jpg" %}"/>	
+		</div>
+	</div>
+
+        <div class = "nav">
+	   <div class ="navblock">
+	    <ul>
+	       <li style= "text-align: center; color:C8E231; line-height:30px; font-weight: bold;">Latest recipes</li>
+			{% for recipe in latest_recipes_one %}
+			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
+		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
+			{% endfor %}
+	       <li style= "text-align: center; color:C8E231; line-height:30px; font-weight: bold;">Popular recipes</li>
+			{% for recipe in random_recipes_one %}
+			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
+		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
+			{% endfor %}
+
+	    </ul>
+	  </div>
+	</div>
+
+	<div class= "content">
+
+<h1> Secret Of  Healthy Living</h1>
+<br>
+Secret of healthy living is Healthy eating. Many factors affect our health. Some you cannot control, such as your genetic makeup or your age and some you can like eating right. By taking steps towards healthy living, you can help reduce your risk of heart disease, cancer, stroke and other serious diseases. Healthy Eating is the basic step for healthy living. 
+<br><br>
+It doesn’t have any diet plans. It’s very simple and you need not keep track of calories or spend time in gym for workouts. Healthy eating is nothing but intuitive eating (Creating a Healthy Relationship With Food, Mind & Body). Healthy eating begins from healthy cooking.
+<br><br>
+Healthy cooking doesn't mean that you have to become a gourmet chef or invest in an expensive cookware. You can use basic cooking techniques to prepare food in healthy ways. The cooking methods described here best captures the flavor and retain the nutrients in foods along with keeping them fresh and healthy.
+
+	{% block content %}
+
+
+
+   {% endblock %}
+
+	</div>
+
+        <div class = "bottom">
+	   <div class ="bottomblock">
+           {% load static from staticfiles %}
+           <img src="{% static "img/recipes" %}" />
+	   <br>
+	   <center><a href="/recipes/all">Recipes</a></center>
+	   <br>
+<p>Find many recipies from baking to broiling and from pastry to perfect rice cooking. Complex recipies are made simple and easy that even a kid can cook with perfection.</p>
+	  </div>
+
+	   <div class ="bottomblock">
+           {% load static from staticfiles %}
+           <img src="{% static "img/health_benefits" %}" />
+	   <br>
+	   <center><a href="#">Health benefits</a></center>
+	   <br>
+<p>Healthy lifestyle is what all wants without compromising their favorite food. Is it possible? Yes! Its just the matter of knowing more about your food</p>
+	    
+	  </div>
+
+	   <div class ="bottomblock">
+           {% load static from staticfiles %}
+           <img src="{% static "img/cooking_skills" %}" />
+	   <br>
+	   <center><a href="#">Cooking skills</a></center>
+	   <br>
+<p>To reach the peak of perfection in cooking follow the tips shared. Your magical touch will not only transform but also create an ambience as starred hotel food, to be craved by one & all in your fly.</p>	    
+	  </div>
+	</div>
+
+</div>	
+        <div class= "footer">
+	     {% load static from staticfiles %}
+	     <img src="{% static "img/surekhacook" %}"/>
+	    <p> © 2014 Surekha's cook house. All rights reserved</p><br>
+        </div>
+</div>	
+</body>
+</html>
