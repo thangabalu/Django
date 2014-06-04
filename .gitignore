@@ -3,6 +3,8 @@
 *.bak
 *.orig
 *~
+*.json
+*.db
 .project
 .pydevproject
 djangotest/static/*

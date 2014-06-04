@@ -24,6 +24,13 @@ class Article(models.Model):
     tips            = models.TextField(blank = True)
     photo           = models.FileField(upload_to= get_upload_file_name)
     recipe_type     = models.CharField(max_length=10,choices=Recipe_Choices)
+    likes           = models.IntegerField(blank = True, null = True, max_length=10)
+    meta_keyword    = models.TextField(blank = True, null = True,max_length=50)
+    meta_description    = models.TextField(blank = True, null = True,max_length=100)
+
 
     def __unicode__(self):
     	return self.title
+
+    class Meta:
+        app_label = 'article'
