@@ -1,229 +1,60 @@
+{% extends "base.html" %}
 <html>
-<title>All recipes</title>
-<meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
-<style type = "text/css">
-   * {padding: 0; margin: 0;}
-   a {text-decoration: none;color: #FF3288; font-weight:bold}
-   p {padding-left: 10px;}
-  .maincontainer {width:1200px; height: 1000px; margin-left:auto; margin-right: auto; border: thin solid black; }
-  .container  {width:1200px; margin: auto; height:133px; background-color: pink;}
-  .header     {background-color: pink}
-  .header h1  {color: #FE2E9A; font-size: 50px;line-height: 100px}
-  .header img {float: left; height: 90px; width: 100px; padding-left:250px;}
-.navmenu
-{	
-	padding-left: 147px;
-}
+<head>
+<title> new home</title>
+</head>
+<body>
 
-.navmenu ul
-{
-	margin:0;
-	padding:0;
-	line-height: 30px;
+{% block content %}
+<div class = "maincontainer">
+	<div class= "contentcontainer_recipes_all">
+        	<div class = "bottom_recipes_all"; style ="margin-top: 100px;">
+	        	<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+           			<img src="{% static "img/recipes" %}" />
+	    			<ul>
+	       				<li style= "text-align: center"><a href="/recipes/cake">Cakes</a></li>
+	                        </ul>
+	  		</div>
 
-}
+	   		<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+           			<img src="{% static "img/health" %}" />
+	    			<ul>
+	       				<li style= "text-align: center"><a href="/recipes/quick">Quick food</a></li>
+	    			</ul>
+	  		</div>
 
-.navmenu li
-{
-	margin:0;
-	padding:0;
-	list-style:none;
-	float:left;
-	position:relative;
-	background: #F781F3;
-}
+			<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+           			<img src="{% static "img/cooking" %}" />
+           			<ul>
+	       				<li style= "text-align: center"><a href="/recipes/past">Pastries</a></li>
+	    			</ul>
+	  		</div>
+		</div>
 
-.navmenu ul li a
-{
-	text-align:center;
-	font-family: "Arial Black", Gadget, sans-serif;
-	text-decoration:none;
-	height:30px;
-	width: 150px;
-	display:block;
-	color: #FFF;
-	border: 1px solid #FFF;
-	text-shadow: 1px 1px 1px #000;
-}
+                <div class = "bottom_recipes_all">
+	   		<div class ="bottomblock_recipes_all">
+		        {% load static from staticfiles %}
+             	        	<img src="{% static "img/recipes" %}" />
+	    			<ul>
+			       		<li style= "text-align: center"><a href="/recipes/variety">Variety Rice</a></li>
+		    		</ul>
+	  		</div>
 
-.navmenu ul ul
-{
-	position: absolute;
-	visibility: hidden;
-	top:32px;
-}
-
-.navmenu ul li:hover ul
-{
-	visibility: visible;
-
-}
-
-.navmenu li:hover
-{
-	background: #FE2E9A;
-}
-
-.navmenu ul li:hover ul li a:hover
-{
-	background: #CCC;
-	color: #000;
-}
-
-.navmenu a: hover
-{
-	color: #000;
-}
-
-.clearfloat
-{
-	clear:both;
-	margin:0;
-	padding:0;
-}
+	   		<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+           			<img src="{% static "img/health" %}" />
+	   	 		<ul>
+	       				<li style= "text-align: center"><a href="/recipes/one">One pot cooking</a></li>
+	    			</ul>
+	  		</div>
+		</div>
+    	</div>
 
 
-  .contentcontainer  {width:1200px; margin: auto; height:772px; float:left;}
-
-
-  .footer {clear: left; background-color: pink; height: 95px; width:1200px; margin: auto;}
-  .footer img {float: left; height: 70px; width: 100px; padding: 5px;}
-
-
-
-
-
-
-  .bottom {float:left; height: 250px; width: 1200px; margin:auto; padding-left: 100px; margin-top:5px;}
-  .bottomblock {float: left; height: 200px; width: 395px;margin:auto;}
-  .bottomblock li { list-style: none; width: 200px;}
-  .bottomblock img {height: 80px; width: 200px; padding: 5px; margin:auto;}
-</style>
-
-  <div class = "maincontainer">
-
-	<div class = "container">
-	  <div class = "header">
-             {% load static from staticfiles %}
-	     <img src="{% static "img/surekhacook" %}" />
-             <h1> Surekha's Cookhouse </h1>
-	<div class = "navmenu">
-		<ul>
-			<li><a href="/home">Home </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-
-		<ul>
-			<li><a href="/recipes/all">Recipes</a>
-			<ul> 
-				<li><a href="/recipes/cake">Cakes </a> </li>
-				<li><a href="/recipes/quick">Quick food </a> </li>
-				<li><a href="/recipes/past">Pastries </a> </li>
-				<li><a href="/recipes/variety">Variety rice </a> </li>
-				<li><a href="/recipes/one">One pot cooking </a> </li>
-			</ul>
-			</li>
-		</ul>
-		
-		<ul>
-			<li><a href="#">Cooking Skills </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-		<ul>
-			<li><a href="#">Health Benefits </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-
-		<ul>
-			<li><a href="#">Glossary </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-
-		<ul>
-			<li><a href="#">About us </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-	</div>
-
-
-          </div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<div class= "contentcontainer">
-        <div class = "bottom"; style ="margin-top: 100px;">
-	   <div class ="bottomblock">
-           {% load static from staticfiles %}
-           <img src="{% static "img/recipes" %}" />
-	    <ul>
-	       <li style= "text-align: center"><a href="/recipes/cake">Cakes</a></li>
-	    </ul>
-	  </div>
-
-	   <div class ="bottomblock">
-           {% load static from staticfiles %}
-           <img src="{% static "img/health" %}" />
-	    <ul>
-	       <li style= "text-align: center"><a href="/recipes/quick">Quick food</a></li>
-	    </ul>
-	  </div>
-
-	   <div class ="bottomblock">
-           {% load static from staticfiles %}
-           <img src="{% static "img/cooking" %}" />
-           <ul>
-	       <li style= "text-align: center"><a href="/recipes/past">Pastries</a></li>
-	    </ul>
-	  </div>
-	</div>
-
-        <div class = "bottom">
-	   <div class ="bottomblock">
-           {% load static from staticfiles %}
-           <img src="{% static "img/recipes" %}" />
-	    <ul>
-	       <li style= "text-align: center"><a href="/recipes/variety">Variety Rice</a></li>
-	    </ul>
-	  </div>
-
-	   <div class ="bottomblock">
-           {% load static from staticfiles %}
-           <img src="{% static "img/health" %}" />
-	    <ul>
-	       <li style= "text-align: center"><a href="/recipes/one">One pot cooking</a></li>
-	    </ul>
-	  </div>
-	</div>
-    </div>
-        <div class= "footer">
-	    <p> © 2014 Surekha's cook house Pvt. Ltd., all rights reserved</p>
-	     {% load static from staticfiles %}
-	     <img src="{% static "img/surekhacook" %}"/>
-        </div>
-
-   </div>
+</div>
+{% endblock %}
+</body>
+</html>
