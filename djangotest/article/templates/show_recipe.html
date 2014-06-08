@@ -41,7 +41,7 @@
 	<br>
 
 
-
+<div class = "bottom_show_recipe">
 	<div class ="bottomblock_show_recipe">
 	<ul>
   	      <li style= "text-align: center;">Latest recipes</li><br>
@@ -49,6 +49,7 @@
 	      <li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title }}/"> {{recipe.title}} </a> </li>
 	      {% endfor %}
 	</ul>
+	</div>
 
 	<div class ="bottomblock_show_recipe">
 	<ul>
@@ -61,10 +62,6 @@
         </div>
 </div>
 </div>
-
-
-
-
 </div>
 {% endblock %}
 </body>
