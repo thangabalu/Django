@@ -28,7 +28,13 @@
 	<h2> Note </h2>
 	<p> {{ article.note|linebreaks }} </p>
 	<br>
-	<h2> Posted by Surekha on {{article.pub_date }} </h2>
+        <a href = "/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">
+       <button>Like</button>
+       </a>
+	<p> {{article.likes}} People liked this recipe </a></p>
+       <br>
+	<h3> Posted by Surekha on {{article.pub_date }} </h3>
+
 
 <div class = "bottom_show_recipe">
 	<div class ="bottomblock_show_recipe">

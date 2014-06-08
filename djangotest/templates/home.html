@@ -31,7 +31,7 @@
 		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
 			{% endfor %}
 	       <li style= "text-align: center; color:C8E231; line-height:30px; font-weight: bold;">Popular recipe</li>
-			{% for recipe in random_recipes_one %}
+			{% for recipe in popular_recipes_one %}
 			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
 		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
 			{% endfor %}
