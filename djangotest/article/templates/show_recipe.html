@@ -28,15 +28,20 @@
 	<h2> Note </h2>
 	<p> {{ article.note|linebreaks }} </p>
 	<br>
-        <a href = "/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">
-       <button>Like</button>
-       </a>
-	<p> {{article.likes}} People liked this recipe </a></p>
-       <br>
+            <div class = "navmenu">
+		<ul>
+			<li><a style="width:100px;" href="/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">Like </a> </li>
+		</ul>
+            </div>
+	<div style="padding-top:5px; font-size: 17px;">
+	   +{{article.likes}}
+	</div>
+       <br><br>
 	<h3> Posted by Surekha on {{article.pub_date }} </h3>
+	<br>
 
 
-<div class = "bottom_show_recipe">
+
 	<div class ="bottomblock_show_recipe">
 	<ul>
   	      <li style= "text-align: center;">Latest recipes</li><br>
@@ -44,7 +49,6 @@
 	      <li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title }}/"> {{recipe.title}} </a> </li>
 	      {% endfor %}
 	</ul>
-	</div>
 
 	<div class ="bottomblock_show_recipe">
 	<ul>
