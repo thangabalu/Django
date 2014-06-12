@@ -25,12 +25,24 @@
 
 	   <div class ="navblock">
 	    <ul>
-	       <li style= "text-align: center; color:C8E231; line-height:30px; font-weight: bold;">Latest recipe</li>
+            <div class = "navmenu"; style="width: 220px; margin-top:10px;">
+		<ul>
+			<li><a style="width:220px; text-align:center; " href="#">Latest recipes</li>
+		</ul>
+            </div>
+	    <br><br>
 			{% for recipe in latest_recipes_one %}
 			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
 		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
 			{% endfor %}
-	       <li style= "text-align: center; color:C8E231; line-height:30px; font-weight: bold;">Popular recipe</li>
+
+		            <div class = "navmenu"; style="width: 220px">
+				<ul>
+					<li><a style="width:220px; text-align:center;" href="#">Popular recipes</li>
+				</ul>
+		            </div>
+			    <br><br>
+
 			{% for recipe in popular_recipes_one %}
 			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
 		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
@@ -40,7 +52,10 @@
 	  </div>
 
 	<div class = "content">
-		<h2> Secret Of  Healthy Living</h2>
+		<h1>
+			<span class="pink">Secret of</span>
+			<span class="green">Healthy living </span>
+		</h1>
 		<br>
 		Secret of healthy living is Healthy eating. Many factors affect our health. Some you cannot control, such as your 			genetic makeup or your age and some you can like eating right. By taking steps towards healthy living, you can 			help reduce your risk of heart disease, cancer, stroke and other serious diseases. Healthy Eating is the basic 			step for healthy living. 
 		<br><br>
