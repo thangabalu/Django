@@ -27,7 +27,7 @@
 	    <ul>
             <div class = "navmenu"; style="width: 220px; margin-top:10px;">
 		<ul>
-			<li><a style="width:220px; text-align:center; " href="#">Latest recipes</li>
+			<li style ="background: #999999"><a style="width:220px; text-align:center; color: #cccc33" href="#">Latest recipes</li>
 		</ul>
             </div>
 	    <br><br>
@@ -36,12 +36,12 @@
 		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
 			{% endfor %}
 
-		            <div class = "navmenu"; style="width: 220px">
-				<ul>
-					<li><a style="width:220px; text-align:center;" href="#">Popular recipes</li>
-				</ul>
-		            </div>
-			    <br><br>
+            <div class = "navmenu"; style="width: 220px">
+		<ul>
+			<li style ="background: #999999"><a style="width:220px; text-align:center; color: #cccc33" href="#">Popular recipes</li>
+		</ul>
+            </div>
+	    <br><br>
 
 			{% for recipe in popular_recipes_one %}
 			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
