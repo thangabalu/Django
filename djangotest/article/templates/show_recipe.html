@@ -12,11 +12,13 @@
 	<br>
 	<br>
 	<h1><u> {{ article.title }} </u></h1>
+	<br>
 	{% if article.photo %}
-	<img src="/static/{{article.photo}}" alt="hello", width= "400" </img>
+	<img src="/static/{{article.photo}}" alt="hello"</img>
+	<br><br>
 	{% endif %}
-	{% if article.tips %}
-	<p> {{ article.tips|linebreaks }} </p>
+	{% if article.note %}
+	<p> {{ article.note|linebreaks }} </p>
 	<br>
 	{% endif %}
 	<h2> Ingredients Required</h2>
@@ -25,8 +27,8 @@
 	<h2> Directions </h2>
 	<p> {{ article.directions|linebreaks }} </p>
 	<br>
-	<h2> Note </h2>
-	<p> {{ article.note|linebreaks }} </p>
+	<h2> Tips </h2>
+	<p> {{ article.tips|linebreaks }} </p>
 	<br>
             <div class = "navmenu">
 		<ul>
@@ -36,8 +38,9 @@
 	<div style="padding-top:5px; font-size: 17px;">
 	   +{{article.likes}}
 	</div>
-       <br><br>
-	<h3> Posted by Surekha on {{article.pub_date }} </h3>
+	<div style="text-align:right">
+		<span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
+	</div>
 	<br>
 
 

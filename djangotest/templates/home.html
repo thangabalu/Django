@@ -27,25 +27,25 @@
 	    <ul>
             <div class = "navmenu"; style="width: 220px; margin-top:10px;">
 		<ul>
-			<li style ="background: #999999"><a style="width:220px; text-align:center; color: #cccc33" href="#">Latest recipes</li>
+			<li style ="background: #CCCCCC"><a style="width:220px; text-align:center; color: #FE2E9A; text-shadow:none" href="#">Latest recipes</li>
 		</ul>
             </div>
 	    <br><br>
 			{% for recipe in latest_recipes_one %}
-			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
-		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
+			<li style= "text-align: center;"> <a style="color:#cccc33;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </li>
+		<img src="/static/{{recipe.photo}}" alt="hello" </img></a><br><br>
 			{% endfor %}
 
             <div class = "navmenu"; style="width: 220px">
 		<ul>
-			<li style ="background: #999999"><a style="width:220px; text-align:center; color: #cccc33" href="#">Popular recipes</li>
+			<li style ="background: #CCCCCC"><a style="width:220px; text-align:center; color: #FE2E9A; text-shadow:none" href="#">Popular recipes</li>
 		</ul>
             </div>
 	    <br><br>
 
 			{% for recipe in popular_recipes_one %}
-			<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
-		<img src="/static/{{recipe.photo}}" alt="hello" </img><br><br>
+			<li style= "text-align: center"> <a style="color:#cccc33;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </li>
+		<img src="/static/{{recipe.photo}}" alt="hello" </img></a><br><br>
 			{% endfor %}
 
 	    </ul>

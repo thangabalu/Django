@@ -16,8 +16,10 @@
         {% if recipe.recipe_type == type %}
         <div class = "bottom_recipe_type"; style ="margin-top: 50px;">
            {% load static from staticfiles %}
+	<a href="/recipes/{{ type }}/{{ recipe.title.split|join:"-"}}/">
            <img src="/static/{{recipe.photo}}"/><br>
-		<p><a href="/recipes/{{ type }}/{{ recipe.title.split|join:"-"}}/">{{recipe.title}}</a></p>
+		<p>{{recipe.title}}</p>
+	</a> 
 	</div>
 	{% endif %}
 
