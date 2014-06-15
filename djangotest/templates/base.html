@@ -50,16 +50,15 @@
   .bottom_recipe_type img {width: 160px; height:100px;}
   .bottom_recipe_type p {text-align: center;}
 
-
-  .content_show_recipe { padding-left: 20px; color: #A9215A;border: thin solid black;}  
-  .content_show_recipe h1 {color: #FE2E9A}
-  .content_show_recipe img {width: 600px; height: 360px }
-  .content_show_recipe p {font-size: 16;line-height: 1.4em;text-align: justify}
+  .content_block_show_recipe {width:620px; color: #A9215A;float:left; padding: 10px;}
+  .content_block_show_recipe h1 {color: #FE2E9A}
+  .content_block_show_recipe img {width: 600px; height: 360px }
+  .content_block_show_recipe p {font-size: 17;line-height: 1.4em;text-align: justify; padding:10px}
   .posted_show_recipe {font-size:15;}
-  .bottom_show_recipe {float:left;border: thin solid black;}
-  .bottomblock_show_recipe {float: left;width: 250px;margin:auto;border: thin solid black;}
-  .bottomblock_show_recipe li { list-style: none; width: 200px;}
+  .navigation_show_recipe {width:250px;float:right;border: thin solid black; padding:10px;}
 
+  .bottomblock_show_recipe li { list-style: none; width: 200px;}
+  .bottomblock_show_recipe a  { font-size: 17; line-height:1.4em;}
 
   .footer {width:100%; clear: left; background-color: pink; height: 115px; margin: auto;}
   .footer p {vertical-align:middle; line-height:95px; text-align:right;}
@@ -211,7 +210,7 @@
           </div>
          </div>
        </div>
-   <div class = "maincontainer"
+   <div class = "maincontainer">
    {% block content %}
 
    {% endblock %}
