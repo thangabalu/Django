@@ -20,8 +20,8 @@ def recipetype (request, recipetype):
 def showrecipe (request, recipetitle=""):
     return render_to_response('show_recipe.html',
 		{'article': Article.objects.get(title=recipetitle.replace("-"," ")),
-		 'latest_recipes_three' : Article.objects.all().order_by('-pub_date')[:10],
-		 'random_recipes_three' : Article.objects.all().order_by('?')[:10],
+		 'latest_recipes_ten' : Article.objects.all().order_by('-pub_date')[:10],
+		 'popular_recipes_ten' : Article.objects.all().order_by('-likes')[:10],
 		})
 
 def recipes_all(request):

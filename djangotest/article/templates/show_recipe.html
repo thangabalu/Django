@@ -52,14 +52,14 @@
 	<div class ="bottomblock_show_recipe">
 	<ul>
   	      <li style= "text-align: center;">Latest recipes</li><br>
-              {% for recipe in latest_recipes_three %}
+              {% for recipe in latest_recipes_ten %}
 	      <li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
 	      {% endfor %}
 	</ul>
 	<br><br>
 	<ul>
 		<li style= "text-align: center;">Popular recipes</li><br>
-		{% for recipe in random_recipes_three %}
+		{% for recipe in popular_recipes_ten %}
 		<li style= "text-align: center"> <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a> </li>
 		{% endfor %}
 
