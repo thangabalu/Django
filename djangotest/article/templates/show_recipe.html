@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-<html>
-<head>
-<title> new home</title>
-</head>
-<body>
+{% block title %}
+<title>{{ article.title }}</title>
+{% endblock %}
 
 {% block content %}
 <div class = "maincontainer"; style="border: thin solid black; float:left">
@@ -74,5 +72,3 @@
    </div>
 </div>
 {% endblock %}
-</body>
-</html>

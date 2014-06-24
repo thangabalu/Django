@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-<html>
-<head>
-<title> new home</title>
-</head>
-<body>
+
+{% block title %}
+<title>{{ type }}</title>
+{% endblock %}
+
 
 {% block content %}
 <div class = "maincontainer">
@@ -27,10 +27,6 @@
 {% endif %}
 </div>
 </div>
-
-
-
 </div>
 {% endblock %}
-</body>
-</html>
+
