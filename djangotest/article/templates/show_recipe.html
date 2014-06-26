@@ -21,7 +21,18 @@
    {% endif %}
 
    <h2> Ingredients Required</h2>
-   <p> {{ article.ingredients|linebreaks }} </p>
+   {% for key,value in ingredient.items %}
+	<h3>{{ key }} </h3>
+	<table>
+	{% for val in value %}
+		<tr>
+		{% for v in val%}
+  			<td>{{ v }}</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+	</table><br>
+   {% endfor %}
    <br>
 
    <h2> Directions </h2>
@@ -31,6 +42,7 @@
    <h2> Tips </h2>
    <p> {{ article.tips|linebreaks }} </p>
    <br>
+
       <div class = "navmenu">
         <ul>
 	 <li><a style="width:100px;" href="/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">Like </a> </li>
