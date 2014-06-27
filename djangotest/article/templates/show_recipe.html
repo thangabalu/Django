@@ -17,7 +17,6 @@
 
    {% if article.note %}
    <p> {{ article.note|linebreaks }} </p>
-   <br>
    {% endif %}
 
    {% for key,value in ingredient.items %}
@@ -32,15 +31,12 @@
 	{% endfor %}
 	</table><br>
    {% endfor %}
-   <br>
 
    <h2> Directions </h2>
    <p> {{ article.directions|linebreaks }} </p>
-   <br>
    
    <h2> Tips </h2>
    <p> {{ article.tips|linebreaks }} </p>
-   <br>
 
       <div class = "navmenu">
         <ul>

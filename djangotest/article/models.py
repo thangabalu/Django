@@ -10,11 +10,11 @@ def get_upload_file_name(instance, filename):
 class Article(models.Model):
 
     Recipe_Choices = (
-      ('cake', 'cakes'),
-      ('quick', 'quick food'),
-      ('past', 'pastries'),
-      ('variety', 'variety rice'),
-      ('one', 'one pot cooking')
+      ('cakes', 'cakes'),
+      ('quick-food', 'quick food'),
+      ('pastries', 'pastries'),
+      ('variety-rice', 'variety rice'),
+      ('one-pot-cooking', 'one pot cooking')
     )
     title           = models.CharField(max_length=200, unique = True)
     ingredients     = models.TextField()
