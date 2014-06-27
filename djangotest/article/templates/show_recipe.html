@@ -20,7 +20,6 @@
    <br>
    {% endif %}
 
-   <h2> Ingredients Required</h2>
    {% for key,value in ingredient.items %}
 	<h3>{{ key }} </h3>
 	<table>
@@ -73,7 +72,7 @@
 		</ul>
             </div>
 			{% for recipe in latest_recipes_ten %}
-			<li style= "text-align: center;"> <a style="color:#cccc33; width:250px; text-align:center;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/" }}/"> {{recipe.title}} </a></li>
+			<li style= "text-align: center;"> <a style="color:#FE2E9A; width:250px; text-align:center;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/" }}/"> {{recipe.title}} </a></li>
 			{% endfor %}
 
             <div class = "navmenu"; style="width: 250px">
@@ -87,7 +86,7 @@
             </div>
 
 			{% for recipe in popular_recipes_ten %}
-			<li style= "text-align: center"> <a style="color:#cccc33; width:250px; text-align:center;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a>	</li>
+			<li style= "text-align: center"> <a style="color:#FE2E9A; width:250px; text-align:center;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a>	</li>
 			{% endfor %}
 
 	    </ul>
