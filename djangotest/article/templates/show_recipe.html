@@ -8,7 +8,7 @@
 <div class = "content_block_show_recipe">
    <br>
    <br>
-   <h1><u> {{ article.title }} </u></h1>
+   <h1> {{ article.title }} </h1>
    <br>
    {% if article.photo %}
    <img src="/static/{{article.photo}}" alt="hello"</img>
@@ -59,42 +59,34 @@
 </div>
 
    <div class = "navigation_show_recipe">
+   <ul style="line-height:31px; width:250px;">
+   <li class = "radial_gradient" style ="width:250px;">		
+   <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;" href="#">
+	Latest recipes
+   </a>
+   </li>
+   {% for recipe in latest_recipes_ten %}
+   <li style= "width:250px;list-style:none;float:left;"> 
+   <a style="color: #FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+	{{recipe.title}}
+   </a> 
+   </li>
+   {% endfor %}
 
-	<div class ="bottomblock_show_recipe">
-            <div class = "navmenu"; style="width: 250px;">
-		<ul>
-			<li style ="
-    background: -webkit-radial-gradient(#edf5bb, #c8e231); /* For Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(#edf5bb, #c8e231); /* For Opera 11.1 to 12.0 */
-    background: -moz-radial-gradient(#edf5bb, #c8e231); /* For Firefox 3.6 to 15 */
-    background: radial-gradient(#edf5bb, #c8e231); /* Standard syntax (must be last) */
-    text-align:center"><a style="text-align:center; color: #FE2E9A; text-shadow:none;padding-top:5px; padding-bottom:5px;width:250px;" href="#">Latest recipes</a></li>
-		</ul>
-            </div>
-			{% for recipe in latest_recipes_ten %}
-			<li style= "text-align: center;"> <a style="color:#FE2E9A; width:250px; text-align:center;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/" }}/"> {{recipe.title}} </a></li>
-			{% endfor %}
+   <li class = "radial_gradient" style ="width:250px;">		
+    <a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;" href="#">
+	Popular recipes
+    </a>
+    </li>
+    {% for recipe in popular_recipes_ten %}
+    <li style= "width:250px;list-style:none;float:left;"> 
+    <a style="color: #FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+	{{recipe.title}} 
+    </a>
+    </li>
+    {% endfor %}
+    </ul>
+    </div>
 
-            <div class = "navmenu"; style="width: 250px">
-		<ul>
-			<li style ="
-    background: -webkit-radial-gradient(#edf5bb, #c8e231); /* For Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(#edf5bb, #c8e231); /* For Opera 11.1 to 12.0 */
-    background: -moz-radial-gradient(#edf5bb, #c8e231); /* For Firefox 3.6 to 15 */
-    background: radial-gradient(#edf5bb, #c8e231); /* Standard syntax (must be last) */"><a style="width:250px; text-align:center; color: #FE2E9A; text-shadow:none;padding-top:5px; padding-bottom:5px;" href="#">Popular recipes</li>
-		</ul>
-            </div>
-
-			{% for recipe in popular_recipes_ten %}
-			<li style= "text-align: center"> <a style="color:#FE2E9A; width:250px; text-align:center;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> {{recipe.title}} </a>	</li>
-			{% endfor %}
-
-	    </ul>
-</div>
-
-
-
-
-   </div>
 </div>
 {% endblock %}
