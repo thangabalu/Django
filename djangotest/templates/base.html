@@ -13,9 +13,10 @@
   .container  {height:159px; border: thin solid black;}
   .maincontainer {width:980px;margin-left:auto; margin-right: auto; background-color:white;}
   .header {height:130px;}
-  .header img {float: left;height: 120px; width: 100px; padding-left:250px;}
-  .header h1  {color: #FE2E9A; font-size: 60px; line-height: 50px;padding-top:40px;}
-  .header h2  {color: #FE2E9A; font-size: 16px;}
+  .headerblock {width:980px;margin-left:auto; margin-right:auto;}
+  .headerblock img {height: 120px; width: 100px; float:left}
+  .headerblock h1  {color: #FE2E9A; font-size: 60px;line-height: 50px;padding-top:40px;}
+  .headerblock h2  {color: #FE2E9A; font-size: 16px;}
 
 
   .bigimage {width: 980px; height: 500px; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888;}
@@ -247,10 +248,12 @@
 <div class = "bigcontainer">
        <div class = "container">
 	  <div class = "header">
+           <div class = "headerblock">
              {% load static from staticfiles %}
 	     <img src="{% static "img/surekhacook" %}" />
              <h1> Surekha's Cookhouse </h1>
 	     <h2>The House of flavors, tastes, recipes and healthy tips.</h2>
+           </div>
           </div>
        <div class = "navmenu_block">
             <div class = "navmenu">
