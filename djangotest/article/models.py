@@ -32,3 +32,12 @@ class Article(models.Model):
 
     def __unicode__(self):
     	return self.title
+
+class comment_table(models.Model):
+
+    comment         = models.CharField(max_length=200)
+    name            = models.CharField(max_length=200)
+    date            = models.DateTimeField(auto_now_add=True)
+    recipeid        = models.ForeignKey(Article)
+    def __unicode__(self):
+    	return self.comment
