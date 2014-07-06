@@ -25,6 +25,7 @@ class Article(models.Model):
     photo           = models.FileField(upload_to= get_upload_file_name)
     recipe_type     = models.CharField(max_length=10,choices=Recipe_Choices)
     likes           = models.IntegerField(max_length=10)
+    did_you_know    = models.CharField(max_length=1000, default="Nothing for this")
     meta_keyword    = models.TextField(blank = True, null = True,max_length=50)
     meta_description    = models.TextField(blank = True, null = True,max_length=100)
 
