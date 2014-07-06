@@ -52,6 +52,36 @@
           <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
       </div>
       <br>
+
+      {% if comments|length = 0 %}
+      <span style="font-weight:bold">No comments </span> <br><br>
+      {% else %}
+      <span style="font-weight:bold">{{comments|length}} comments</span><br><br>
+      {% for comment in comments %}
+          {% if comment.name %}
+             <span style="font-weight:bold">{{comment.name }} said..</span><br>
+          {% else %}
+             <span style="font-weight:bold">Anonymous said</span><br>	
+	  {% endif %}
+          {{comment.comment}}<br>
+          {{comment.date}}<br><br>
+      {% endfor %}
+      {% endif %}
+
+
+
+<form action="/recipes/comments/" method="post"> {% csrf_token %}
+        <span style="font-weight:bold">Enter your name</span><br>
+	<textarea name="name" cols="40" rows="1"></textarea><br>
+	<span style="font-weight:bold">Enter your comment</span><br> 
+	<textarea name="comment" cols="40" rows="10"></textarea>
+	<input type="hidden" name = "recipe_type" value= {{article.recipe_type}}>
+	<input type="hidden" name = "recipe_title" value= {{recipe_title_url_format}}>
+	<input type="hidden" name = "recipe_id" value= "{{article.id}}">
+	<input type="submit" value="submit" />
+
+</form>
+
 </div>
 <!--All <a> tags have font-weight:bold.. check base.html -->
    <div class ="navigation_did_you_know_show_recipe">
