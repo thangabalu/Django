@@ -1,13 +1,18 @@
+import re
+
 from django.shortcuts import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render_to_response
-from article.models import Article
-from article.models import comment_table
 from django.http import HttpResponseRedirect
 from django.utils.datastructures import SortedDict
-import re
 from django.core.context_processors import csrf
+from django.core.mail import send_mail
+from django.conf import settings
+
+from article.models import Article
+from article.models import comment_table
+
 
 # Create your views here.
 #Order.objects.order_by('-date')[0]
@@ -65,6 +70,16 @@ def recipes_comments(request):
     else:        
         row = comment_table(comment=comment, name=name, recipeid_id=recipe_id)
         row.save()
+	#Send email
+	#Need below to send non empty name in email
+        if name == "":
+		name="Anonymous"
+	subject='Comment from %s' %(name)
+	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe type -> %s \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,comment)
+	from_email=settings.EMAIL_HOST_USER
+	to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
+	
+	send_mail(subject,message,from_email,to_list,fail_silently=True)
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
 
