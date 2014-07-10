@@ -105,7 +105,7 @@
    </a>
    </li>
    {% for recipe in latest_recipes_ten %}
-   <li style= "width:250px;list-style:none;float:left;"> 
+   <li style= "width:250px;list-style:none;float:left; border-bottom: thin dotted black"> 
    <a style="color: #FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 	{{recipe.title}}
    </a> 
@@ -118,7 +118,7 @@
     </a>
     </li>
     {% for recipe in popular_recipes_ten %}
-    <li style= "width:250px;list-style:none;float:left;"> 
+    <li style= "width:250px;list-style:none;float:left;border-bottom: thin dotted black"> 
     <a style="color: #FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 	{{recipe.title}} 
     </a>
