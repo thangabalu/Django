@@ -45,8 +45,10 @@ def showrecipe (request, recipetitle=""):
 	    if match:
 	        ingredient_dictionary[key].append([match.group(1),match.group(2)])
     c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
-		 'latest_recipes_ten' : Article.objects.all().order_by('-pub_date')[:10],
-		 'popular_recipes_ten' : Article.objects.all().order_by('-likes')[:10],
+		 'latest_recipes_nine' : Article.objects.all().order_by('-pub_date')[:9],
+		 'latest_recipe_tenth' : Article.objects.all().order_by('-pub_date')[9:10],                 
+		 'popular_recipes_nine' : Article.objects.all().order_by('-likes')[:9],
+		 'popular_recipe_tenth' : Article.objects.all().order_by('-likes')[9:10],            
 		 'ingredient'	     :ingredient_dictionary,
 		 'recipe_title_url_format' : recipetitle,
                   'comments': comment_table.objects.filter(recipeid=recipe_id)

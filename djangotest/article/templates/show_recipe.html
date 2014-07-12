@@ -16,11 +16,12 @@
    {% endif %}
 
    {% if article.note %}
-   <p> {{ article.note|linebreaks }} </p>
+   <span> {{ article.note|linebreaks }} </span>
    {% endif %}
-
+   <br>     
    {% for key,value in ingredient.items %}
 	<h3>{{ key }} </h3>
+	<br>
 	<table>
 	{% for val in value %}
 		<tr>
@@ -32,11 +33,18 @@
 	</table><br>
    {% endfor %}
 
-   <h2> Directions </h2>
-   <p> {{ article.directions|linebreaks }} </p>
+   <h3> Directions </h3>
+   <br>
+   <div class= "directions_show_recipe">
+   <span> {{ article.directions|linebreaks }} </span>
+   </div>
+   <br>
    
-   <h2> Tips </h2>
-   <p> {{ article.tips|linebreaks }} </p>
+   {% if article.tips %}
+   <h3> Tips </h3>
+   <br>
+   <span>{{ article.tips|linebreaks }} </span>
+   {% endif %}
 
       <div class = "navmenu">
         <ul>
@@ -92,38 +100,56 @@
    </a>
    </li>
 
-   <span style="color: #FE2E9A;font-size: 16px; font-weight:bold">{{ article.did_you_know }}</span>
+   <span style="color: #FE2E9A;font-size: 16px;">{{ article.did_you_know }}</span>
 
    </ul>
    </div>
 
    <div class = "navigation_show_recipe">
-   <ul style="line-height:31px; width:250px;">
-   <li class = "radial_gradient" style ="width:250px;">		
-   <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;" href="#">
+   <ul style="line-height:25px; width:250px;display: block;">
+   <li class = "radial_gradient" style ="width:250px;display: inline-block">		
+   <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;display: block;" href="#">
 	Latest recipes
    </a>
    </li>
-   {% for recipe in latest_recipes_ten %}
-   <li style= "width:250px;list-style:none;float:left; border-bottom: thin dotted black"> 
-   <a style="color: #FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-	{{recipe.title}}
-   </a> 
-   </li>
-   {% endfor %}
 
-   <li class = "radial_gradient" style ="width:250px;">		
-    <a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;" href="#">
+   {% for recipe in latest_recipes_nine %}
+	  <li style= "width:250px;list-style:none;float:left; border-bottom: thin dotted black;display: inline-block"> 
+           <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+	   {{recipe.title}}
+           </a> 
+           </li>
+   {% endfor %}
+   {% for recipe in latest_recipe_tenth %}
+           <li style= "width:250px;list-style:none;float:left;display: inline-block"> 
+           <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+	   {{recipe.title}}
+           </a> 
+           </li>
+   {% endfor %}   
+
+
+   <li class = "radial_gradient" style ="width:250px;display: inline-block">		
+    <a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;display: block;" href="#">
 	Popular recipes
     </a>
     </li>
-    {% for recipe in popular_recipes_ten %}
-    <li style= "width:250px;list-style:none;float:left;border-bottom: thin dotted black"> 
-    <a style="color: #FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-	{{recipe.title}} 
-    </a>
-    </li>
+    {% for recipe in popular_recipes_nine %}
+         <li style= "width:250px;list-style:none;float:left;border-bottom: thin dotted black;display: inline-block"> 
+         <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+	       {{recipe.title}} 
+         </a>
+         </li>
     {% endfor %}
+    
+     {% for recipe in popular_recipe_tenth %}
+           <li style= "width:250px;list-style:none;float:left;display: inline-block"> 
+           <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+	   {{recipe.title}}
+           </a> 
+           </li>
+     {% endfor %} 
+    
     </ul>
     </div>
 
