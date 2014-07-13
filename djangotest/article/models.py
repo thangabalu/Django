@@ -22,10 +22,10 @@ class Article(models.Model):
     directions      = models.TextField()
     note            = models.TextField(blank = True)
     tips            = models.TextField(blank = True)
-    photo           = models.FileField(upload_to= get_upload_file_name)
+    photo           = models.FileField(upload_to= get_upload_file_name,blank=True)
     recipe_type     = models.CharField(max_length=100,choices=Recipe_Choices)
     likes           = models.IntegerField(max_length=100)
-    did_you_know    = models.CharField(max_length=1000, default="Nothing for this")
+    did_you_know    = models.TextField(blank = True)
     meta_keyword    = models.TextField(blank = True, null = True,max_length=50)
     meta_description    = models.TextField(blank = True, null = True,max_length=100)
 
