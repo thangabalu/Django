@@ -44,12 +44,29 @@ def showrecipe (request, recipetitle=""):
 	    match = re.search('(.*);(.*)',ingredient)
 	    if match:
 	        ingredient_dictionary[key].append([match.group(1),match.group(2)])
+
+    directions = recipe.directions
+    directions_split = directions.split('\n') 
+    directions_dictionary= SortedDict()
+    key=""
+    for direction in directions_split:
+      if '<h>' in direction:
+         match = re.search('<h>(.*)',direction)
+   	 if match:
+	    directions_dictionary[match.group(1)] =""
+	    key=match.group(1)
+      else:
+         if key:
+ 	    directions_dictionary[key]= directions_dictionary[key] + direction
+    
+    
     c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
-		 'latest_recipes_nine' : Article.objects.all().order_by('-pub_date')[:9],
-		 'latest_recipe_tenth' : Article.objects.all().order_by('-pub_date')[9:10],                 
-		 'popular_recipes_nine' : Article.objects.all().order_by('-likes')[:9],
-		 'popular_recipe_tenth' : Article.objects.all().order_by('-likes')[9:10],            
-		 'ingredient'	     :ingredient_dictionary,
+		 'latest_recipes_nine'     : Article.objects.all().order_by('-pub_date')[:9],
+		 'latest_recipe_tenth'     : Article.objects.all().order_by('-pub_date')[9:10],                 
+		 'popular_recipes_nine'    : Article.objects.all().order_by('-likes')[:9],
+		 'popular_recipe_tenth'    : Article.objects.all().order_by('-likes')[9:10],            
+		 'ingredient'	           : ingredient_dictionary,
+                 'direction'               : directions_dictionary,
 		 'recipe_title_url_format' : recipetitle,
                   'comments': comment_table.objects.filter(recipeid=recipe_id)
 		})

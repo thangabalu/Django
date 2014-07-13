@@ -35,9 +35,22 @@
 
    <h3> Directions </h3>
    <br>
+   
+   {% if direction|length = 0 %}
    <div class= "directions_show_recipe">
-   <span> {{ article.directions|linebreaks }} </span>
+        <span> {{ article.directions|linebreaks }} </span>
    </div>
+   {% else %}
+     {% for key,value in direction.items %}     
+	  <h4>{{ key }}</h4>
+          <div class= "directions_show_recipe">
+	       <span> {{ value |linebreaks }} </span>
+	  </div>
+	  <br>
+     {%endfor%}	
+	
+   {% endif %}
+   
    <br>
    
    {% if article.tips %}
