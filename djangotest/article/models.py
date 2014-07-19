@@ -10,11 +10,15 @@ def get_upload_file_name(instance, filename):
 class Article(models.Model):
 
     Recipe_Choices = (
-      ('cakes', 'cakes'),
+      ('baking', 'baking'),
       ('quick-food', 'quick food'),
       ('pastries', 'pastries'),
       ('variety-rice', 'variety rice'),
-      ('one-pot-cooking', 'one pot cooking')
+      ('one-pot-cooking', 'one pot cooking'),      
+      ('chutney', 'chutney'),
+      ('sides', 'sides'),
+      ('gravy', 'gravy'),
+      ('others', 'others')
     )
     title           = models.CharField(max_length=200, unique = True)
     ingredients     = models.TextField()
@@ -24,7 +28,9 @@ class Article(models.Model):
     tips            = models.TextField(blank = True)
     photo           = models.FileField(upload_to= get_upload_file_name,blank=True)
     recipe_type     = models.CharField(max_length=100,choices=Recipe_Choices)
-    likes           = models.IntegerField(max_length=100)
+    recipe_type_1   = models.CharField(max_length=100, choices=Recipe_Choices,blank=True)
+    recipe_type_2   = models.CharField(max_length=100, choices=Recipe_Choices,blank=True)
+    likes           = models.IntegerField(max_length=100,default=0)
     did_you_know    = models.TextField(blank = True)
     meta_keyword    = models.TextField(blank = True, null = True,max_length=50)
     meta_description    = models.TextField(blank = True, null = True,max_length=100)

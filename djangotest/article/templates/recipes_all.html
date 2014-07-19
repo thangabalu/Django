@@ -9,10 +9,10 @@
         	<div class = "bottom_recipes_all"; style ="margin-top: 100px;">
 	        	<div class ="bottomblock_recipes_all">
            		{% load static from staticfiles %}
-			<a href="/recipes/cakes">
+			<a href="/recipes/baking">
            			<img src="{% static "img/recipes" %}" />
 	    			<ul>
-	       				<li style= "text-align: center">Cakes</li>
+	       				<li style= "text-align: center">Baking</li>
 	                        </ul>
 			</a>
 	  		</div>
@@ -58,9 +58,50 @@
 	    			</ul>
 			</a>
 	  		</div>
+			
+	   		<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+			<a href="/recipes/chutney">
+           			<img src="{% static "img/health" %}" />
+	   	 		<ul>
+	       				<li style= "text-align: center">Chutney</li>
+	    			</ul>
+			</a>
+	  		</div>
 		</div>
+		
+                <div class = "bottom_recipes_all">
+	   		<div class ="bottomblock_recipes_all">
+		        {% load static from staticfiles %}
+			<a href="/recipes/sides">
+             	        	<img src="{% static "img/recipes" %}" />
+	    			<ul>
+			       		<li style= "text-align: center">Sides</li>
+		    		</ul>
+			</a>
+	  		</div>
+
+	   		<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+			<a href="/recipes/gravy">
+           			<img src="{% static "img/health" %}" />
+	   	 		<ul>
+	       				<li style= "text-align: center">Gravy</li>
+	    			</ul>
+			</a>
+	  		</div>
+			
+	   		<div class ="bottomblock_recipes_all">
+           		{% load static from staticfiles %}
+			<a href="/recipes/others">
+           			<img src="{% static "img/health" %}" />
+	   	 		<ul>
+	       				<li style= "text-align: center">Others</li>
+	    			</ul>
+			</a>
+	  		</div>
+		</div>		
+		
     	</div>
-
-
 </div>
 {% endblock %}

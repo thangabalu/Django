@@ -91,10 +91,11 @@ def recipes_comments(request):
         row.save()
 	#Send email
 	#Need below to send non empty name in email
+        #Change the recipe url in the email content after buying a domain        
         if name == "":
 		name="Anonymous"
 	subject='Comment from %s' %(name)
-	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe type -> %s \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,comment)
+	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,recipe_title,comment)
 	from_email=settings.EMAIL_HOST_USER
 	to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
 	
