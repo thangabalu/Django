@@ -21,6 +21,7 @@ class Article(models.Model):
       ('others', 'others')
     )
     title           = models.CharField(max_length=200, unique = True)
+    also_known_as   = models.TextField(blank = True)    
     ingredients     = models.TextField()
     pub_date        = models.DateTimeField()
     directions      = models.TextField()
