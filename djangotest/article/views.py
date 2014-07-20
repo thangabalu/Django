@@ -12,6 +12,7 @@ from django.conf import settings
 
 from article.models import Article
 from article.models import comment_table
+from article.models import ipaddress_table
 
 
 # Create your views here.
@@ -22,6 +23,17 @@ def home(request):
                               	 'popular_recipes_one' : Article.objects.all().order_by('-likes')[0:1]})
 
 def recipetype (request, recipetype):
+    #  Add this later in other requests...   
+    ip = request.META.get("HTTP_X_FORWARDED_FOR", None)
+    if ip:
+        # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
+        ip = ip.split(",")[0]
+    else:
+        ip = request.META.get("REMOTE_ADDR", "")
+
+    row = ipaddress_table(ip_address=ip)
+    row.save()
+
     return render_to_response('recipe_type_new.html',
 				{'type' : recipetype,
 				 'recipes': Article.objects.all()})

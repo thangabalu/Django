@@ -48,3 +48,12 @@ class comment_table(models.Model):
     recipeid        = models.ForeignKey(Article)
     def __unicode__(self):
     	return self.comment
+
+class ipaddress_table(models.Model):
+    #LAter change the "date"s type to Date time field. Temporarily have charfield to see the date in admin
+    #Because setting auto_now_add is true hides the value in the admin page
+    ip_address = models.IPAddressField()
+    date       = models.CharField(default=time.strftime("%c"),max_length=100)
+
+    def __unicode__(self):
+    	return self.ip_address
