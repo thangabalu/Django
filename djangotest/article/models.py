@@ -6,6 +6,9 @@ import time
 def get_upload_file_name(instance, filename):
 	return "uploaded_files/%s_%s" % (str(time.time()).replace('.','_'), filename)
 
+def get_time():
+	return time.strftime("%c")
+
 # I am making the title field unique, because I will use this in the part of the url
 class Article(models.Model):
 
@@ -53,7 +56,7 @@ class ipaddress_table(models.Model):
     #LAter change the "date"s type to Date time field. Temporarily have charfield to see the date in admin
     #Because setting auto_now_add is true hides the value in the admin page
     ip_address = models.IPAddressField()
-    date       = models.CharField(default=time.strftime("%c"),max_length=100)
+    date       = models.CharField(default=get_time,max_length=100)
 
     def __unicode__(self):
     	return self.ip_address
