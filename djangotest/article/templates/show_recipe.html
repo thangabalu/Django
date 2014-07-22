@@ -68,7 +68,7 @@
           <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
       </div>
       <br>
-
+     <div style="width:400px;">
       {% if comments|length = 0 %}
       <span style="font-weight:bold">No comments </span> <br><br>
       {% else %}
@@ -81,10 +81,12 @@
 	  {% endif %}
           {{comment.comment}}<br>
           {{comment.date}}<br><br>
+	  <!--This below div is just for providing dotted line under each comment -->
+          <div style="border:thin dotted #B0B0B0">	   </div>
+	  <br>
       {% endfor %}
       {% endif %}
-
-
+     </div>
 
 <form action="/recipes/comments/" method="post"> {% csrf_token %}
         <span style="font-weight:bold">Enter your name</span><br>
