@@ -15,13 +15,13 @@
    <br><br>
    {% endif %}
 
+   <!--All h4 tags inside content_block_show_recipe have margin-bottom property set in base.html-->   
    {% if article.note %}
    <span> {{ article.note|linebreaks }} </span>
    {% endif %}
    <br>     
    {% for key,value in ingredient.items %}
 	<h4>{{ key }} </h4>
-	<br>
 	<table>
 	{% for val in value %}
 		<tr>
@@ -33,28 +33,23 @@
 	</table><br>
    {% endfor %}
 
-   
-   {% if direction|length = 0 %}
-   <div class= "directions_show_recipe">
-        <span> {{ article.directions|linebreaks }} </span>
-   </div>
-   {% else %}
-     {% for key,value in direction.items %}     
-	  <h4>{{ key }}</h4>
-	  <br>
-          <div class= "directions_show_recipe">
+     <h4>Directions</h4>
+     {% load my_custom_filters %}
+     {% for value in direction %}
+	  {% if '<h>' in value %}
+	  <h4>{{ value |extract_from_h_tag}}</h4>
+	  {% else %}
+	  <div class= "directions_show_recipe">
 	       <span> {{ value |linebreaks }} </span>
 	  </div>
-	  <br>
-     {%endfor%}	
-	
-   {% endif %}
+	  {% endif %}
+     {% endfor %}	
+   
    
    <br>
    
    {% if article.tips %}
    <h4> Tips </h4>
-   <br>
    <span>{{ article.tips|linebreaks }} </span>
    {% endif %}
 
