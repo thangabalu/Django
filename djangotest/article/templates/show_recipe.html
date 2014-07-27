@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class = "maincontainer"; style="border: thin solid black; float:left">
-<div class = "content_block_show_recipe">
+<div class = "content_block_show_recipe">	
    <br>
    <br>
    <h1> {{ article.title }} </h1>
@@ -81,13 +81,41 @@
 	  {% endif %}
           {{comment.comment}}<br>
           {{comment.date}}<br><br>
+	  
+	  <!-- using the unique ids for making javascript to create div elements properly -->
+	  <input type = "button" name = {{comment.id|concatenate_two_strings_firstdiv }} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}") </input>
+	  <div id={{comment.id|concatenate_two_strings_firstdiv}}> </div>
+
+	  {% for key,value in comment_reply_dictionary.items%}
+	       {%for id,date,comment_val,unique_id,name in value%}
+		    {% if id == comment.id%}
+			 <div style="margin-left: 50px;">
+			 <br>
+			 {% if name %}
+			      <span style="font-weight:bold">{{name }} said..</span><br>
+			 {% else %}
+			      <span style="font-weight:bold">Anonymous said</span><br>
+			 {% endif %}     
+			 {{date}}<br>
+	  		 {{comment_val}}<br><br>
+			 <input type = "button" name = {{unique_id|concatenate_two_strings_seconddiv}} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}") </input>
+			 <div id={{unique_id|concatenate_two_strings_seconddiv}}> </div>
+			 </div>
+			 <br>
+			 <div style="margin-left: 50px;border:thin dotted #B0B0B0">	   </div>
+		    {% endif %}
+	       {% endfor %}
+	  <br>
+	  {% endfor %}	  
+
+	  
 	  <!--This below div is just for providing dotted line under each comment -->
-          <div style="border:thin dotted #B0B0B0">	   </div>
+	  <div style="border:thin dotted #B0B0B0">	   </div>
 	  <br>
       {% endfor %}
       {% endif %}
      </div>
-
+     
 <form action="/recipes/comments/" method="post"> {% csrf_token %}
         <span style="font-weight:bold">Enter your name</span><br>
 	<textarea name="name" cols="40" rows="1"></textarea><br>

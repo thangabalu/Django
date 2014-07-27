@@ -45,10 +45,19 @@ class Article(models.Model):
 
 class comment_table(models.Model):
 
-    comment         = models.CharField(max_length=200)
     name            = models.CharField(max_length=200)
     date            = models.DateTimeField(auto_now_add=True)
+    comment         = models.CharField(max_length=200)    
     recipeid        = models.ForeignKey(Article)
+    def __unicode__(self):
+    	return self.comment
+
+class comment_reply_table(models.Model):
+
+    comment_reply_id   = models.ForeignKey(comment_table)
+    name            = models.CharField(max_length=200)
+    comment            = models.CharField(max_length=200)
+    date               = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
     	return self.comment
 

@@ -9,11 +9,12 @@ from django.utils.datastructures import SortedDict
 from django.core.context_processors import csrf
 from django.core.mail import send_mail
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 from article.models import Article
 from article.models import comment_table
 from article.models import ipaddress_table
-
+from article.models import comment_reply_table
 
 # Create your views here.
 #Order.objects.order_by('-date')[0]
@@ -39,28 +40,44 @@ def recipetype (request, recipetype):
 				 'recipes': Article.objects.all()})
 
 def showrecipe (request, recipetitle=""):
-    c={}
-    c.update(csrf(request))
-    recipe = Article.objects.get(title=recipetitle.replace("-"," "))
-    recipe_id = recipe.id
-    ingredients = recipe.ingredients
-    ingredients_split = ingredients.split('\n')    
-    ingredient_dictionary= SortedDict()
-    for ingredient in ingredients_split:
-        if '<h>' in ingredient:
-	    match = re.search('<h>(.*)',ingredient)
-   	    if match:
-	        ingredient_dictionary[match.group(1)] =[]
-		key=match.group(1)
-	elif ';' in ingredient:
-	    match = re.search('(.*);(.*)',ingredient)
-	    if match:
-	        ingredient_dictionary[key].append([match.group(1),match.group(2)])
-
-    directions = recipe.directions
-    directions_split = directions.split('\n') 
+   c={}
+   c.update(csrf(request))
+   recipe = Article.objects.get(title=recipetitle.replace("-"," "))
+   recipe_id = recipe.id
+   ingredients = recipe.ingredients
+   ingredients_split = ingredients.split('\n')    
+   ingredient_dictionary= SortedDict()
+   for ingredient in ingredients_split:
+      if '<h>' in ingredient:
+         match = re.search('<h>(.*)',ingredient)
+         if match:
+            ingredient_dictionary[match.group(1)] =[]
+            key=match.group(1)
+         elif ';' in ingredient:
+            match = re.search('(.*);\s*(.*)',ingredient)
+            if match:
+               ingredient_dictionary[key].append([match.group(1),match.group(2)])
    
-    c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
+   directions = recipe.directions
+   directions_split = directions.split('\n')
+    
+   # Starting from here for reply comments.
+   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
+   
+   comment_reply_dictionary = SortedDict()
+   for comment in comment_rows:
+      result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
+      if result:
+         comment_reply_dictionary[comment.id] = []
+         for row in result:
+            row_date = row.date
+            row_comment  = row.comment
+            row_id = row.comment_reply_id_id
+            row_unique_id = row.id
+            row_name = row.name
+            comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
+   
+   c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
 		 'latest_recipes_nine'     : Article.objects.all().order_by('-pub_date')[:9],
 		 'latest_recipe_tenth'     : Article.objects.all().order_by('-pub_date')[9:10],                 
 		 'popular_recipes_nine'    : Article.objects.all().order_by('-likes')[:9],
@@ -68,10 +85,11 @@ def showrecipe (request, recipetitle=""):
 		 'ingredient'	           : ingredient_dictionary,
                  'direction'               : directions_split,
 		 'recipe_title_url_format' : recipetitle,
-                  'comments': comment_table.objects.filter(recipeid=recipe_id)
+                 'comments': comment_table.objects.filter(recipeid=recipe_id),
+                 'comment_reply_dictionary' : comment_reply_dictionary
 		})
 	    
-    return render_to_response('show_recipe.html',c)
+   return render_to_response('show_recipe.html',c)
 
 def recipes_all(request):
     return render_to_response('recipes_all.html',
@@ -98,10 +116,28 @@ def recipes_comments(request):
 	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,recipe_title,comment)
 	from_email=settings.EMAIL_HOST_USER
 	to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
-	
+	#to_list=['thangabalu@gmail.com']	
 	send_mail(subject,message,from_email,to_list,fail_silently=True)
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
+@csrf_exempt
+def recipes_comments_reply(request):
+   name = request.POST.get('name','anonymous')
+   comment = request.POST.get('comment','')
+   comment_id = request.POST.get('comment_id','')
+
+   recipe_type = request.POST.get('recipe_type','')
+   recipe_title = request.POST.get('recipe_title_url_format','')
+
+   #Add email
+
+   if comment=="":
+      return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
+   else:        
+      row = comment_reply_table(name=name, comment_reply_id_id=comment_id, comment=comment )
+      row.save()
+
+   return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
 def like_article(request, recipetype="",recipetitle=""):
     if recipetype and recipetitle:

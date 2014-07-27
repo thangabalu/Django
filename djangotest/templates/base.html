@@ -4,6 +4,88 @@
 <title>Base page</title>
 {% endblock %}
 
+{% load static from staticfiles %}
+<script type="text/javascript">
+function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
+{
+   var real_div= document.getElementById(name)
+   var form = document.createElement("form");
+   form.method = "POST";
+   form.action = "/recipes/comments/reply/";
+
+   var label_name = document.createElement("span");
+   label_name.innerHTML="Enter your name";
+   label_name.style.fontWeight ="bold"   
+   
+   var textbox_name = document.createElement("input")
+   textbox_name.type = "text"
+   textbox_name.name ="name"
+   textbox_name.size = "10"
+
+   var textbox_name = document.createElement("textarea")
+   textbox_name.type = "text"
+   textbox_name.name = "name"   
+   textbox_name.cols= "40"
+   textbox_name.rows= "1"
+   
+   var line_break = document.createElement("br")
+
+   var label_comment = document.createElement("span");
+   label_comment.innerHTML="Enter your comment";
+   label_comment.style.fontWeight ="bold"  
+
+
+   var textbox_comment = document.createElement("textarea")
+   textbox_comment.type = "text"
+   textbox_comment.name = "comment"   
+   textbox_comment.cols= "40"
+   textbox_comment.rows= "10"
+   
+
+   var submit_button = document.createElement("input")
+   submit_button.type ="button"
+   submit_button.id   ="mybutton_"+name
+   submit_button.value ="Submit"
+
+   var comment_id_hidden = document.createElement("input")
+   comment_id_hidden.type="hidden"
+   comment_id_hidden.name="comment_id"
+   comment_id_hidden.value= comment_id
+
+   var recipe_type_hidden = document.createElement("input")
+   recipe_type_hidden.type="hidden"
+   recipe_type_hidden.name="recipe_type"
+   recipe_type_hidden.value= recipe_type
+
+   var recipe_title_hidden = document.createElement("input")
+   recipe_title_hidden.type="hidden"
+   recipe_title_hidden.name="recipe_title_url_format"
+   recipe_title_hidden.value= recipe_title_url_format   
+
+   form.appendChild(label_name);
+   form.appendChild(textbox_name);
+   
+   form.appendChild(line_break)
+   
+   form.appendChild(label_comment)
+   form.appendChild(textbox_comment)
+   
+   form.appendChild(submit_button)
+   
+   form.appendChild(comment_id_hidden)
+   form.appendChild(recipe_type_hidden)
+   form.appendChild(recipe_title_hidden)
+   
+   real_div.appendChild(form)
+
+   document.getElementById("mybutton_"+name).addEventListener("click", function () {
+   form.submit();
+   });   
+
+   document.getElementsByName(name)[0].disabled = true;
+}   
+</script>
+
 <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
 <style type = "text/css">
    * {padding: 0; margin: 0;}
