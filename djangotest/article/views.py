@@ -53,10 +53,10 @@ def showrecipe (request, recipetitle=""):
          if match:
             ingredient_dictionary[match.group(1)] =[]
             key=match.group(1)
-         elif ';' in ingredient:
-            match = re.search('(.*);\s*(.*)',ingredient)
-            if match:
-               ingredient_dictionary[key].append([match.group(1),match.group(2)])
+      elif ';' in ingredient:
+         match = re.search('(.*);\s*(.*)',ingredient)
+         if match:
+            ingredient_dictionary[key].append([match.group(1),match.group(2)])
    
    directions = recipe.directions
    directions_split = directions.split('\n')
