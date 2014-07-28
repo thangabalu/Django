@@ -13,33 +13,29 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
    form.method = "POST";
    form.action = "/recipes/comments/reply/";
 
-   var label_name = document.createElement("span");
-   label_name.innerHTML="Enter your name";
-   label_name.style.fontWeight ="bold"   
-   
+
    var textbox_name = document.createElement("input")
    textbox_name.type = "text"
    textbox_name.name ="name"
    textbox_name.size = "10"
 
+   var line_break = document.createElement("br")
+   
    var textbox_name = document.createElement("textarea")
    textbox_name.type = "text"
    textbox_name.name = "name"   
    textbox_name.cols= "40"
    textbox_name.rows= "1"
+   textbox_name.placeholder ="Enter your name"
    
-   var line_break = document.createElement("br")
-
-   var label_comment = document.createElement("span");
-   label_comment.innerHTML="Enter your comment";
-   label_comment.style.fontWeight ="bold"  
-
+   var line_break_1 = document.createElement("br")
 
    var textbox_comment = document.createElement("textarea")
    textbox_comment.type = "text"
    textbox_comment.name = "comment"   
    textbox_comment.cols= "40"
    textbox_comment.rows= "10"
+   textbox_comment.placeholder ="Enter your comment"
    
 
    var submit_button = document.createElement("input")
@@ -62,12 +58,11 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
    recipe_title_hidden.name="recipe_title_url_format"
    recipe_title_hidden.value= recipe_title_url_format   
 
-   form.appendChild(label_name);
+   form.appendChild(line_break)
    form.appendChild(textbox_name);
    
-   form.appendChild(line_break)
+   form.appendChild(line_break_1)
    
-   form.appendChild(label_comment)
    form.appendChild(textbox_comment)
    
    form.appendChild(submit_button)
@@ -83,7 +78,7 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
    });   
 
    document.getElementsByName(name)[0].disabled = true;
-}   
+}      
 </script>
 
 <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
@@ -218,7 +213,6 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
   .content_block_show_recipe h4 {margin-bottom: 10px;}  
   .content_block_show_recipe img {width: 600px; }
   .content_block_show_recipe span {font-size: 17;line-height: 1.4em;text-align: justify;}
-  .directions_show_recipe {color: #000000;}
   .posted_show_recipe {font-size:15;}
 
   .navigation_did_you_know_show_recipe {width:250px;float:right;border-left: thin solid black;border-top: thin solid black; border-bottom: thin solid black; padding:10px; margin-top:103px; margin-bottom: 50px;}
@@ -235,7 +229,7 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
   }
   table,td
   {
-   	border:1px solid black;
+   	border:1px solid #A9215A; color: #A9215A;
   }
   td
   {

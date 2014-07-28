@@ -39,9 +39,7 @@
 	  {% if '<h>' in value %}
 	  <h4>{{ value |extract_from_h_tag}}</h4>
 	  {% else %}
-	  <div class= "directions_show_recipe">
-	       <span> {{ value |linebreaks }} </span>
-	  </div>
+            <span> {{ value |linebreaks }} </span>
 	  {% endif %}
      {% endfor %}	
    
@@ -68,6 +66,18 @@
           <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
       </div>
       <br>
+
+<form action="/recipes/comments/" method="post"> {% csrf_token %}
+	<textarea name="name" cols="40" rows="1" placeholder="Enter your name"></textarea>
+	<br>
+	<textarea name="comment" cols="40" rows="10" placeholder="Enter your comment"></textarea>
+	<input type="hidden" name = "recipe_type" value= {{article.recipe_type}}>
+	<input type="hidden" name = "recipe_title" value= {{recipe_title_url_format}}>
+	<input type="hidden" name = "recipe_id" value= "{{article.id}}">
+	<input type="submit" value="submit" />
+
+</form>
+	  
      <div style="width:400px;">
       {% if comments|length = 0 %}
       <span style="font-weight:bold">No comments </span> <br><br>
@@ -102,7 +112,7 @@
 			 <div id={{unique_id|concatenate_two_strings_seconddiv}}> </div>
 			 </div>
 			 <br>
-			 <div style="margin-left: 50px;border:thin dotted #B0B0B0">	   </div>
+			 <div style="margin-left: 50px;border-bottom: solid #B0B0B0">	   </div>
 		    {% endif %}
 	       {% endfor %}
 	  <br>
@@ -110,24 +120,12 @@
 
 	  
 	  <!--This below div is just for providing dotted line under each comment -->
-	  <div style="border:thin dotted #B0B0B0">	   </div>
+	  <div style="border-bottom: solid #B0B0B0;">	   </div>
 	  <br>
       {% endfor %}
       {% endif %}
      </div>
      
-<form action="/recipes/comments/" method="post"> {% csrf_token %}
-        <span style="font-weight:bold">Enter your name</span><br>
-	<textarea name="name" cols="40" rows="1"></textarea><br>
-	<span style="font-weight:bold">Enter your comment</span><br> 
-	<textarea name="comment" cols="40" rows="10"></textarea>
-	<input type="hidden" name = "recipe_type" value= {{article.recipe_type}}>
-	<input type="hidden" name = "recipe_title" value= {{recipe_title_url_format}}>
-	<input type="hidden" name = "recipe_id" value= "{{article.id}}">
-	<input type="submit" value="submit" />
-
-</form>
-
 </div>
 <!--All <a> tags have font-weight:bold.. check base.html -->
    <div class ="navigation_did_you_know_show_recipe">
