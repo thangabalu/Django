@@ -136,10 +136,11 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
 	}
 
 
-
-  .content {color: #A9215A; float: left; width: 700px; font-size: 16; margin: auto; margin-left:20px; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify}
+  .content {color: #A9215A; float: left; padding-right:20px; width: 700px; font-size: 16; margin: auto; margin-left:20px; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
+  .content_picture {float:right; width:250px; height: 250px; margin-left: 40px; margin-top: 50px;}
+  .content_picture img {width: 250px;height:250px;}
   .pink  {color:#FE2E9A}
-  .green {color:#4CC417}
+  .grey {color:#666666}
 
   .bottom {float:left;margin-top:100px;}
   .bottomblock {float: left; width: 245px;margin:auto; padding-left:35px;}
@@ -406,7 +407,7 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format)
    <div class= "footer">
      {% load static from staticfiles %}
      <img src="{% static "img/surekhacook" %}"/>
-    <p> © 2014 Surekha's cook house. All rights reserved</p><br>
+    <p> © 2014 Surekha's cookhouse. All rights reserved</p><br>
    </div>
 </div>	
 </body>
