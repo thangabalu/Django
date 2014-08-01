@@ -4,22 +4,11 @@
 <title>Home page</title>
 {% endblock %}
 
+{% load static from staticfiles %}
 {% block content %}
 <div class = "maincontainer">
 	<div class= "bigimage">
-	     {% load static from staticfiles %}
-		<div class = "firstimage">
-                  <div class= "firstimage_first">
-		     <img class="img1" src="{% static "img/bigpic_home1.jpg" %}"/>	
-                  </div>
-                  <div class = "firstimage_second">
-		     <img class="img2" src="{% static "img/bigpic_home3.jpg" %}"/>
-                  </div>
-		</div>
-
-		<div class = "secondimage">
-		     <img src="{% static "img/bigpic_home2.jpg" %}"/>	
-		</div>
+		<img src="{% static "img/Home_big_image.jpg" %}"/>
 	</div>
 
    <div class ="navblock">
