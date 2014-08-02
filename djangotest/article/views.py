@@ -97,7 +97,9 @@ def recipes_all(request):
 
 def recipes_comments(request):
     comment = request.POST.get('comment','')    
-    name = request.POST.get('name','anonymous')    
+    name = request.POST.get('name','')
+    if name == "":
+      name="Anonymous"    
     recipe_id = request.POST.get('recipe_id','')
     recipe_type  = request.POST.get('recipe_type','')
     recipe_title = request.POST.get('recipe_title','')
@@ -108,10 +110,7 @@ def recipes_comments(request):
         row = comment_table(comment=comment, name=name, recipeid_id=recipe_id)
         row.save()
 	#Send email
-	#Need below to send non empty name in email
         #Change the recipe url in the email content after buying a domain        
-        if name == "":
-		name="Anonymous"
 	subject='Comment from %s' %(name)
 	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,recipe_title,comment)
 	from_email=settings.EMAIL_HOST_USER

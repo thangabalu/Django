@@ -7,5 +7,7 @@
 *.db
 .project
 .pydevproject
-djangotest/static/*
+djangotest/static/img
+djangotest/static/css
+djangotest/static/uploaded_files
 static/*
