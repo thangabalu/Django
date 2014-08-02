@@ -121,7 +121,9 @@ def recipes_comments(request):
 
 @csrf_exempt
 def recipes_comments_reply(request):
-   name = request.POST.get('name','anonymous')
+   name = request.POST.get('name','')
+   if name == "":
+      name="Anonymous"   
    comment = request.POST.get('comment','')
    comment_id = request.POST.get('comment_id','')
 
