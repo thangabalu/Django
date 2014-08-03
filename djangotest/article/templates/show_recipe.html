@@ -90,7 +90,7 @@
 	     </div>
           {{comment.comment}}
 	    <br>
-	    
+	    <br>
 	  <!-- using the unique ids for making javascript to create div elements properly -->
 	  <div style="float:right">
 	       <input type = "button" class= "reply_button" name = {{comment.id|concatenate_two_strings_firstdiv }} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}","{{comment.name}}") </input>
@@ -114,12 +114,11 @@
 			 </div>
 			 <br>			 
 			 <div id={{unique_id|concatenate_two_strings_seconddiv}}> </div>
+			 <br>
 			 </div>
 		    {% endif %}
 	       {% endfor %}
-	  <br>
 	  {% endfor %}	  
-	  <br>
       {% endfor %}
       {% endif %}
      </div>
