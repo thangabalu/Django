@@ -40,6 +40,10 @@ function you_hovered(name,comment_id,recipe_type,recipe_title_url_format,comment
  
    document.getElementById("mybutton_"+name).addEventListener("click", function () {
    var collect_name_from_div = $("#editable_div_name_"+name).text();
+   // The below loop is done to clean up the textarea if the user has not typed name.Otherwise "Enter your name" will go to database
+   if (collect_name_from_div == "Enter your name") {
+      collect_name_from_div =""
+   }
    var collect_comment_from_div = $("#editable_div_comment_"+name).text();
 
    $("form").append(

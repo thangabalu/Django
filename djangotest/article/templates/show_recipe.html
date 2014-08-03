@@ -84,11 +84,11 @@
       {% else %}
       <span style="font-weight:bold">{{comments|length}} comments</span><br><br>
       {% for comment in comments %}
-	     <div style="background-color:#DEDEDE;height:35px;"> 
-	       <span style="font-weight:bold;line-height: 30px; padding-left: 5px;">{{comment.name }}</span>
-	       <span style="font-weight:bold;float: right; line-height: 30px; padding-right:5px;">{{comment.date }}</span>
+	     <div style="background-color:#DEDEDE;height:30px;"> 
+	       <span style="font-weight:bold;line-height: 30px; padding-left: 5px;font-size: 14px;">{{comment.name }}</span>
+	       <span style="float: right; line-height: 30px; padding-right:5px;font-size: 12px;">{{comment.date }}</span>
 	     </div>
-          {{comment.comment}}
+          <span>{{comment.comment}}</span>
 	    <br>
 	    <br>
 	  <!-- using the unique ids for making javascript to create div elements properly -->
@@ -103,12 +103,13 @@
 			 <div style="margin-left: 50px;">
 			 <br>
 		      
-		         <div style="background-color:#DEDEDE;height:35px;"> 
-			      <span style="font-weight:bold;line-height: 35px; padding-left: 5px;">{{ name }}</span>
-	                      <span style="font-weight:bold;float: right; line-height: 35px; padding-right:5px;">{{date }}</span>
+		         <div style="background-color:#DEDEDE;height:30px;"> 
+			      <span style="font-weight:bold;line-height: 35px; padding-left: 5px;font-size:14px;">{{ name }}</span>
+	                      <span style="float: right; line-height: 35px; padding-right:5px; font-size: 12px;">{{date }}</span>
 	                 </div>     
     
-	       		 {{comment_val}}<br><br>
+	       		 <span>{{comment_val}}</span>
+			 <br><br>
 			 <div style="float:right">		 
 			      <input type = "button" class= "reply_button" name = {{unique_id|concatenate_two_strings_seconddiv}} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}","{{name}}") </input>
 			 </div>
