@@ -86,7 +86,8 @@ def showrecipe (request, recipetitle=""):
                  'direction'               : directions_split,
 		 'recipe_title_url_format' : recipetitle,
                  'comments': comment_table.objects.filter(recipeid=recipe_id),
-                 'comment_reply_dictionary' : comment_reply_dictionary
+                 'comment_reply_dictionary' : comment_reply_dictionary,
+                 'you_might_also_like'      : Article.objects.all().order_by('?')[:3]
 		})
 	    
    return render_to_response('show_recipe.html',c)

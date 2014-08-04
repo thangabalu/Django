@@ -67,6 +67,27 @@
       </div>
       <br>
 
+      <!--You might also like section -->
+      <!--Make the entire div clickable -->
+      <span style="font-size:20px;">You might also like:</span>
+      <div class="you_might_also_like_show_recipe">
+	  {% for recipe in you_might_also_like %}
+	          {% if recipe.photo %}
+		       <div class="block_in_you_might_also_like_show_recipe">
+			<a href ="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+			 <div class="content_in_you_might_also_like_show_recipe">
+	  		    <img src="/static/{{recipe.photo}}" alt="hello"</img><br>
+			    <span style="font-weight:bold;font-size:15px;">{{recipe.title}}</span><br>
+			 </a>
+			</div>
+   		       </div>
+	         {% endif %}
+          {% endfor %}
+      </div>
+      <br>
+      
+      
+      
 <form action="/recipes/comments/" method="post"> {% csrf_token %}
 	<textarea name="name" cols="40" rows="1" placeholder="Enter your name"></textarea>
 	<br>
