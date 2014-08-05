@@ -3,6 +3,7 @@
 <title>{{ article.title }}</title>
 {% endblock %}
 
+{% load static from staticfiles %}
 {% block content %}
 <div class = "maincontainer"; style="border: thin solid black; float:left">
 <div class = "content_block_show_recipe">	
@@ -52,21 +53,33 @@
    {% endif %}
 
    <br>
-      <div class = "navmenu">
+      <div class = "navmenu" style="float:left; display: inline-block">
         <ul>
 	 <li><a style="width:100px;" href="/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">Like </a> </li>
-        </ul>
-      </div>
-      
-      <div style="padding-top:5px; font-size: 17px;">
+	  <div style="padding-left:5px; font-size: 17px;">
    	  +{{article.likes}}
       </div>
-	
-      <div style="text-align:right">
-          <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
+        </ul>
       </div>
-      <br>
 
+     <div style="text-align:right;">
+         <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
+     </div>
+     
+     <div class="social-icons">
+        <ul>
+	  <li style="font-size: 20px;">Share:</li>
+          <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank" title="{{ article.title }}/"><img src="{% static "img/face-book.png" %}" width="16" height="16" alt="img" /></a></li>
+          <li><a href="https://twitter.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/&amp;text={{ article.title }}" target="_blank"><img src="{% static "img/twitter.png" %}" width="16" height="16" alt="img" /></a></li>
+          <li><a href="https://plus.google.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank"><img src="{% static "img/google.png" %}" width="16" height="16" alt="img" /></a></li>
+        </ul>
+      </div>     
+     
+     
+	
+      <br><br>
+
+      
       <!--You might also like section -->
       <!--Make the entire div clickable -->
       <span style="font-size:20px;">You might also like:</span>
