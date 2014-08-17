@@ -149,3 +149,21 @@ def like_article(request, recipetype="",recipetitle=""):
 	a.likes = count
 	a.save()
     return HttpResponseRedirect('/recipes/%s/%s/'% (recipetype,recipetitle))
+
+def search(request):
+   c={}
+   c.update(csrf(request))   
+   return render_to_response('search.html',c)
+
+def search_titles(request):
+   if request.method == "POST":
+      search_text = request.POST['search_text']
+   else:
+      search_text = ''
+   #hotcoded value, because '' fetching all values from database   
+   if search_text =='':
+      search_text ='nothinggggggggggggggggggggggggggggggggggggg'
+
+   #Can I pass the value directly from here instead of doing from another html
+   recipes= Article.objects.filter(title__contains=search_text)
+   return render_to_response('ajax_search.html',{'recipes':recipes})

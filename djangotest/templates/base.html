@@ -1,10 +1,10 @@
 <html>
 <head>
+{% load static from staticfiles %}   
 {% block title %}
 <title>Base page</title>
 {% endblock %}
 
-{% load static from staticfiles %}
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="{% static "js/first.js" %}"> </script>
 
@@ -24,7 +24,6 @@
   .headerblock h2  {color: #FE2E9A; font-size: 16px;}
 
   .bigimage {width: 980px; height: 500px; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888;}
-
   .firstimage {float:left; height:400px; width: 400px;}
   .secondimage {float:left; width: 570px; height: 364px;}
   .img1  {width: 320px; height: 214px;margin-top:25px;}
@@ -198,11 +197,26 @@
 	padding:7px; font-size:13px; font-family: 'Tahoma', 'Geneva', 'sans-serif';
   }
 
-
-
   .bottomblock_show_recipe li { list-style: none; width: 200px;}
   .bottomblock_show_recipe a  { font-size: 17; line-height:1.4em;}
 
+  .ajax_search a{
+   text-decoration: none;
+   font-weight: normal;
+  }
+  
+  .ajax_search li:hover{
+   text-decoration:  underline;
+   background-color: #BCC6CC;
+   font-weight: bold;
+  }
+
+  .ajax_search li:hover a{
+   font-weight: bold;
+   font-size: 18px;
+  }
+   
+  
   .footer {width:100%; clear: left; height: 115px; margin: auto;}
   .footer p {vertical-align:middle; line-height:95px; text-align:right;color: #FE2E9A; font-size: 18px;}
   .footer img {float: right; height: 100px; width: 100px;}
@@ -303,6 +317,12 @@
 	     <img src="{% static "img/surekhacook" %}" />
              <h1> Surekha's Cookhouse </h1>
 	     <h2>The House of flavors, tastes, recipes and healthy tips.</h2>
+	     
+	 <div class="search_bar" style="float:right;padding-right:10px;">
+	    <input type="text" id="searchbar_top_page" name="searchbar" size="20" placeholder="Search" style="font-size: 15px;" />
+	 </div>
+	     
+	     
            </div>
           </div>
        <div class = "navmenu_block">

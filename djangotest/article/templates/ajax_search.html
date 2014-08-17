@@ -1,0 +1,11 @@
+{% if recipes.count > 0 %}
+  <div class="ajax_search" style="width:372px;border-bottom: thin solid #EBE9ED; border-right: thin solid #EBE9ED; border-left:thin solid #EBE9ED"
+  <ul>
+  {% for recipe in recipes %}
+    <li style="list-style: none; padding-left: 5px;"><a style="display:block;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/">{{recipe.title}}</a></li>
+  {% endfor %}
+  </ul>
+  </div>
+{% else %}
+   None to show
+{% endif %}

@@ -7,9 +7,39 @@ $(document).ready(function(){
    //When mouse key leaves the editable name div, it fills the content back
    $(".content_block_show_recipe").on("mouseleave", ".editable_div", function(){
       $(this).text('Enter your name')
-   });     
+   });
+   
+   $("#search").keyup(function(){
+
+      $.ajax({
+         type:"POST",
+         url : "/search_titles/",
+         data:{
+               'search_text' : $('#search').val(),
+               'csrfmiddlewaretoken' :$("input[name=csrfmiddlewaretoken]").val()
+         },
+         success: searchSuccess,
+         dataType: 'html'
+         
+      });
+           
+   });
+   // use window.location.href = "file2.html" to open on same window.
+   //$("#searchbar_top_page").keydown(function(){
+   //   window.open("/search/")
+   //});
+
+   $("#searchbar_top_page").mousedown(function(){
+      window.open("/search/")
+   });
+   
    
 });
+
+
+function searchSuccess(data,textStatus,jqXHR) {
+   $("#search_results").html(data);
+}
 
 
 

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Search recipes</title>
+{% load static from staticfiles %}
+<script type="text/javascript">
+//base.html have the search bar. So, the below function will remove it from the current page
+//once the page is loaded
+function remove_searchbar()
+{
+    var element = document.getElementById("searchbar_top_page");
+    element.parentNode.removeChild(element);
+}
+window.onload = remove_searchbar;
+//The above function is run after the page is loaded
+
+</script>
+  
+{% endblock %}
+
+{% block content %}
+<div class = "maincontainer"; style="border: thin solid black;">
+    <div style="padding: 5px; min-height: 400px; color: #FE2E9A;">
+{% csrf_token %}
+
+<input type="text" id="search" name="search" size="40" placeholder="Please search here" style="font-size: 15px;" />
+
+<div id ="search_results">
+    
+    
+</div>
+</div>
+</div>
+{% endblock %}
