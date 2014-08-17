@@ -1,13 +1,28 @@
 $(document).ready(function(){
    //When mouse key is down on the editable name div, it empties the content
    $(".content_block_show_recipe").on("mousedown", ".editable_div", function(){
-      $(this).empty();
+      var input = $(this).text();
+      if (input == "Enter your name") {
+         $(this).empty();
+      }
    });  
 
    //When mouse key leaves the editable name div, it fills the content back
    $(".content_block_show_recipe").on("mouseleave", ".editable_div", function(){
-      $(this).text('Enter your name')
+      if ($(this).is(':empty'))
+      {
+         $(this).text('Enter your name')
+      }
    });
+   // The below is if user has cleared the existing "Enter your name" and pressed
+   // the tab button, it will again write "Enter your name"
+   $(".content_block_show_recipe").on("focusout", ".editable_div", function(){
+      if ($(this).is(':empty'))
+      {
+         $(this).text('Enter your name')
+      }
+   });
+
    
    $("#search").keyup(function(){
 
