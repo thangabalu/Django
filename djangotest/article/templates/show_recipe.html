@@ -100,19 +100,20 @@
       <br>
       
       
-      
+<div style="float: left; clear: both;">
 <form action="/recipes/comments/" method="post"> {% csrf_token %}
-	<textarea name="name" cols="40" rows="1" placeholder="Enter your name"></textarea>
+	<textarea name="name" cols="50" rows="1" placeholder="Enter your name"></textarea>
 	<br>
-	<textarea name="comment" cols="40" rows="10" placeholder="Enter your comment"></textarea>
+	<textarea name="comment" cols="50" rows="10" placeholder="Enter your comment"></textarea>
 	<input type="hidden" name = "recipe_type" value= {{article.recipe_type}}>
 	<input type="hidden" name = "recipe_title" value= {{recipe_title_url_format}}>
-	<input type="hidden" name = "recipe_id" value= "{{article.id}}">
+	<input type="hidden" name = "recipe_id" value= "{{article.id}}"><br>
 	<input type="submit" value="submit" />
 
 </form>
-	  
-     <div style="width:400px;">
+</div>      
+     <div style="width:400px; float: left;">
+	       <br>
       {% if comments|length = 0 %}
       <span style="font-weight:bold">No comments </span> <br><br>
       {% else %}
