@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% load static from staticfiles %}
-{% block content %}
+{% block content %} 
 <div class = "maincontainer"; style="border: thin solid black; float:left">
 <div class = "content_block_show_recipe">	
    <br>
@@ -12,7 +12,7 @@
    <h1> {{ article.title }} </h1>
    <br>
    {% if article.photo %}
-   <img src="/static/{{article.photo}}" alt="hello"</img>
+   <img src="/static/{{article.photo}}" alt={{article.title.split|join:"-"}}</img>
    <br><br>
    {% endif %}
 
