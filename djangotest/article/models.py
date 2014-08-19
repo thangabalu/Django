@@ -4,7 +4,7 @@ import time
 # Create your models here.
 
 def get_upload_file_name(instance, filename):
-	return "uploaded_files/%s_%s" % (str(time.time()).replace('.','_'), filename)
+	return "uploaded_files/%s" % filename.replace(" ", "_")
 
 def get_time():
 	return time.strftime("%c")
