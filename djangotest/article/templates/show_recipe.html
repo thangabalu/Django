@@ -68,7 +68,7 @@
      
      <div class="social-icons">
         <ul>
-	  <li style="font-size: 20px;">Share:</li>
+	  <li style="font-size: 18px;color:#FE2E9A;">Share:</li>
           <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank" title="{{ article.title }}/"><img src="{% static "img/face-book.png" %}" alt="facebook share" /></a></li>
           <li><a href="https://twitter.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/&amp;text={{ article.title }}" target="_blank"><img src="{% static "img/twitter.png" %}" alt="Twitter" /></a></li>
           <li><a href="https://plus.google.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank"><img src="{% static "img/google.png" %}" alt="Google plus" /></a></li>
@@ -82,7 +82,7 @@
       
       <!--You might also like section -->
       <!--Make the entire div clickable -->
-      <span style="font-size: 20px;">You might also like:</span>
+      <span style="font-size: 18px;color:#FE2E9A;">You might also like:</span>
       <div class="you_might_also_like_show_recipe">
 	  {% for recipe in you_might_also_like %}
 	          {% if recipe.photo %}
@@ -90,7 +90,7 @@
 			<a href ="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 			 <div class="content_in_you_might_also_like_show_recipe">
 	  		    <img src="/static/{{recipe.photo}}" alt="hello"</img><br>
-			    <span style="font-weight:bold;font-size:15px;">{{recipe.title}}</span><br>
+			    <span style="font-weight:bold;">{{recipe.title}}</span><br>
 			 </a>
 			</div>
    		       </div>
@@ -162,8 +162,8 @@
 </div>
 <!--All <a> tags have font-weight:bold.. check base.html -->
    <div class ="navigation_did_you_know_show_recipe">
-   <ul style="line-height:31px; width:250px;">
-   <li class = "radial_gradient" style ="width:250px;">		
+   <ul style="line-height:31px; width:200px;">
+   <li class = "radial_gradient" style ="width:200px;">		
    <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;" href="#">
 	Did you know?
    </a>
@@ -175,22 +175,22 @@
    </div>
 
    <div class = "navigation_show_recipe">
-   <ul style="line-height:25px; width:250px;display: block;">
-   <li class = "radial_gradient" style ="width:250px;display: inline-block">		
+   <ul style="line-height:25px; width:200px;display: block;">
+   <li class = "radial_gradient" style ="width:200px;display: inline-block">		
    <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;display: block;" href="#">
 	Latest recipes
    </a>
    </li>
 
    {% for recipe in latest_recipes_nine %}
-	  <li style= "width:250px;list-style:none;float:left; border-bottom: thin dotted black;display: inline-block"> 
+	  <li style= "width:200px;list-style:none;float:left; border-bottom: thin dotted black;display: inline-block"> 
            <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 	   {{recipe.title}}
            </a> 
            </li>
    {% endfor %}
    {% for recipe in latest_recipe_tenth %}
-           <li style= "width:250px;list-style:none;float:left;display: inline-block"> 
+           <li style= "width:200px;list-style:none;float:left;display: inline-block"> 
            <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 	   {{recipe.title}}
            </a> 
@@ -198,13 +198,13 @@
    {% endfor %}   
 
 
-   <li class = "radial_gradient" style ="width:250px;display: inline-block">		
+   <li class = "radial_gradient" style ="width:200px;display: inline-block">		
     <a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;display: block;" href="#">
 	Popular recipes
     </a>
     </li>
     {% for recipe in popular_recipes_nine %}
-         <li style= "width:250px;list-style:none;float:left;border-bottom: thin dotted black;display: inline-block"> 
+         <li style= "width:200px;list-style:none;float:left;border-bottom: thin dotted black;display: inline-block"> 
          <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 	       {{recipe.title}} 
          </a>
@@ -212,7 +212,7 @@
     {% endfor %}
     
      {% for recipe in popular_recipe_tenth %}
-           <li style= "width:250px;list-style:none;float:left;display: inline-block"> 
+           <li style= "width:200px;list-style:none;float:left;display: inline-block"> 
            <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
 	   {{recipe.title}}
            </a> 
