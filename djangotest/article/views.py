@@ -63,10 +63,11 @@ def showrecipe (request, recipetitle=""):
     
    # Starting from here for reply comments.
    comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
-   
+   comment_reply_number = 0 # This variable is used for counter total number of reply comments
    comment_reply_dictionary = SortedDict()
    for comment in comment_rows:
       result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
+      comment_reply_number += len(result)
       if result:
          comment_reply_dictionary[comment.id] = []
          for row in result:
@@ -76,6 +77,9 @@ def showrecipe (request, recipetitle=""):
             row_unique_id = row.id
             row_name = row.name
             comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
+   #sum the number of comments and reply comments
+   comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
+   total_comments = comment_number +  comment_reply_number
    
    c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
 		 'latest_recipes_nine'     : Article.objects.all().order_by('-pub_date')[:9],
@@ -87,6 +91,7 @@ def showrecipe (request, recipetitle=""):
 		 'recipe_title_url_format' : recipetitle,
                  'comments': comment_table.objects.filter(recipeid=recipe_id),
                  'comment_reply_dictionary' : comment_reply_dictionary,
+                 'total_comments'           : total_comments,
                  'you_might_also_like'      : Article.objects.all().order_by('?')[:3]
 		})
 	    
