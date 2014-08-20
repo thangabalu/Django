@@ -5,6 +5,7 @@
 *~
 *.json
 *.db
+*min.js
 .project
 .pydevproject
 djangotest/static/img
