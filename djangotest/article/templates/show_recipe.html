@@ -29,11 +29,12 @@
    {% for key,value in ingredient.items %}
 	<h4>{{ key }} </h4>
 	<table>
+        {% load my_custom_filters %}
 	{% for val in value %}
 		<tr>
-		{% for v in val%}
-  			<td>{{ v }}</td>
-		{% endfor %}
+  			<td class="first_column_ingredients">{{ val | extract_first_td}}</td>
+			<td class="second_column_ingredients">{{ val | extract_second_td}}</td>
+
 		</tr>
 	{% endfor %}
 	</table><br>
