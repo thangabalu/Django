@@ -16,10 +16,15 @@
    <br><br>
    {% endif %}
 
-   <!--All h4 tags inside content_block_show_recipe have margin-bottom property set in base.html-->   
+   <!--All h4 tags inside content_block_show_recipe have margin-bottom property set in base.html-->
+   
    {% if article.note %}
    <span> {{ article.note|linebreaks }} </span>
    {% endif %}
+
+   <!-- Ingredients -->
+<div class="two_blocks">
+   <div class ="ingredients_block">
    <br>     
    {% for key,value in ingredient.items %}
 	<h4>{{ key }} </h4>
@@ -33,7 +38,10 @@
 	{% endfor %}
 	</table><br>
    {% endfor %}
+   </div>
 
+   <div class="directions_block">
+     <br>
      <h4>Directions</h4>
      {% load my_custom_filters %}
      {% for value in direction %}
@@ -51,7 +59,8 @@
    <h4> Tips </h4>
    <span>{{ article.tips|linebreaks }} </span>
    {% endif %}
-
+</div>
+</div>
    <br>
       <div class = "navmenu" style="float:left; display: inline-block">
         <ul>
