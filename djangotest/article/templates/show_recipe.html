@@ -110,7 +110,7 @@
       
       
 <div style="float: left; clear: both;">
-<form action="/recipes/comments/" method="post"> {% csrf_token %}
+<form action="/recipes/comments/" method="post" onsubmit="return thank_you()"> {% csrf_token %}
 	<textarea name="name" cols="50" rows="1" placeholder="Enter your name"></textarea>
 	<br>
 	<textarea name="comment" cols="50" rows="10" placeholder="Enter your comment"></textarea>
@@ -130,7 +130,7 @@
       {% for comment in comments %}
 	     <div style="background-color:#DEDEDE;height:30px;"> 
 	       <span style="font-weight:bold;line-height: 30px; padding-left: 5px;font-size: 14px;">{{comment.name }}</span>
-	       <span style="float: right; line-height: 30px; padding-right:5px;font-size: 12px;">{{comment.date }}</span>
+	       <span style="float: right; line-height: 30px; padding-right: 5px;font-size: 12px;">{{comment.date }}</span>
 	     </div>
           <span>{{comment.comment}}</span>
 	    <br>

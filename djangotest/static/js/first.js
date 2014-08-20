@@ -51,11 +51,15 @@ $(document).ready(function(){
    
 });
 
-
 function searchSuccess(data,textStatus,jqXHR) {
    $("#search_results").html(data);
 }
 
+//Thank you comment for comment and reply comment.
+function thank_you() {
+   alert("Thank you for the comment")
+   return true
+}
 
 
 function you_hovered(name,comment_id,recipe_type,recipe_title_url_format,commenter_name)

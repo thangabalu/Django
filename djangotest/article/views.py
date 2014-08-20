@@ -143,6 +143,15 @@ def recipes_comments_reply(request):
    else:        
       row = comment_reply_table(name=name, comment_reply_id_id=comment_id, comment=comment )
       row.save()
+      #Send email
+      #Change the recipe url in the email content after buying a domain        
+      subject='Comment from %s' %(name)
+      message=' %s has replied for an existing comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_reply_table'%(name,recipe_title,recipe_type,recipe_title,comment)
+      from_email=settings.EMAIL_HOST_USER
+      to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
+      #to_list=['thangabalu@gmail.com']	
+      send_mail(subject,message,from_email,to_list,fail_silently=True)
+      return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
    return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
