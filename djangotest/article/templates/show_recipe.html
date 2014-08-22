@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}
 <title>{{ article.title }}</title>
+<meta name="description" content="{{ article.meta_description|truncatechars:140 }}">
 {% endblock %}
 
 {% load static from staticfiles %}
@@ -9,8 +10,37 @@
 <div class = "content_block_show_recipe">	
    <br>
    <br>
-   <h1> {{ article.title }} </h1>
+   <h1 style="padding-left:10px"> {{ article.title }} </h1>
    <br>
+   {% if article.meta_description%}
+   <span> {{ article.meta_description|linebreaks }} </span>   
+   {% endif %}
+   <br>  
+   <!-- Block for prep time, cooking time, serves -->
+<div style="background-color:#E6E6E6; height: 50px;padding: 0; margin: 0; width: 713px;margin-left:10px;
+            border-bottom: thin solid black;">
+   <!-- Prep time -->
+   <div style="font-weight:bold;width: 236px;border-left: thin solid black;
+	       border-top: thin solid black; height:50px;text-align: center; line-height: 50px;float:left;">
+     Prep time: {{article.prep_time}}
+     
+   </div>
+
+   <!-- cooking time -->
+   <div style="font-weight:bold;width: 236px;border-left: thin solid black;
+	       border-top: thin solid black; height:50px;text-align: center; line-height: 50px;float:left;">
+     Cooking time: {{article.cooking_time}}
+     
+   </div>
+   
+   <!-- Serves-->
+     <div style="font-weight:bold;width: 236px;border-right:thin solid black;border-left: thin solid black;
+	       border-top: thin solid black; height:50px;text-align: center; line-height: 50px;float:left;">
+     Serves: {{article.serves}}
+     
+   </div>
+</div>
+     
    {% if article.photo %}
    <img src="/static/{{article.photo}}" alt={{article.title.split|join:"-"}}</img>
    <br><br>
@@ -43,13 +73,13 @@
 
    <div class="directions_block">
      <br>
-     <h4>Directions</h4>
+     <h4 style="padding-left:10px">Directions</h4>
      {% load my_custom_filters %}
      {% for value in direction %}
 	  {% if '<h>' in value %}
-	  <h4>{{ value |extract_from_h_tag}}</h4>
+	  <h4 style="padding-left:10px">{{ value |extract_from_h_tag}}</h4>
 	  {% else %}
-            <span> {{ value |linebreaks }} </span>
+            <span style="line-height: 2em;"> {{ value |linebreaks }} </span>
 	  {% endif %}
      {% endfor %}	
    
@@ -57,8 +87,8 @@
    <br>
    
    {% if article.tips %}
-   <h4> Tips </h4>
-   <span>{{ article.tips|linebreaks }} </span>
+   <h4 style="padding-left:10px"> Tips </h4>
+   <span style="line-height: 2em;">{{ article.tips|linebreaks }} </span>
    {% endif %}
 </div>
 </div>

@@ -1,15 +1,15 @@
 <html>
 <head>
 {% load static from staticfiles %}   
-{% block title %}
-<title>Base page</title>
-{% endblock %}
+
 
 <script type="text/javascript" src="{% static "js/jquery-1.11.1.min.js" %}"> </script>
 <!-- Downloaded the compressed jquery library-->
 <script type="text/javascript" src="{% static "js/first.js" %}"></script>
-
 <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+{% block title %}
+<title>Base page</title>
+{% endblock %}
 <style type = "text/css">
    * {padding: 0; margin: 0;}
    a {text-decoration: none;color: #FF3288; font-weight:bold}
@@ -139,7 +139,7 @@
   .content_block_show_recipe {width:720px; color: #666666;float:left; padding: 10px;}
   .content_block_show_recipe h1 {color: #FE2E9A;}
   .content_block_show_recipe h4 {margin-bottom: 10px; color:#FE2E9A}  
-  .content_block_show_recipe img {width: 600px; }
+  .content_block_show_recipe img {width: 714px; margin-left:10px; }
   .content_block_show_recipe span {font-size: 13;line-height: 1.5em;text-align: justify;font-family: 'Tahoma', 'Geneva', 'sans-serif';}
   .posted_show_recipe {font-size:15;}
   .two_blocks {float:left; clear: both; width: 720px;}
@@ -193,7 +193,7 @@
   /*The below line says that don't place any float elements after this. By making this we can make sure that comment line goes to next line*/
   .you_might_also_like_show_recipe {clear: both; min-height: 110px;}
   .you_might_also_like_show_recipe img {width:180px;height:100px;}
-  .block_in_you_might_also_like_show_recipe {float: left; padding: 10px;}
+  .block_in_you_might_also_like_show_recipe {float: left; padding: 25px;}
   .content_in_you_might_also_like_show_recipe{text-align: center; width: 180px;word-wrap: break-word;}
   .content_in_you_might_also_like_show_recipe: hover{text-decoration: underline;}
   

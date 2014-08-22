@@ -24,7 +24,10 @@ class Article(models.Model):
       ('others', 'others')
     )
     title           = models.CharField(max_length=200, unique = True)
-    also_known_as   = models.TextField(blank = True)    
+    also_known_as   = models.TextField(blank = True)
+    prep_time       = models.CharField(max_length=20,blank = True)
+    cooking_time    = models.CharField(max_length=20,blank = True)
+    serves          = models.CharField(max_length=20,blank = True)
     ingredients     = models.TextField()
     pub_date        = models.DateTimeField()
     directions      = models.TextField()
@@ -37,7 +40,7 @@ class Article(models.Model):
     likes           = models.IntegerField(max_length=100,default=0)
     did_you_know    = models.TextField(blank = True)
     meta_keyword    = models.TextField(blank = True, null = True,max_length=50)
-    meta_description    = models.TextField(blank = True, null = True,max_length=100)
+    meta_description    = models.TextField(blank = True, null = True,max_length=500)
 
 
     def __unicode__(self):
