@@ -7,6 +7,7 @@
 <!-- Downloaded the compressed jquery library-->
 <script type="text/javascript" src="{% static "js/first.js" %}"></script>
 <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
 {% block title %}
 <title>Base page</title>
 {% endblock %}
@@ -233,7 +234,7 @@
    
   
   .footer {width:100%; clear: left; height: 115px; margin: auto;}
-  .footer p {vertical-align:middle; line-height:95px; text-align:right;color: #FE2E9A; font-size: 18px;}
+  .footer p {line-height:115px; float:right;color: #FE2E9A; font-size: 18px;}
   .footer img {float: right; height: 100px; width: 100px;}
 
 
@@ -404,6 +405,7 @@
    <div class= "footer">
      {% load static from staticfiles %}
      <img src="{% static "img/surekhacook" %}"/>
+
     <p> © 2014 Surekha's cookhouse. All rights reserved</p><br>
    </div>
 </div>	

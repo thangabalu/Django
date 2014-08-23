@@ -1,4 +1,5 @@
 import re
+import urllib
 
 from django.shortcuts import HttpResponse
 from django.template.loader import get_template
@@ -10,36 +11,76 @@ from django.core.context_processors import csrf
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Sum
 
 from article.models import Article
 from article.models import comment_table
 from article.models import ipaddress_table
 from article.models import comment_reply_table
+from article.models import time_functions
+
+class ipaddress_class:
+   def save_ipaddress(self,request):
+      ip_address = request.META.get("HTTP_X_FORWARDED_FOR", None)
+      if ip_address:
+         # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
+         ip_address = ip_address.split(",")[0]
+      else:
+         ip_address = request.META.get("REMOTE_ADDR", "")
+      
+      #Check if ipaddress is already present. If not, add it. If present, increase the count with latest time
+      fetch_ip = ipaddress_table.objects.filter(ip_address = ip_address).count()
+      if fetch_ip == 0:
+         response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
+         country = re.findall(r'Country:\s+(.*)',response)
+         city    = re.findall(r'City:\s+(.*)\n',response)
+         row = ipaddress_table()
+         row.ip_address = ip_address
+         row.country = country[0]
+         row.city    = city[0]
+         row.save()
+      else:
+         #Get time
+         time_object = time_functions()
+         #Api call to get country and city
+         response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
+         country = re.findall(r'Country:\s+(.*)',response)
+         city    = re.findall(r'City:\s+(.*)\n',response)
+         
+         fetch_ip = ipaddress_table.objects.get(ip_address = ip_address)
+         fetch_ip.no_of_times += 1
+         fetch_ip.date = time_object.get_time()
+         fetch_ip.country = country[0]
+         fetch_ip.city    = city[0]
+         fetch_ip.save()
+   
 
 # Create your views here.
 #Order.objects.order_by('-date')[0]
 def home(request):
+   ip_address_object = ipaddress_class()
+   ip_address_object.save_ipaddress(request)
+
+   #Total page views
+   total_page_views = ipaddress_table.objects.aggregate(Sum('no_of_times'))
+
    return render_to_response('home.html', 
-				{'latest_recipes_one' : Article.objects.all().order_by('-pub_date')[:1],
+				{'total_page_views'   : total_page_views["no_of_times__sum"],
+                                 'latest_recipes_one' : Article.objects.all().order_by('-pub_date')[:1],
                               	 'popular_recipes_one' : Article.objects.all().order_by('-likes')[0:1]})
 
 def recipetype (request, recipetype):
-    #  Add this later in other requests...   
-    ip = request.META.get("HTTP_X_FORWARDED_FOR", None)
-    if ip:
-        # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
-        ip = ip.split(",")[0]
-    else:
-        ip = request.META.get("REMOTE_ADDR", "")
-
-    row = ipaddress_table(ip_address=ip)
-    row.save()
+    ip_address_object = ipaddress_class()
+    ip_address_object.save_ipaddress(request)
 
     return render_to_response('recipe_type_new.html',
 				{'type' : recipetype,
 				 'recipes': Article.objects.all()})
 
 def showrecipe (request, recipetitle=""):
+   ip_address_object = ipaddress_class()
+   ip_address_object.save_ipaddress(request)
+
    c={}
    c.update(csrf(request))
    recipe = Article.objects.get(title=recipetitle.replace("-"," "))
@@ -80,6 +121,12 @@ def showrecipe (request, recipetitle=""):
    #sum the number of comments and reply comments
    comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
    total_comments = comment_number +  comment_reply_number
+
+   #Add page views count
+   count = recipe.page_views
+   count += 1
+   recipe.page_views = count
+   recipe.save()
    
    c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
 		 'latest_recipes_nine'     : Article.objects.all().order_by('-pub_date')[:9],
@@ -98,6 +145,9 @@ def showrecipe (request, recipetitle=""):
    return render_to_response('show_recipe.html',c)
 
 def recipes_all(request):
+    ip_address_object = ipaddress_class()
+    ip_address_object.save_ipaddress(request)
+
     return render_to_response('recipes_all.html',
 				{'articles': Article.objects.all()})
 

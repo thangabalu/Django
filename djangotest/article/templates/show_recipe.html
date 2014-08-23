@@ -98,10 +98,12 @@
 	 <li><a style="width:100px;" href="/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">Like </a> </li>
 	  <div style="padding-left:5px; font-size: 17px;">
    	  +{{article.likes}}
-      </div>
+          </div>
         </ul>
       </div>
-
+   
+      This recipe is viewed {{article.page_views}} times
+      
      <div style="text-align:right;">
          <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
      </div>
