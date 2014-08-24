@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+<title>{{ article.title }}</title>
+{% endblock %}
+
+{% block content %}
+<div class = "maincontainer"; style="border: thin solid black; float:left">
+    <div class ="contact">
+Leave your message. We are looking forward to answering your email<br>
+    {% csrf_token %}
+	<input type="text" id="name" placeholder="Name" size="75"><br>
+        <input type="text" id="email" placeholder="Email" size="75"><br>
+        <input type="text" id="subject" placeholder="Subject" size="75"><br>
+	<textarea name="message" id = "message" cols="77" rows="10" placeholder="Message"></textarea><br>
+	<button id="send_button">Send</button> 
+
+    </div>
+</div>
+{% endblock %}

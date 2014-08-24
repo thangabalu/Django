@@ -1,5 +1,6 @@
 import re
 import urllib
+import json
 
 from django.shortcuts import HttpResponse
 from django.template.loader import get_template
@@ -231,3 +232,23 @@ def search_titles(request):
    #Can I pass the value directly from here instead of doing from another html
    recipes= Article.objects.filter(title__contains=search_text)
    return render_to_response('ajax_search.html',{'recipes':recipes})
+
+def contact(request):
+   c={}
+   c.update(csrf(request))   
+   return render_to_response('contact.html',c)
+
+def contact_submit(request):
+   name = request.POST.get('name','')    
+   email = request.POST.get('email','')    
+   question_subject = request.POST.get('subject','')
+   message = request.POST.get('message','')
+    
+   #Send email
+   subject='Question from %s' %(name)
+   message='Email id -%s\n Subject -%s\n Message-%s\n'%(email,question_subject,message)
+   from_email=settings.EMAIL_HOST_USER
+   #to_list=['thangabalu@gmail.com']
+   to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
+   send_mail(subject,message,from_email,to_list,fail_silently=True)
+   return HttpResponse(json.dumps("success"))

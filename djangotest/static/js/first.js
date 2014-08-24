@@ -47,9 +47,44 @@ $(document).ready(function(){
    $("#searchbar_top_page").mousedown(function(){
       window.open("/search/")
    });
-   
+
+
+   $("#send_button").click(function(event){
+      $name   = $('#name').val(),
+      $subject= $('#subject').val(),
+      $email  = $('#email').val(),
+      $message= $('#message').val()
+      
+      if ($name == null || $name == "" || $email == null || $email == "" || $subject == null || $subject == "" || $message == null || $message == "") {
+        alert("Fields cannot be empty")
+      }
+      else{
+         $.ajax({
+            type:"POST",
+            url : "/contact_submit/",
+            async : false,
+            data:{
+               'name' : $('#name').val(),
+               'subject' : $('#subject').val(),
+               'email' : $('#email').val(),
+               'message' : $('#message').val(),
+               'csrfmiddlewaretoken' :$("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: questionSuccess
+         });
+      }
+      }); 
    
 });
+
+function questionSuccess(data,textStatus,jqXHR) {   
+   $("#name").val("");
+   $("#subject").val("");
+   $("#email").val("");
+   $("#message").val("");
+   alert("Thanks for your message. We will reply as soon as possible")
+}
+
 
 function searchSuccess(data,textStatus,jqXHR) {
    $("#search_results").html(data);
