@@ -79,7 +79,7 @@
 	  {% if '<h>' in value %}
 	  <h4 style="padding-left:10px">{{ value |extract_from_h_tag}}</h4>
 	  {% else %}
-            <span style="line-height: 2em;"> {{ value |linebreaks }} </span>
+            <span> {{ value |linebreaks }} </span>
 	  {% endif %}
      {% endfor %}	
    
@@ -88,7 +88,7 @@
    
    {% if article.tips %}
    <h4 style="padding-left:10px"> Tips </h4>
-   <span style="line-height: 2em;">{{ article.tips|linebreaks }} </span>
+   <span>{{ article.tips|linebreaks }} </span>
    {% endif %}
 </div>
 </div>
@@ -210,10 +210,8 @@
 	Did you know?
    </a>
    </li>
-
-   <span style="color: #FE2E9A;font-size: 16px;">{{ article.did_you_know }}</span>
-
    </ul>
+   <span style="color: #FE2E9A;">{{ article.did_you_know }}</span>
    </div>
 
    <div class = "navigation_show_recipe">
