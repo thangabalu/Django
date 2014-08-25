@@ -129,7 +129,7 @@ def showrecipe (request, recipetitle=""):
    recipe.page_views = count
    recipe.save()
    
-   c.update({'article': Article.objects.get(title=recipetitle.replace("-"," ")),
+   c.update({    'article'                 : Article.objects.get(title=recipetitle.replace("-"," ")),
 		 'latest_recipes_nine'     : Article.objects.all().order_by('-pub_date')[:9],
 		 'latest_recipe_tenth'     : Article.objects.all().order_by('-pub_date')[9:10],                 
 		 'popular_recipes_nine'    : Article.objects.all().order_by('-likes')[:9],
@@ -140,10 +140,20 @@ def showrecipe (request, recipetitle=""):
                  'comments': comment_table.objects.filter(recipeid=recipe_id),
                  'comment_reply_dictionary' : comment_reply_dictionary,
                  'total_comments'           : total_comments,
-                 'you_might_also_like'      : Article.objects.all().order_by('?')[:3]
+                 'you_might_also_like'      : Article.objects.all().order_by('?')[:3]                 
 		})
 	    
    return render_to_response('show_recipe.html',c)
+
+def popular_recipes(request):
+    return render_to_response('popular_or_latest_recipes.html',
+				{'popular_or_latest_recipes_all': Article.objects.all().order_by('-likes'),
+                                 'popular_or_latest'  : 'Popular recipes'})
+
+def latest_recipes(request):
+    return render_to_response('popular_or_latest_recipes.html',
+				{'popular_or_latest_recipes_all' : Article.objects.all().order_by('-pub_date'),
+                                 'popular_or_latest'  : 'Latest recipes'})      
 
 def recipes_all(request):
     ip_address_object = ipaddress_class()

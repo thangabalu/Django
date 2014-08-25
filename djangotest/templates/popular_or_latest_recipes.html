@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+<title>{{popular_or_latest}}</title>
+{% endblock %}
+
+{% block content %}
+<div class = "maincontainer"; style="border: thin solid black; float:left">
+    <div class ="popular_recipes">
+    
+{% for recipe in popular_or_latest_recipes_all %}
+
+<a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"><h2>{{recipe.title}}</h2></a>
+{% if recipe.meta_description %}
+<span class="content_block_show_recipe">{{recipe.meta_description|truncatechars:140}}</span>
+
+{% elif recipe.tips %}
+<span class="content_block_show_recipe">{{recipe.tips|truncatechars:140}}</span>
+
+{% elif recipe.note %}
+<span class="content_block_show_recipe">{{recipe.note|truncatechars:140}}</span>
+
+{% elif recipe.did_you_know %}
+<span class="content_block_show_recipe">{{recipe.did_you_know|truncatechars:140}}</span>
+{% endif %}
+
+{% endfor %}
+    </div>
+</div>
+{% endblock %}
