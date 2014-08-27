@@ -13,21 +13,104 @@
 <title>Base page</title>
 {% endblock %}
 <style type = "text/css">
-   * {padding: 0; margin: 0;}
-   a {text-decoration: none;color: #FF3288; font-weight:bold}
-   p {padding-left: 10px;}
-  .bigcontainer {width:100%;}
-  .container  {height:159px;}
-  .header {height:130px;}
-  .headerblock {width:72%;margin-left:14%; margin-right:14%;}
-  .headerblock img {height: 120px; width: 10.1%; float:left}
-  .headerblock h1  {color: #FE2E9A; font-size: 3.75em;line-height: 101%;padding-top:3%;}
-  .headerblock h2  {color: #FE2E9A; font-size: 1em;}
 
+    /* Base page */
+    * {padding: 0; margin: 0;}
+    a {text-decoration: none;color: #FF3288; font-weight:bold}
+    p {padding-left: 10px;}
+   .bigcontainer {width:100%;}
+   .container  {height:159px;}
+   .header {height:130px;}
+   .headerblock {width:72%;margin-left:14%; margin-right:14%;}
+   .headerblock img {height: 120px; width: 10.1%; float:left}
+   .headerblock h1  {color: #FE2E9A; font-size: 3.75em;line-height: 101%;padding-top:3%;}
+   .headerblock h2  {color: #FE2E9A; font-size: 1em;}
+   .maincontainer {width:85.5%;margin-left:7.25%; margin-right: 7.25%; background-color:white;}
+
+   .navmenu_block
+   {
+      height:29px;
+      background: #FE2E9A; repeat-x;
+      margin:0;
+      padding:0;
+   }
+
+   .navmenu
+   {	
+      width:980px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top:0;
+      margin-bottom:0;
+   }
+
+   .navmenu ul
+   {
+      line-height: 31px;
+   }
+
+   .navmenu li
+   {
+      padding:0;
+      width:auto;
+      list-style:none;
+      float:left;
+      position:relative;
+      background: #FE2E9A;
+      height:29px;
+      border-right: thin solid white;
+   }
+
+   .navmenu ul li a
+   {       
+      margin:0;
+      padding:0; 
+      text-align:center;
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size: 14px;
+      text-decoration:none;
+      width: 162.3437px;
+      display:block;
+      color: #FFF;
+      text-shadow: 1px 1px 1px #000;
+   }
+
+   .navmenu ul ul
+   {
+      position: absolute;
+      visibility: hidden;
+      top:32px;
+   }
+
+   .navmenu ul li:hover ul
+   {
+	visibility: visible;
+
+   }
+
+   .navmenu li:hover
+   {
+	background: #FFC0CB;
+   }
+
+   .navmenu ul li:hover ul li a:hover
+   {
+   	background: #FFC0CB;
+   }
+
+   .navmenu a: hover
+   {
+	color: #000;
+   }
+  
+   .footer {width:100%; clear: left; height: 100px; margin: auto;}
+   .footer p {line-height:115px; float:right;color: #FE2E9A; font-size: 18px;}
+   .footer img {float: right; height: 100px; width: 80px;}
+  
+  
   /* Home page */ 
   .bigimage {width: 980px; height: 500px; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888;}
 
-  .maincontainer {width:85.5%;margin-left:7.25%; margin-right: 7.25%; background-color:white;}
   .navblock { width: 234px; float: left; text-align:center; margin-top:auto; margin-bottom:auto; border: thin solid black;}
   .navblock ul {list-style-type: none;}
   .navblock img{
@@ -57,16 +140,16 @@
 	}
 
 
-  .content{color: #666666; float: left; padding-right:20px; width: 700px; margin: auto; margin-left:20px; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
-  .bottom {color: #666666; float: left;line-height: 1.4em;background-color:white; text-align: justify;}
-  .content_picture {float:right; width:250px; height: 250px; margin-left: 40px; margin-top: 50px;}
-  .content_picture img {width: 250px;height:250px;}
-  .pink  {color:#FE2E9A}
-  .grey {color:#666666}
+   .content{color: #666666; float: left; padding-right:20px; width: 700px; margin: auto; margin-left:20px; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
+   .bottom {color: #666666; float: left;line-height: 1.4em;background-color:white; text-align: justify;}
+   .content_picture {float:right; width:250px; height: 250px; margin-left: 40px; margin-top: 50px;}
+   .content_picture img {width: 250px;height:250px;}
+   .pink  {color:#FE2E9A}
+   .grey {color:#666666}
 
-  .bottom {float:left;margin-top:100px;}
-  .bottom span {font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 13;}
-  .bottom img {
+   .bottom {float:left;margin-top:100px;}
+   .bottom span {font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 13;}
+   .bottom img {
 	width: 240px; 
 	height:160px;
 	display:inline;
@@ -82,10 +165,9 @@
    .bottom center:hover{
 	text-decoration:underline;
 	}
+   .bottom center {font-size:18; font-weight:bold}
 
-  .bottom center {font-size:18; font-weight:bold}
-
-
+   /* All recipes page */
   .contentcontainer_recipes_all  {margin: auto; float:left; border: thin solid black;min-height: 700px;}
   .bottom_recipes_all {float:left; margin:auto; margin-top:5px;}
   .bottomblock_recipes_all {float: left; height: 200px; width: 300px;margin-left:25px;}
@@ -107,6 +189,7 @@
 	text-decoration:underline;
    }
 
+   /* Recipe type page */   
   .contentcontainer_recipe_type  {margin: auto;float:left;border: thin solid black;min-height: 700px;width:980px;}
   .bottomcontainer_recipe_type {margin-left: 50px;}
   .bottom_recipe_type{width: 160px;float:left; padding-right:50px;}
@@ -130,13 +213,15 @@
 	text-decoration:underline;
    }
 
+   /* Show recipe page */
+   /* The below style class is also used in popular or latest recipes page */
   .content_block_show_recipe {width:720px; color: #666666;float:left; padding: 10px;}
   .content_block_show_recipe h1 {color: #FE2E9A;}
   .content_block_show_recipe h4 {margin-bottom: 10px; color:#FE2E9A}  
   .content_block_show_recipe img {width: 714px; margin-left:10px; }
   .content_block_show_recipe span {font-size: 13;line-height: 1.8em;text-align: justify;font-family: 'Tahoma', 'Geneva', 'sans-serif';}
   
-.like_button{
+   .like_button{
   background-color:#FE2E9A;
   color: white;
   font-size:16px;
@@ -146,68 +231,64 @@
   font-family: 'Tahoma', 'Geneva', 'sans-serif';
   text-shadow: 1px 1px 1px #000;
   box-sizing: border-box;
-}
+   }
 
-.like_button:hover{
-  color: #666666;
-  font-size:18px;
-}
-
-
+   .like_button:hover{
+      color: #666666;
+      font-size:18px;
+   }
   
-  .posted_show_recipe {font-size:15;}
-  .two_blocks {float:left; clear: both; width: 720px;}
-  .ingredients_block{float: left;width:295px;padding-left:5px;}
-  .directions_block{float: right;width:395px;clear: right;}
+   .posted_show_recipe {font-size:15;}
+   .two_blocks {float:left; clear: both; width: 720px;}
+   .ingredients_block{float: left;width:295px;padding-left:5px;}
+   .directions_block{float: right;width:395px;clear: right;}
   
-  table{
+   table{
       border-collapse: collapse;
-  }
+   }
   
-  table,td
-  {
+   table,td
+   {
    	border:1px solid #000000; color: #666666;
-  }
+   }
   
   
  
-  .first_column_ingredients{
+   .first_column_ingredients{
         width: 220px; padding:5px; font-size:13px; font-family: 'Tahoma', 'Geneva', 'sans-serif';
 	display: inline-block; word-wrap: break-word;
-  }
+   }
   
-  .second_column_ingredients{
+   .second_column_ingredients{
         width:75px; padding:5px; font-size:13px; font-family: 'Tahoma', 'Geneva', 'sans-serif'; display: inline-block;
 	word-wrap: break-word;
-   
-  }
+   }
 
  
-.social-icons {
+   .social-icons {
 	float: left;
 	padding: 0px;
 	display: inline-block;
 	margin: 0px;
-}
-.social-icons ul {
+   }
+   .social-icons ul {
 	float: left;
 	display: inline-block;
-}
-.social-icons ul li {
+   }
+   .social-icons ul li {
 	float: left;
 	display: inline-block;
 	margin: 0 10px 0 0;
-}
-.social-icons ul li a {
+   }
+   .social-icons ul li a {
 	display: block;
-}
+   }
 
-.social-icons img{
+   .social-icons img{
    padding-top:5px;
    height:14px;
    width:14px;
-   
-}
+   }
   /*The below line says that don't place any float elements after this. By making this we can make sure that comment line goes to next line*/
   .you_might_also_like_show_recipe {clear: both; min-height: 110px;}
   .you_might_also_like_show_recipe img {width:180px;height:100px;}
@@ -235,6 +316,8 @@
   .bottomblock_show_recipe li { list-style: none; width: 200px;}
   .bottomblock_show_recipe a  { font-size: 17; line-height:1.4em;}
 
+  
+   /* ajax_search.html */        
   .ajax_search a{
    text-decoration: none;
    font-weight: normal;
@@ -251,151 +334,70 @@
    font-size: 18px;
   }
 
-.contact
-{
-   margin: auto;float:left;min-height: 700px; padding: 10px;
-   font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 15; color: #666666;
-}
+   /* Contact page */        
+   .contact
+   {
+      margin: auto;float:left;min-height: 700px; padding: 10px;
+      font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 15; color: #666666;
+   }
 
-
-.contact input,textarea,button{
-  margin-bottom:10px;
-  font-family: 'Tahoma', 'Geneva', 'sans-serif';
-  border: thin solid #666666;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 15px;
-}
-
-.contact input{
-     height: 50px;
-}
-
-textarea{
-   resize: none;
-}
-
-
-#send_button{
-  background-color:#666666;
-  color: white;
-  font-size:16px;
-  padding:5px;
-  border-radius:5px;
-  cursor:pointer;
-  font-family: 'Tahoma', 'Geneva', 'sans-serif';  
-  box-sizing: border-box;
-}
-
-#send_button:hover{
-  color: #FE2E9A;
-  font-size:18px;
-}
-
-.popular_recipes{
-   width:600px;
-   padding-left:20px; padding-right:10px;padding-top:20px; padding-bottom:20px;
+   .contact input,textarea,button{
+   margin-bottom:10px;
    font-family: 'Tahoma', 'Geneva', 'sans-serif';
-   font-size:13
-}
+   border: thin solid #666666;
+   border-radius: 5px;
+   padding: 10px;
+   font-size: 15px;
+   }
 
-.popular_recipes a,h2{
-   font-weight:normal;
-}
+   .contact input{
+      height: 50px;
+   }
 
-.popular_recipes a:hover h2{
-   text-decoration: underline;
-   font-weight: bold;
-}
+   textarea{
+      resize: none;
+   }
+
+
+   #send_button{
+      background-color:#666666;
+      color: white;
+      font-size:16px;
+      padding:5px;
+      border-radius:5px;
+      cursor:pointer;
+      font-family: 'Tahoma', 'Geneva', 'sans-serif';  
+      box-sizing: border-box;
+   }
+
+   #send_button:hover{
+      color: #FE2E9A;
+      font-size:18px;
+   }
+
+   /* Popular or latest recipes */      
+   .popular_recipes{
+      width:600px;
+      padding-left:20px; padding-right:10px;padding-top:20px; padding-bottom:20px;
+      font-family: 'Tahoma', 'Geneva', 'sans-serif';
+      font-size:13
+   }
+
+   .popular_recipes a,h2{
+      font-weight:normal;
+   }
+
+   .popular_recipes a:hover h2{
+      text-decoration: underline;
+      font-weight: bold;
+   }
    
-  
-.footer {width:100%; clear: left; height: 100px; margin: auto;}
-.footer p {line-height:115px; float:right;color: #FE2E9A; font-size: 18px;}
-.footer img {float: right; height: 100px; width: 80px;}
-
-
-.navmenu_block
-{
-        height:29px;
-	background: #FE2E9A; repeat-x;
-        margin:0;
-        padding:0;
-}
-
-.navmenu
-{	
-        width:980px;
-        margin-left:auto;
-        margin-right:auto;
-        margin-top:0;
-        margin-bottom:0;
-}
-
-.navmenu ul
-{
-	line-height: 31px;
-}
-
-.navmenu li
-{
-	padding:0;
-        width:auto;
-	list-style:none;
-	float:left;
-	position:relative;
-	background: #FE2E9A;
-        height:29px;
-	border-right: thin solid white;
-}
-
-.navmenu ul li a
-{       
-        margin:0;
-	padding:0; 
-	text-align:center;
-	font-family: "Arial Black", Gadget, sans-serif;
-        font-size: 14px;
-	text-decoration:none;
-	width: 162.3437px;
-	display:block;
-	color: #FFF;
-	text-shadow: 1px 1px 1px #000;
-}
-
-.navmenu ul ul
-{
-	position: absolute;
-	visibility: hidden;
-	top:32px;
-}
-
-.navmenu ul li:hover ul
-{
-	visibility: visible;
-
-}
-
-.navmenu li:hover
-{
-	background: #FFC0CB;
-}
-
-.navmenu ul li:hover ul li a:hover
-{
-	background: #FFC0CB;
-}
-
-.navmenu a: hover
-{
-	color: #000;
-}
-
-.clearfloat
-{
+   .clearfloat
+   {
 	clear:both;
 	margin:0;
 	padding:0;
-}
+   }
 
 </style>
 </head>
@@ -417,7 +419,7 @@ textarea{
 	     
          </div>
       </div>
-       <div class = "navmenu_block">
+      <div class = "navmenu_block">
             <div class = "navmenu">
 		<ul>
 			<li><a href="/home">Home </a>
