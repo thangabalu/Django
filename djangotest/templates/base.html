@@ -14,6 +14,31 @@
 {% endblock %}
 <style type = "text/css">
 
+@media screen and (min-width: 501px) and (max-width:969px){
+   .navmenu li{
+      clear: both;
+   }
+
+}
+
+@media screen and (max-width:500px){
+   .navmenu li{
+      clear: both;
+      width: auto;
+   }
+   
+   #searchbar_top_page
+   {
+      display: none;
+   }
+
+   .headerblock h2
+   {
+      display: none;
+   }
+
+}
+
     /* Base page */
     * {padding: 0; margin: 0;}
     a {text-decoration: none;color: #FF3288; font-weight:bold}
@@ -40,7 +65,7 @@
       margin-right:13.5%;
    }
 
-   .ul{
+   .navmenu ul{
       width  :100%
    }
    
@@ -387,12 +412,13 @@
       <div class = "header">
 	 <div class = "headerblock">
 	    <img src="{% static "img/surekhacook" %}" />
-	    <h1> Surekha's Cookhouse </h1>
-	    <h2>The House of flavors, tastes, recipes and healthy tips.</h2>
-	     
+	    
 	    <div class="search_bar" style="float:right;">
 	       <input type="text" id="searchbar_top_page" name="searchbar" size="20" placeholder="Search" style="font-size: 15px;" />
 	    </div> <!--search_bar   div(end) -->
+   	    <h1> Surekha's Cookhouse </h1>
+	    <h2>The House of flavors, tastes, recipes and healthy tips.</h2>    
+
 	 </div>    <!--header_block div(end) -->
       </div>       <!--header       div(end) -->
       <div class = "navmenu_block">
