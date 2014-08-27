@@ -37,6 +37,9 @@
       display: none;
    }
 
+  .footer img {display: none}
+   
+   
 }
 
     /* Base page */
@@ -106,8 +109,8 @@
 	color: #000;
    }
   
-   .footer {width:100%; clear: left; height: 100px; margin: auto;}
-   .footer p {line-height:115px; float:right;color: #FE2E9A; font-size: 18px;}
+   .footer {width:100%; clear: left; height: 100px;}
+   .footer p {line-height:115px; float:right;color: #FE2E9A; font-size: 1.1em;}
    .footer img {float: right; height: 100px; width: 80px;}
   
   
@@ -439,14 +442,12 @@
    {% block content %}
 
    {% endblock %}
-   </div>
+   </div> <!--maincontainer div(end) -->
 	
    <div class= "footer">
-     {% load static from staticfiles %}
-     <img src="{% static "img/surekhacook" %}"/>
-
-    <p> © 2014 Surekha's cookhouse. All rights reserved</p><br>
-   </div>
+      <img src="{% static "img/surekhacook" %}"/>
+      <p> © 2014 Surekha's cookhouse. All rights reserved</p><br>
+   </div> <!--footer div(end) -->
 </div>	
 </body>
 </html>
