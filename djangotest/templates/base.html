@@ -17,7 +17,6 @@
     /* Base page */
     * {padding: 0; margin: 0;}
     a {text-decoration: none;color: #FF3288; font-weight:bold}
-    p {padding-left: 10px;}
    .bigcontainer {width:100%;}
    .container  {height:159px;}
    .header {height:130px;}
@@ -29,73 +28,52 @@
 
    .navmenu_block
    {
+      width: 100%;
       height:29px;
       background: #FE2E9A; repeat-x;
-      margin:0;
-      padding:0;
    }
 
    .navmenu
    {	
-      width:980px;
-      margin-left:auto;
-      margin-right:auto;
-      margin-top:0;
-      margin-bottom:0;
+      width	  :73%;
+      margin-left :13.5%;
+      margin-right:13.5%;
    }
 
-   .navmenu ul
-   {
-      line-height: 31px;
+   .ul{
+      width  :100%
    }
-
+   
    .navmenu li
    {
-      padding:0;
-      width:auto;
       list-style:none;
       float:left;
-      position:relative;
       background: #FE2E9A;
+      width:16.565683673%;
       height:29px;
+      line-height: 29px;
       border-right: thin solid white;
    }
 
+   .navmenu li:last-child{
+      border-right: none;
+   }
+   
    .navmenu ul li a
    {       
-      margin:0;
-      padding:0; 
       text-align:center;
       font-family: "Arial Black", Gadget, sans-serif;
-      font-size: 14px;
+      font-size: 0.9em;
       text-decoration:none;
-      width: 162.3437px;
       display:block;
       color: #FFF;
       text-shadow: 1px 1px 1px #000;
-   }
-
-   .navmenu ul ul
-   {
-      position: absolute;
-      visibility: hidden;
-      top:32px;
-   }
-
-   .navmenu ul li:hover ul
-   {
-	visibility: visible;
-
+      
    }
 
    .navmenu li:hover
    {
 	background: #FFC0CB;
-   }
-
-   .navmenu ul li:hover ul li a:hover
-   {
-   	background: #FFC0CB;
    }
 
    .navmenu a: hover
@@ -403,77 +381,34 @@
 </head>
 
 <body>
+{% load static from staticfiles %}   
 <div class = "bigcontainer">
-       <div class = "container">
-	  <div class = "header">
-           <div class = "headerblock">
-             {% load static from staticfiles %}
-	     <img src="{% static "img/surekhacook" %}" />
-             <h1> Surekha's Cookhouse </h1>
-	     <h2>The House of flavors, tastes, recipes and healthy tips.</h2>
+   <div class = "container">
+      <div class = "header">
+	 <div class = "headerblock">
+	    <img src="{% static "img/surekhacook" %}" />
+	    <h1> Surekha's Cookhouse </h1>
+	    <h2>The House of flavors, tastes, recipes and healthy tips.</h2>
 	     
-	 <div class="search_bar" style="float:right;">
-	    <input type="text" id="searchbar_top_page" name="searchbar" size="20" placeholder="Search" style="font-size: 15px;" />
-	 </div>
-	     
-	     
-         </div>
-      </div>
+	    <div class="search_bar" style="float:right;">
+	       <input type="text" id="searchbar_top_page" name="searchbar" size="20" placeholder="Search" style="font-size: 15px;" />
+	    </div> <!--search_bar   div(end) -->
+	 </div>    <!--header_block div(end) -->
+      </div>       <!--header       div(end) -->
       <div class = "navmenu_block">
-            <div class = "navmenu">
-		<ul>
-			<li><a href="/home">Home </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
+	 <div class = "navmenu">
+	    <ul>
+	       <li><a href="/home">Home </a>
+	       <li><a href="/recipes/all">Recipes</a>
+	       <li><a href="#">Cooking Skills </a>
+	       <li><a href="#">Health Benefits </a>
+	       <li><a href="#">Glossary </a>
+	       <li><a href="/contact/">Contact Us</a>
+	    <ul>		
+	 </div>   <!--navmenu div(end) -->
+      </div>      <!--navmenu_block div(end) -->
+   </div>
 
-		<ul>
-			<li><a href="/recipes/all">Recipes</a>
-			<ul> <!--
-				<li><a href="/recipes/baking">Baking </a> </li>
-				<li><a href="/recipes/quick-food">Quick food </a> </li>
-				<li><a href="/recipes/pastries">Pastries </a> </li>
-				<li><a href="/recipes/variety-rice">Variety rice </a> </li>
-				<li><a href="/recipes/one-pot-cooking">One pot cooking </a> </li>
-				<li><a href="/recipes/chutney">Chutney </a> </li>
-			        <li><a href="/recipes/sides">Sides </a> </li>
-			        <li><a href="/recipes/gravy">Gravy </a> </li>
-			        <li><a href="/recipes/others">Others </a> </li>
-				-->
-			</ul>
-			</li>
-		</ul>
-		
-		<ul>
-			<li><a href="#">Cooking Skills </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-		<ul>
-			<li><a href="#">Health Benefits </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-
-		<ul>
-			<li><a href="#">Glossary </a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-
-		<ul>
-			<li><a href="/contact/">Contact Us</a>
-			<ul>
-			</ul>
-			</li>
-		</ul>
-          </div>
-         </div>
-       </div>
    <div class = "maincontainer">
    {% block content %}
 
