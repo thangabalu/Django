@@ -93,15 +93,10 @@
 </div>
 </div>
    <br>
-      <div class = "navmenu" style="float:left; display: inline-block">
-        <ul>
-	 <li><a style="width:100px;" href="/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/">Like </a> </li>
-	  <div style="padding-left:5px; font-size: 17px;">
+
+          <button type="button" class ="like_button" onclick="location.href='/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/'">Like</button>
    	  +{{article.likes}}
-          </div>
-        </ul>
-      </div>
-   
+     <br>   
       This recipe is viewed {{article.page_views}} times
       
      <div style="text-align:right;">
