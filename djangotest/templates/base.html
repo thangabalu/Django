@@ -8,57 +8,23 @@
 <!-- Downloaded the compressed jquery library-->
 <script type="text/javascript" src="{% static "js/first.js" %}"></script>
 <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   
 {% block title %}
 <title>Base page</title>
 {% endblock %}
 <style type = "text/css">
 
-@media screen and (min-width: 501px) and (max-width:969px){
-   .navmenu li{
-      clear: both;
-   }
-
-}
-
-@media screen and (max-width:500px){
-   .navmenu li{
-      clear: both;
-      width: auto;
-   }
-   
-   #searchbar_top_page
-   {
-      display: none;
-   }
-
-   .headerblock h2
-   {
-      display: none;
-   }
-
-  .footer img {display: none}
-   
-   
-}
-
-    /* Base page */
-    * {padding: 0; margin: 0;}
-    a {text-decoration: none;color: #FF3288; font-weight:bold}
-   .bigcontainer {width:100%;}
-   .container  {height:159px;}
-   .header {height:130px;}
-   .headerblock {width:72%;margin-left:14%; margin-right:14%;}
-   .headerblock img {height: 120px; width: 10.1%; float:left}
-   .headerblock h1  {color: #FE2E9A; font-size: 3.75em;line-height: 101%;padding-top:3%;}
-   .headerblock h2  {color: #FE2E9A; font-size: 1em;}
+@media (min-width: 970px) and (max-width: 3700px) {
    .maincontainer {width:85.5%;margin-left:7.25%; margin-right: 7.25%; background-color:white;}
-
+   .headerblock {width:72%;margin-left:14%; margin-right:14%;}   
+   .headerblock p  {color: #FE2E9A; font-size: 3.75em;line-height: 101%;padding-top:3%; font-weight: bold;}
    .navmenu_block
    {
       width: 100%;
       height:29px;
       background: #FE2E9A; repeat-x;
+      clear: both;
    }
 
    .navmenu
@@ -66,10 +32,6 @@
       width	  :73%;
       margin-left :13.5%;
       margin-right:13.5%;
-   }
-
-   .navmenu ul{
-      width  :100%
    }
    
    .navmenu li
@@ -82,6 +44,142 @@
       line-height: 29px;
       border-right: thin solid white;
    }
+   
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 60.42857%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
+   .bottom_block_home{float:left; width:28%;}
+}
+
+
+
+@media (min-width: 511px) and (max-width: 969px) {
+
+   .maincontainer{
+      width:100%;
+   }
+
+   .headerblock {width:100%;}
+                                         
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 70.42859898%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
+   
+   .bottom_block_home{float:left; width:28%;}
+   
+   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}     
+   
+   .navmenu_block
+   {
+      width: 100%;
+      height:29px;
+      background: white;
+      clear: both;
+   }
+
+   .navmenu
+   {	
+      width	  :100%;
+   }   
+
+   .navmenu li
+   {
+      list-style:none;
+      float:left;
+      background: #FE2E9A;
+      width:22%;
+      height:29px;
+      line-height: 29px;
+      border-right: thin solid white;
+   }
+ 
+   .footer img
+   {
+      display: none
+   }
+   
+}
+
+@media (min-width: 384px) and (max-width:510px){
+
+   .maincontainer{
+      width:100%;
+   }
+   
+   .bigimage{display: none}
+   .navblock{display: none}
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 95.3061%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}      
+   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}
+
+   .bottom_block_home{clear:both;width:75%;margin-left: 12.5%;margin-right: 12.5%;}
+   
+   .navmenu li
+   {
+      list-style:none;
+      float:left;
+      background: #FE2E9A;
+      width:30%%;
+      height:29px;	
+      line-height: 29px;
+      border-right: thin solid white;
+   }
+
+   .footer img
+   {
+      display: none
+   }   
+   
+}
+
+
+
+@media (max-width: 383px){
+   .maincontainer{
+      width:100%;
+   }
+
+   #searchbar_top_page
+   {
+      display: none;
+   }
+   .bigimage{display: none}
+   .navblock{display: none}
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 95.3061%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}      
+   .bottom_block_home{clear:both;width:75%;margin-left: 12.5%;margin-right: 12.5%;}
+   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}  
+
+   .navmenu li
+   {
+      list-style:none;
+      float:left;
+      background: #FE2E9A;
+      width:40%%;
+      height:29px;
+      line-height: 29px;
+      border-right: thin solid white;
+   }
+   .footer img
+   {
+      display: none
+   }
+
+   
+}
+
+
+
+    /* Base page */
+    * {padding: 0; margin: 0;}
+    a {text-decoration: none;color: #FF3288; font-weight:bold}
+   .bigcontainer {width:100%;}
+   .container  {height:159px;}
+   .header {height:130px;}
+   
+   .headerblock img {height: 120px; width: 10.1%; float:left}   
+   .headerblock h2  {color: #FE2E9A; font-size: 1em;}
+
+
+
+   .navmenu ul{
+      width  :100%
+   }
+   
 
    .navmenu li:last-child{
       border-right: none;
@@ -115,14 +213,18 @@
   
   
   /* Home page */ 
-  .bigimage {width: 980px; height: 500px; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888;}
+  .bigimage {width: 100%; height: auto; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888; float: left;}
+  .bigimage img {width: 100%; height: auto;}
 
-  .navblock { width: 234px; float: left; text-align:center; margin-top:auto; margin-bottom:auto; border: thin solid black;}
+  .navblock { width: 23.87755102%; float: left; text-align:center; margin-top:auto; margin-bottom:auto; border: thin solid black;
+              margin-left: auto; margin-right: auto;}
   .navblock ul {list-style-type: none;}
   .navblock img{
-	width:220px; 
+	width:94.017094017%; 
 	height: 148px;
-	display: inline;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
         opacity: 1.0;
         filter: alpha(opacity=40); /* For IE8 and earlier */
 	}
@@ -139,24 +241,25 @@
 	background: -o-radial-gradient(#edf5bb, #c8e231); /* For Opera 11.1 to 12.0 */
 	background: -moz-radial-gradient(#edf5bb, #c8e231); /* For Firefox 3.6 to 15 */
 	background: radial-gradient(#edf5bb, #c8e231); /* Standard syntax (must be last) */
-	list-style:none;
 	height:29px;
-	float:left;
 	text-align:center;
+	line-height: 29px;
+	margin-left: auto;
+	margin-right: auto;
+	width:94.017094017%;
+	margin-bottom:5px;
 	}
 
-
-   .content{color: #666666; float: left; padding-right:20px; width: 700px; margin: auto; margin-left:20px; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
-   .bottom {color: #666666; float: left;line-height: 1.4em;background-color:white; text-align: justify;}
-   .content_picture {float:right; width:250px; height: 250px; margin-left: 40px; margin-top: 50px;}
-   .content_picture img {width: 250px;height:250px;}
+   .content_picture {float:right; width:35.714285714%; height: auto; margin-left: 40px; margin-top: 50px;}
+   .content_picture img {width: 100%;height:auto;}
    .pink  {color:#FE2E9A}
    .grey {color:#666666}
 
-   .bottom {float:left;margin-top:100px;}
-   .bottom span {font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 13;}
+   .bottom {color: #666666; float: left;line-height: 1.4em;background-color:white; text-align: justify;margin-top:100px;}
+
+   .bottom span {font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 0.8em;}
    .bottom img {
-	width: 240px; 
+	width: 100%;
 	height:160px;
 	display:inline;
         opacity: 1.0;
@@ -419,7 +522,7 @@
 	    <div class="search_bar" style="float:right;">
 	       <input type="text" id="searchbar_top_page" name="searchbar" size="20" placeholder="Search" style="font-size: 15px;" />
 	    </div> <!--search_bar   div(end) -->
-   	    <h1> Surekha's Cookhouse </h1>
+   	    <p> Surekha's Cookhouse </p>
 	    <h2>The House of flavors, tastes, recipes and healthy tips.</h2>    
 
 	 </div>    <!--header_block div(end) -->

@@ -11,45 +11,37 @@
 		<img src="{% static "img/Home_big_image.jpg" %}"/>
 	</div>
 
-   <div class ="navblock">
-   <div style="width: 220px; margin-top:10px; margin-left:auto;
-		        margin-right:auto; margin-bottom:0;">
-   <ul style="line-height:31px; width:220px;">
-   <li class = "radial_gradient" style ="width:220px;">
-	<a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;" href="/latest_recipes/">
-            Latest recipes
-        </a>
-   </li>
-   
-   {% for recipe in latest_recipes_one %}
-   <li style= "width:220px;list-style:none;float:left;"> 
-       <a style="color:#FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-           {{recipe.title}} 
-   </li>
+  <div class ="navblock">
+	
+	<div class = "radial_gradient" style="margin-top:10px;">
+		<a style="text-align:center; color: #FE2E9A;font-size: 1em;text-decoration:none;" href="/latest_recipes/">
+		Latest recipes
+		</a>
+	</div>   
 
-   <img src="/static/{{recipe.photo}}" alt={{recipe.title}} </img>
-   </a>
-   <br><br>
-   {% endfor %}
+	{% for recipe in latest_recipes_one %}
+	<a style="color:#FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+		{{recipe.title}} 
+		<img src="/static/{{recipe.photo}}" alt="{{recipe.title}}"</img>
+	</a>
+	<br><br>
+	{% endfor %}
    
-   <li class = "radial_gradient" style ="width:220px;">
-   <a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;" href="/popular_recipes/">
-       Popular recipes
-   </a>
-   </li>
+	<div class = "radial_gradient">
+		<a style="text-align:center; color: #FE2E9A;font-size: 1em;text-decoration:none;" href="/popular_recipes/">
+			Popular recipes
+		</a>
+	</div>
 
-   {% for recipe in popular_recipes_one %}
-   <li style= "width:220px;list-style:none;float:left;"> 
-   <a style="color:#FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-       {{recipe.title}} 
-   </li>
-   <img src="/static/{{recipe.photo}}" alt={{recipe.title}} </img>
-   </a>
-   <br><br>
-   {% endfor %}
-    </ul>
+	{% for recipe in popular_recipes_one %}
+	<a style="color:#FE2E9A;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+		{{recipe.title}} 
+		<img src="/static/{{recipe.photo}}" alt="{{recipe.title}}" </img>
+	</a>
+	<br><br>
+	{% endfor %}
   </div>
-</div>
+	
 	<div class = "content">
 	    <div class="content_picture">
 		<img src="{% static "img/watermelon-salad.jpg" %}"/>
@@ -60,7 +52,7 @@
 			<span class="pink">Healthy living </span>
 		</h1>
 		<br>
-		<div style="font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 13;">
+		<div style="font-family: 'Tahoma', 'Geneva', 'sans-serif'; font-size: 0.8em;">
 		Secret of healthy living is Healthy eating. Many factors affect our health. Some you cannot control,
 		such as your genetic makeup or your age and some you can like eating right. By taking steps towards healthy living, you can
 		help reduce your risk of heart disease, cancer, stroke and other serious diseases. Healthy Eating is the basic step for
@@ -78,7 +70,7 @@
 	</div>
 
         <div class = "bottom">
-	   <div style="float:left; width:245px; margin-right:100px;">
+	   <div class ="bottom_block_home" style="margin-right:5%;">
            {% load static from staticfiles %}
 	<a href="/recipes/all">
            <img src="{% static "img/recipes" %}" />
@@ -90,7 +82,7 @@
 <span>Find many recipies from baking to broiling and from pastry to perfect rice cooking. Complex recipies are made simple and easy that even a kid can cook with perfection.</span>
 	  </div>
 
-	   <div style="float:left; width:245px; margin-right:100px;">
+	   <div class ="bottom_block_home" style="margin-right:5%;">
            {% load static from staticfiles %}
 	<a href="#">
            <img src="{% static "img/health_benefits" %}" />
@@ -102,7 +94,7 @@
 	    
 	  </div>
 
-	   <div style="float:right; width:245px;">
+	   <div class ="bottom_block_home">
            {% load static from staticfiles %}
 	<a href="#">
            <img src="{% static "img/cooking_skills" %}" />
