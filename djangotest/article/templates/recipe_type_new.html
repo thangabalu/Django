@@ -7,30 +7,29 @@
 
 {% block content %}
 <div class = "maincontainer">
-
 <div class= "contentcontainer_recipe_type">
-<div class = "bottomcontainer_recipe_type">
+
 
 {% load static from staticfiles %}
 {% if recipes.count > 0 %}
 {% for recipe in recipes %}
 
         {% if recipe.recipe_type == type %}
-	<div class = "bottom_recipe_type"; style ="margin-top: 50px;">			
+	<div class = "bottom_recipe_type">			
 	<a href="/recipes/{{ type }}/{{ recipe.title.split|join:"-"}}/">
            <img src="/static/{{recipe.photo}}"/><br>
 		<p>{{recipe.title}}</p>
 	</a>
 	</div>
 	{% elif recipe.recipe_type_1 == type %}
-        <div class = "bottom_recipe_type"; style ="margin-top: 50px;">		
+        <div class = "bottom_recipe_type">		
 	<a href="/recipes/{{ type }}/{{ recipe.title.split|join:"-"}}/">
            <img src="/static/{{recipe.photo}}"/><br>
 		<p>{{recipe.title}}</p>
 	</a>	
 	</div>
 	{% elif recipe.recipe_type_2 == type %}
-        <div class = "bottom_recipe_type"; style ="margin-top: 50px;">		
+        <div class = "bottom_recipe_type">		
 	<a href="/recipes/{{ type }}/{{ recipe.title.split|join:"-"}}/">
            <img src="/static/{{recipe.photo}}"/><br>
 		<p>{{recipe.title}}</p>
@@ -40,7 +39,6 @@
 
 {% endfor %}
 {% endif %}
-</div>
 </div>
 </div>
 {% endblock %}
