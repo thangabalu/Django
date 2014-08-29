@@ -16,6 +16,7 @@
 <style type = "text/css">
 
 @media (min-width: 970px) and (max-width: 3700px) {
+   /* Base template */
    .maincontainer {width:85.5%;margin-left:7.25%; margin-right: 7.25%; background-color:white;}
    .headerblock {width:72%;margin-left:14%; margin-right:14%;}   
    .headerblock p  {color: #FE2E9A; font-size: 3.75em;line-height: 101%;padding-top:3%; font-weight: bold;}
@@ -26,14 +27,12 @@
       background: #FE2E9A; repeat-x;
       clear: both;
    }
-
    .navmenu
    {	
       width	  :73%;
       margin-left :13.5%;
       margin-right:13.5%;
    }
-   
    .navmenu li
    {
       list-style:none;
@@ -44,27 +43,24 @@
       line-height: 29px;
       border-right: thin solid white;
    }
-   
+
+   /* Home page */   
    .content{color: #666666; float: left; padding-right:2.34695%; width: 60.42857%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
    .bottom_block_home{float:left; width:28%;}
+
+   /* All recipes page */   
+   .bottomblock_recipes_all {float: left; width: 20%; padding: 3%;margin-right:5%}   
 }
 
 
 
 @media (min-width: 511px) and (max-width: 969px) {
-
+   /* Base template */
    .maincontainer{
       width:100%;
    }
-
    .headerblock {width:100%;}
-                                         
-   .content{color: #666666; float: left; padding-right:2.34695%; width: 70.42859898%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
-   
-   .bottom_block_home{float:left; width:28%;}
-   
-   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}     
-   
+   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}
    .navmenu_block
    {
       width: 100%;
@@ -72,12 +68,10 @@
       background: white;
       clear: both;
    }
-
    .navmenu
    {	
       width	  :100%;
    }   
-
    .navmenu li
    {
       list-style:none;
@@ -88,27 +82,26 @@
       line-height: 29px;
       border-right: thin solid white;
    }
- 
    .footer img
    {
       display: none
    }
    
+   /* Home page */   
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 70.42859898%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}
+   .bottom_block_home{float:left; width:28%;}
+
+   /* All recipes page */   
+   .bottomblock_recipes_all {float: left; width: 20%; padding: 3%;margin-right:5%}      
 }
 
 @media (min-width: 384px) and (max-width:510px){
-
+   /* Base template */
    .maincontainer{
       width:100%;
    }
-   
-   .bigimage{display: none}
-   .navblock{display: none}
-   .content{color: #666666; float: left; padding-right:2.34695%; width: 95.3061%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}      
-   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}
-
-   .bottom_block_home{clear:both;width:75%;margin-left: 12.5%;margin-right: 12.5%;}
-   
+   .headerblock {width:100%;}
+   .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}   
    .navmenu li
    {
       list-style:none;
@@ -119,31 +112,33 @@
       line-height: 29px;
       border-right: thin solid white;
    }
-
    .footer img
    {
       display: none
    }   
    
+    /* Home page */   
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 95.3061%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}      
+   .bottom_block_home{clear:both;width:75%;margin-left: 12.5%;margin-right: 12.5%;}      
+   .bigimage{display: none}
+   .navblock{display: none}
+
+   /* All recipes page */   
+   .bottomblock_recipes_all {clear:both; width: 50%; margin-left: 25%;margin-right:25%;margin-bottom: 5%}      
 }
 
 
 
 @media (max-width: 383px){
+   /* Base page */
    .maincontainer{
       width:100%;
    }
-
    #searchbar_top_page
    {
       display: none;
    }
-   .bigimage{display: none}
-   .navblock{display: none}
-   .content{color: #666666; float: left; padding-right:2.34695%; width: 95.3061%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}      
-   .bottom_block_home{clear:both;width:75%;margin-left: 12.5%;margin-right: 12.5%;}
    .headerblock p  {color: #FE2E9A; font-size: 2.5em;line-height: 101%;padding-top:3%; font-weight: bold;}  
-
    .navmenu li
    {
       list-style:none;
@@ -157,9 +152,16 @@
    .footer img
    {
       display: none
-   }
+   }   
 
-   
+    /* Home page */   
+   .content{color: #666666; float: left; padding-right:2.34695%; width: 95.3061%; margin: auto; margin-left:2.34695%; line-height: 1.4em;background-color:white; margin-top:50px; text-align: justify;}      
+   .bottom_block_home{clear:both;width:75%;margin-left: 12.5%;margin-right: 12.5%;}
+   .bigimage{display: none}
+   .navblock{display: none}
+
+   /* All recipes page */   
+   .bottomblock_recipes_all {clear:both; width: 50%; margin-left: 25%;margin-right:25%;margin-bottom: 5%}         
 }
 
 
@@ -170,21 +172,15 @@
    .bigcontainer {width:100%;}
    .container  {height:159px;}
    .header {height:130px;}
-   
    .headerblock img {height: 120px; width: 10.1%; float:left}   
    .headerblock h2  {color: #FE2E9A; font-size: 1em;}
-
-
 
    .navmenu ul{
       width  :100%
    }
-   
-
    .navmenu li:last-child{
       border-right: none;
    }
-   
    .navmenu ul li a
    {       
       text-align:center;
@@ -196,17 +192,14 @@
       text-shadow: 1px 1px 1px #000;
       
    }
-
    .navmenu li:hover
    {
 	background: #FFC0CB;
    }
-
    .navmenu a: hover
    {
 	color: #000;
    }
-  
    .footer {width:100%; clear: left; height: 100px;}
    .footer p {line-height:115px; float:right;color: #FE2E9A; font-size: 1.1em;}
    .footer img {float: right; height: 100px; width: 80px;}
@@ -215,7 +208,6 @@
   /* Home page */ 
   .bigimage {width: 100%; height: auto; margin-bottom: 30px; box-shadow: 0px 10px 10px 5px #888888; float: left;}
   .bigimage img {width: 100%; height: auto;}
-
   .navblock { width: 23.87755102%; float: left; text-align:center; margin-top:auto; margin-bottom:auto; border: thin solid black;
               margin-left: auto; margin-right: auto;}
   .navblock ul {list-style-type: none;}
@@ -277,13 +269,10 @@
    .bottom center {font-size:18; font-weight:bold}
 
    /* All recipes page */
-  .contentcontainer_recipes_all  {margin: auto; float:left; border: thin solid black;min-height: 700px;}
-  .bottom_recipes_all {float:left; margin:auto; margin-top:5px;}
-  .bottomblock_recipes_all {float: left; height: 200px; width: 300px;margin-left:25px;}
-  .bottomblock_recipes_all li { list-style: none; width: 200px;}
+  .contentcontainer_recipes_all  {margin: auto; float:left; border: thin solid black;min-height: 700px;width:99%}
   .bottomblock_recipes_all img 
   {
-	width: 220px; height:148px; padding: 5px; margin:auto;
+	width: 100%; height:148px;
 	display:inline;
         opacity: 1.0;
         filter: alpha(opacity=40); /* For IE8 and earlier */
