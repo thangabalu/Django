@@ -11,16 +11,20 @@
 
 <a href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"><h2>{{recipe.title}}</h2></a>
 {% if recipe.meta_description %}
-<span class="content_block_show_recipe">{{recipe.meta_description|truncatechars:140}}</span>
+<span>{{recipe.meta_description|truncatechars:140}}</span>
+<br><br>
 
 {% elif recipe.tips %}
-<span class="content_block_show_recipe">{{recipe.tips|truncatechars:140}}</span>
+<span>{{recipe.tips|truncatechars:140}}</span>
+<br><br>
 
 {% elif recipe.note %}
-<span class="content_block_show_recipe">{{recipe.note|truncatechars:140}}</span>
+<span>{{recipe.note|truncatechars:140}}</span>
+<br><br>
 
 {% elif recipe.did_you_know %}
-<span class="content_block_show_recipe">{{recipe.did_you_know|truncatechars:140}}</span>
+<span>{{recipe.did_you_know|truncatechars:140}}</span>
+<br><br>
 {% endif %}
 
 {% endfor %}
