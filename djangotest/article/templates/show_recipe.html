@@ -7,255 +7,243 @@
 {% load static from staticfiles %}
 {% block content %} 
 <div class = "maincontainer"; style="border: thin solid black; float:left">
-<div class = "content_block_show_recipe">	
-   <br>
-   <br>
-   <h1> {{ article.title }} </h1>
-   <br>
-   {% if article.meta_description%}
-   <span> {{ article.meta_description|linebreaks }} </span>   
-   {% endif %}
-   <br>  
-   <!-- Block for prep time, cooking time, serves -->
-<div style="background-color:#E6E6E6; height: 50px;padding: 0; margin: 0; width: 713px;margin-left:10px;
-            border-bottom: thin solid black;">
-   <!-- Prep time -->
-   <div style="font-weight:bold;width: 236px;border-left: thin solid black;
-	       border-top: thin solid black; height:50px;text-align: center; line-height: 50px;float:left;">
-     Prep time: {{article.prep_time}}
-     
-   </div>
-
-   <!-- cooking time -->
-   <div style="font-weight:bold;width: 236px;border-left: thin solid black;
-	       border-top: thin solid black; height:50px;text-align: center; line-height: 50px;float:left;">
-     Cooking time: {{article.cooking_time}}
-     
-   </div>
-   
-   <!-- Serves-->
-     <div style="font-weight:bold;width: 236px;border-right:thin solid black;border-left: thin solid black;
-	       border-top: thin solid black; height:50px;text-align: center; line-height: 50px;float:left;">
-     Serves: {{article.serves}}
-     
-   </div>
-</div>
-     
-   {% if article.photo %}
-   <img src="/static/{{article.photo}}" alt={{article.title.split|join:"-"}}</img>
-   <br><br>
-   {% endif %}
-
-   <!--All h4 tags inside content_block_show_recipe have margin-bottom property set in base.html-->
-   
-   {% if article.note %}
-   <span> {{ article.note|linebreaks }} </span>
-   {% endif %}
-
-   <!-- Ingredients -->
-<div class="two_blocks">
-   <div class ="ingredients_block">
-   <br>     
-   {% for key,value in ingredient.items %}
-	<h4>{{ key }} </h4>
-	<table>
-        {% load my_custom_filters %}
-	{% for val in value %}
-		<tr>
-  			<td class="first_column_ingredients">{{ val | extract_first_td}}</td>
-			<td class="second_column_ingredients">{{ val | extract_second_td}}</td>
-
-		</tr>
-	{% endfor %}
-	</table><br>
-   {% endfor %}
-   </div>
-
-   <div class="directions_block">
-     <br>
-     <h4>Directions</h4>
-     {% load my_custom_filters %}
-     {% for value in direction %}
-	  {% if '<h>' in value %}
-	  <h4>{{ value |extract_from_h_tag}}</h4>
-	  {% else %}
-            <span> {{ value |linebreaks }} </span>
+     <div class = "content_block_show_recipe">	
+	  <br>
+	  <br>
+	  <h1> {{ article.title }} </h1>
+	  <br>
+	  {% if article.meta_description%}
+	       <span> {{ article.meta_description|linebreaks }} </span>   
 	  {% endif %}
-     {% endfor %}	
+	  <br>  
    
-   
-   <br>
-   
-   {% if article.tips %}
-   <h4> Tips </h4>
-   <span>{{ article.tips|linebreaks }} </span>
-   {% endif %}
-</div>
-</div>
-   <br>
+   <!-- Block for prep time, cooking time, serves -->
+	  <div class="time_show_recipe">
+	       <!-- Prep time -->
+	       <div class ="prep_time_show_recipe">
+		    Prep time: {{article.prep_time}}  
+	       </div>
 
+	       <!-- cooking time -->
+	       <div class="cooking_time_show_recipe">
+		    Cooking time: {{article.cooking_time}}
+	       </div>
+   
+	       <!-- Serves-->
+	       <div class="serving_time_show_recipe">
+		    Serves: {{article.serves}}
+	       </div>
+	  </div>
+     
+	  {% if article.photo %}
+	       <img src="/static/{{article.photo}}" alt={{article.title.split|join:"-"}}</img>
+	       <br><br>
+	  {% endif %}
+
+	  <!--All h4 tags inside content_block_show_recipe have margin-bottom property set in base.html-->
+   
+	  {% if article.note %}
+	       <span> {{ article.note|linebreaks }} </span>
+	  {% endif %}
+
+	  <!-- Ingredients -->
+	  <div class="two_blocks">
+	       <div class ="ingredients_block">
+		    <br>     
+		    {% for key,value in ingredient.items %}
+			 <h4>{{ key }} </h4>
+			 <table>
+			      {% load my_custom_filters %}
+			      {% for val in value %}
+			      <tr>
+			           <td class="first_column_ingredients">{{ val | extract_first_td}}</td>
+			           <td class="second_column_ingredients">{{ val | extract_second_td}}</td>
+			      </tr>
+	     		     {% endfor %}
+			 </table><br>
+		    {% endfor %}
+	       </div>
+
+	       <div class="directions_block">
+		    <br>
+		    <h4>Directions</h4>
+		    {% load my_custom_filters %}
+		    {% for value in direction %}
+			 {% if '<h>' in value %}
+			      <h4>{{ value |extract_from_h_tag}}</h4>
+			 {% else %}
+			      <span> {{ value |linebreaks }} </span>
+			 {% endif %}
+		    {% endfor %}	
+		    <br>
+   
+		    {% if article.tips %}
+			 <h4> Tips </h4>
+			 <span>{{ article.tips|linebreaks }} </span>
+		    {% endif %}
+	       </div>
+	  </div>
+	  <br>
+
+	  <!-- Like button and page Views -->
           <button type="button" class ="like_button" onclick="location.href='/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/like/'">Like</button>
    	  +{{article.likes}}
-     <br>   
-      This recipe is viewed {{article.page_views}} times
+	  <br>   
+	  <span>This recipe is viewed {{article.page_views}} times</span>
       
-     <div style="text-align:right;">
-         <span class = "posted_show_recipe"> Posted by Surekha on {{article.pub_date }} </span>
-     </div>
-     
-     <div class="social-icons">
-        <ul>
-	  <li style="font-size: 18px;color:#FE2E9A;">Share:</li>
-          <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank" title="{{ article.title }}/"><img src="{% static "img/face-book.png" %}" alt="facebook share" /></a></li>
-          <li><a href="https://twitter.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/&amp;text={{ article.title }}" target="_blank"><img src="{% static "img/twitter.png" %}" alt="Twitter" /></a></li>
-          <li><a href="https://plus.google.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank"><img src="{% static "img/google.png" %}" alt="Google plus" /></a></li>
-        </ul>
-      </div>     
-     
-     
-	
-      <br><br>
-
-      
-      <!--You might also like section -->
-      <!--Make the entire div clickable -->
-      <span style="font-size: 18px;color:#FE2E9A;">You might also like:</span>
-      <div class="you_might_also_like_show_recipe">
-	  {% for recipe in you_might_also_like %}
-	          {% if recipe.photo %}
-		       <div class="block_in_you_might_also_like_show_recipe">
-			<a href ="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-			 <div class="content_in_you_might_also_like_show_recipe">
-	  		    <img src="/static/{{recipe.photo}}" alt="hello"</img><br>
-			    <span style="font-weight:bold;">{{recipe.title}}</span><br>
-			 </a>
-			</div>
-   		       </div>
-	         {% endif %}
-          {% endfor %}
-      </div>
-      <br>
-      
-      
-<div style="float: left; clear: both;">
-<form action="/recipes/comments/" method="post" onsubmit="return thank_you()"> {% csrf_token %}
-	<textarea name="name" cols="50" rows="1" placeholder="Enter your name"></textarea>
-	<br>
-	<textarea name="comment" cols="50" rows="10" placeholder="Enter your comment"></textarea>
-	<input type="hidden" name = "recipe_type" value= {{article.recipe_type}}>
-	<input type="hidden" name = "recipe_title" value= {{recipe_title_url_format}}>
-	<input type="hidden" name = "recipe_id" value= "{{article.id}}"><br>
-	<input type="submit" value="submit" />
-
-</form>
-</div>      
-     <div style="width:400px; float: left;">
-	       <br>
-      {% if comments|length = 0 %}
-      <span style="font-weight:bold">No comments </span> <br><br>
-      {% else %}
-      <span style="font-weight:bold">{{total_comments}} comments</span><br><br>
-      {% for comment in comments %}
-	     <div style="background-color:#DEDEDE;height:30px;"> 
-	       <span style="font-weight:bold;line-height: 30px; padding-left: 5px;font-size: 14px;">{{comment.name }}</span>
-	       <span style="float: right; line-height: 30px; padding-right: 5px;font-size: 12px;">{{comment.date }}</span>
-	     </div>
-          <span>{{comment.comment}}</span>
-	    <br>
-	    <br>
-	  <!-- using the unique ids for making javascript to create div elements properly -->
-	  <div style="float:right">
-	       <input type = "button" class= "reply_button" name = {{comment.id|concatenate_two_strings_firstdiv }} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}","{{comment.name}}") </input>
+	  <div class ="posted_show_recipe">
+	       <span> Posted by Surekha on {{article.pub_date }} </span>
 	  </div>
-	  <div id={{comment.id|concatenate_two_strings_firstdiv}}> </div>
-          <br> 
-	  {% for key,value in comment_reply_dictionary.items%}
-	       {%for id,date,comment_val,unique_id,name in value%}
-		    {% if id == comment.id%}
-			 <div style="margin-left: 50px;">
-			 <br>
-		      
-		         <div style="background-color:#DEDEDE;height:30px;"> 
-			      <span style="font-weight:bold;line-height: 35px; padding-left: 5px;font-size:14px;">{{ name }}</span>
-	                      <span style="float: right; line-height: 35px; padding-right:5px; font-size: 12px;">{{date }}</span>
-	                 </div>     
-    
-	       		 <span>{{comment_val}}</span>
-			 <br><br>
-			 <div style="float:right">		 
-			      <input type = "button" class= "reply_button" name = {{unique_id|concatenate_two_strings_seconddiv}} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}","{{name}}") </input>
-			 </div>
-			 <br>			 
-			 <div id={{unique_id|concatenate_two_strings_seconddiv}}> </div>
-			 <br>
+     
+	  <div class="social-icons">
+	       <ul>
+		    <li style="font-size: 18px;color:#FE2E9A;">Share:</li>
+		    <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank" title="{{ article.title }}/"><img src="{% static "img/face-book.png" %}" alt="facebook share" /></a></li>
+		    <li><a href="https://twitter.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/&amp;text={{ article.title }}" target="_blank"><img src="{% static "img/twitter.png" %}" alt="Twitter" /></a></li>
+		    <li><a href="https://plus.google.com/share?url=http://surekha-cookhouse.rhcloud.com/recipes/{{article.recipe_type}}/{{article.title.split|join:"-"}}/" target="_blank"><img src="{% static "img/google.png" %}" alt="Google plus" /></a></li>
+	       </ul>
+	  </div>     
+	  <br><br>
+
+	  <!--You might also like section -->
+	  <!--Make the entire div clickable -->
+	  <span style="font-size: 1.1em;color:#FE2E9A;">You might also like:</span>
+	  <div class="you_might_also_like_show_recipe">
+	       {% for recipe in you_might_also_like %}
+	            {% if recipe.photo %}
+			 <div class="block_in_you_might_also_like_show_recipe">
+			      <a href ="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+				   <div class="content_in_you_might_also_like_show_recipe">
+					<img src="/static/{{recipe.photo}}" alt="hello"</img><br>
+					<span style="font-weight:bold;">{{recipe.title}}</span><br>
+				   </div>
+			      </a>	
 			 </div>
 		    {% endif %}
 	       {% endfor %}
-	  {% endfor %}	  
-      {% endfor %}
-      {% endif %}
+	  </div>
+	  <br>
+      
+	  <!--Comments section--> 
+	  <div class="comments_show_recipe">
+	       <form action="/recipes/comments/" method="post" onsubmit="return thank_you()"> {% csrf_token %}
+		    <textarea class="name_textarea" name="name" placeholder="Enter your name"></textarea>
+		    <br>
+		    <textarea class="comment_textarea" name="comment" placeholder="Enter your comment"></textarea>
+		    <input type="hidden" name = "recipe_type" value= {{article.recipe_type}}>
+		    <input type="hidden" name = "recipe_title" value= {{recipe_title_url_format}}>
+		    <input type="hidden" name = "recipe_id" value= "{{article.id}}"><br>
+		    <input class="like_button" style="border-radius:8px;" type="submit" value="Submit"/>
+	       </form>
+	  </div>
+	  
+	  <div class="display_comments_show_recipe">
+	       <br>
+	       {% if comments|length = 0 %}
+		    <span style="font-weight:bold">No comments </span> <br><br>
+	       {% else %}
+		    <span style="font-weight:bold">{{total_comments}} comments</span><br><br>
+		    {% for comment in comments %}
+			 <div style="background-color:#DEDEDE;height:5%;padding:1%;border-radius:20px"> 
+			      <span style="font-weight:bold;line-height: 2em;font-size: 0.9em;">{{comment.name }}</span>
+			      <span style="float:right; line-height: 2.6em; font-size: 0.7em;">{{comment.date }}</span>
+			 </div>
+			 <span style="padding-left: 1%">{{comment.comment}}</span>
+			 <br>
+			 <br>
+			 <!-- using the unique ids for making javascript to create div elements properly -->
+	  
+			 <div style="float:right">
+			      <input type = "button" class= "reply_button" name = {{comment.id|concatenate_two_strings_firstdiv }} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}","{{comment.name}}") </input>
+			 </div>
+			 
+			 <div id={{comment.id|concatenate_two_strings_firstdiv}}> </div>
+			 <br> 
+			 {% for key,value in comment_reply_dictionary.items%}
+			      {%for id,date,comment_val,unique_id,name in value%}
+				   {% if id == comment.id%}
+					<div style="margin-left: 50px;">
+					     <br>
+		      
+					     <div style="background-color:#DEDEDE;height:5%; padding: 1%;border-radius:20px;"> 
+						  <span style="font-weight:bold;line-height: 2em;font-size:0.9em;">{{ name }}</span>
+						  <span style="float: right; line-height: 2.6em;font-size: 0.7em;">{{date }}</span>
+					     </div>     
+					     <span>{{comment_val}}</span>
+					     <br><br>
+					     
+					     <div style="float:right">		 
+						  <input type = "button" class= "reply_button" name = {{unique_id|concatenate_two_strings_seconddiv}} value ="Reply" onclick = you_hovered(this.name,{{comment.id}},"{{article.recipe_type}}","{{recipe_title_url_format}}","{{name}}") </input>
+					     </div>
+					     <br>			 
+					
+					     <div id={{unique_id|concatenate_two_strings_seconddiv}}> </div>
+					     <br>
+					</div>
+				   {% endif %}
+			      {% endfor %}
+			 {% endfor %}	  
+		    {% endfor %}
+	       {% endif %}
+	  </div>
+     </div> <!-- end of content_block_show_recipe-->
+     <!--All <a> tags have font-weight:bold.. check base.html -->
+     <div class ="navigation_did_you_know_show_recipe">
+	  <ul style="line-height:31px; width:100%">
+	       <li class = "radial_gradient" style ="width:100%;">		
+		    <a style="color: #FE2E9A;font-size: 1.1em;text-decoration:none;" href="#">
+			 Did you know?
+		    </a>
+	       </li>
+	  </ul>
+	  <span style="color: #FE2E9A;">{{ article.did_you_know }}</span>
      </div>
-     
-</div>
-<!--All <a> tags have font-weight:bold.. check base.html -->
-   <div class ="navigation_did_you_know_show_recipe">
-   <ul style="line-height:31px; width:200px;">
-   <li class = "radial_gradient" style ="width:200px;">		
-   <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;" href="#">
-	Did you know?
-   </a>
-   </li>
-   </ul>
-   <span style="color: #FE2E9A;">{{ article.did_you_know }}</span>
-   </div>
 
-   <div class = "navigation_show_recipe">
-   <ul style="line-height:25px; width:200px;display: block;">
-   <li class = "radial_gradient" style ="width:200px;display: inline-block">		
-   <a style="color: #FE2E9A;font-size: 16px;text-decoration:none;display: block;" href="/latest_recipes/">
-	Latest recipes
-   </a>
-   </li>
+     <div class = "navigation_show_recipe">
+	  <ul style="line-height:25px; width:100%;display: block;">
+	       <li class = "radial_gradient" style ="width:100%;display: inline-block">		
+		    <a style="color: #FE2E9A;font-size: 1em;text-decoration:none;display: block;" href="/latest_recipes/">
+			 Latest recipes
+		    </a>
+	       </li>
 
-   {% for recipe in latest_recipes_nine %}
-	  <li style= "width:200px;list-style:none;float:left; border-bottom: thin dotted black;display: inline-block"> 
-           <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-	   {{recipe.title}}
-           </a> 
-           </li>
-   {% endfor %}
-   {% for recipe in latest_recipe_tenth %}
-           <li style= "width:200px;list-style:none;float:left;display: inline-block"> 
-           <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-	   {{recipe.title}}
-           </a> 
-           </li>
-   {% endfor %}   
+	       {% for recipe in latest_recipes_nine %}
+		    <li style= "width:100%;list-style:none;float:left; border-bottom: thin dotted black;display: inline-block"> 
+			 <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 1em" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+			      {{recipe.title}}
+			 </a>
+		    </li>
+	       {% endfor %}
+	  
+	       {% for recipe in latest_recipe_tenth %}
+		    <li style= "width:100%;list-style:none;float:left;display: inline-block"> 
+			 <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 1em;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+			      {{recipe.title}}
+			 </a> 
+		    </li>
+	       {% endfor %}   
 
-
-   <li class = "radial_gradient" style ="width:200px;display: inline-block">		
-    <a style="text-align:center; color: #FE2E9A;font-size: 16px;text-decoration:none;display: block;" href="/popular_recipes/">
-	Popular recipes
-    </a>
-    </li>
-    {% for recipe in popular_recipes_nine %}
-         <li style= "width:200px;list-style:none;float:left;border-bottom: thin dotted black;display: inline-block"> 
-         <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-	       {{recipe.title}} 
-         </a>
-         </li>
-    {% endfor %}
+	       <li class = "radial_gradient" style ="width:100%;display: inline-block">		
+		    <a style="text-align:center; color: #FE2E9A;font-size: 1em;text-decoration:none;display: block;" href="/popular_recipes/">
+			 Popular recipes
+		    </a>
+	       </li>
+	       {% for recipe in popular_recipes_nine %}
+		    <li style= "width:100%;list-style:none;float:left;border-bottom: thin dotted black;display: inline-block"> 
+			 <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 1em" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+			      {{recipe.title}} 
+			 </a>
+		    </li>
+	       {% endfor %}
     
-     {% for recipe in popular_recipe_tenth %}
-           <li style= "width:200px;list-style:none;float:left;display: inline-block"> 
-           <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 16px" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
-	   {{recipe.title}}
-           </a> 
-           </li>
-     {% endfor %} 
-    
-    </ul>
+	       {% for recipe in popular_recipe_tenth %}
+		    <li style= "width:100%;list-style:none;float:left;display: inline-block"> 
+			 <a style="color: #FE2E9A;display: block;font-weight: normal;font-size: 1em;" href="/recipes/{{ recipe.recipe_type }}/{{ recipe.title.split|join:"-" }}/"> 
+			      {{recipe.title}}
+			 </a> 
+		    </li>
+	       {% endfor %} 
+	  </ul>
     </div>
-
 </div>
 {% endblock %}
