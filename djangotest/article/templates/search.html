@@ -19,15 +19,15 @@ window.onload = remove_searchbar;
 
 {% block content %}
 <div class = "maincontainer"; style="border: thin solid black;">
-    <div style="padding: 5px; min-height: 400px; color: #FE2E9A;">
-{% csrf_token %}
+    <div class="search_page">
+    {% csrf_token %}
 
-<input type="text" id="search" name="search" size="40" placeholder="Please search here" style="font-size: 15px;" />
+        <input type="text" id="search" name="search" placeholder="Please search here" />
 
-<div id ="search_results">
+        <div id ="search_results">
     
     
-</div>
-</div>
+        </div>
+    </div>
 </div>
 {% endblock %}
