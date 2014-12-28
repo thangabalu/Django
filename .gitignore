@@ -4,11 +4,5 @@
 *.orig
 *~
 *.json
-*.db
-*min.js
 .project
 .pydevproject
-djangotest/static/img
-djangotest/static/css
-djangotest/static/uploaded_files
-static/*
