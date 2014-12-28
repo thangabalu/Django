@@ -29,34 +29,31 @@ class ipaddress_class:
       else:
          ip_address = request.META.get("REMOTE_ADDR", "")
       
-      #Check if ipaddress is already present. If not, add it. If present, increase the count with latest time
+      #Check if ipaddress is already present. If not, add it. If present, increase the count
       fetch_ip = ipaddress_table.objects.filter(ip_address = ip_address).count()
       if fetch_ip == 0:
-         response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
-         country = re.findall(r'Country:\s+(.*)',response)
-         city    = re.findall(r'City:\s+(.*)\n',response)
-         row = ipaddress_table()
-         row.ip_address = ip_address
-         row.country = country[0]
-         row.city    = city[0]
-         row.save()
+         no_of_times = 0
+         self.api_ip_address(ip_address, no_of_times)
       else:
-         #Get time
-         time_object = time_functions()
-         #Api call to get country and city
-         response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
-         country = re.findall(r'Country:\s+(.*)',response)
-         city    = re.findall(r'City:\s+(.*)\n',response)
-         
-         fetch_ip = ipaddress_table.objects.get(ip_address = ip_address)
-         fetch_ip.no_of_times += 1
-         fetch_ip.date = time_object.get_time()
-         fetch_ip.country = country[0]
-         fetch_ip.city    = city[0]
-         fetch_ip.save()
-   
+         fetch_ip_address_row = ipaddress_table.objects.get(ip_address = ip_address)
+         no_of_times = fetch_ip_address_row.no_of_times
 
-# Create your views here.
+         #Delete the current row
+         ipaddress_table.objects.filter(ip_address = ip_address).delete()
+         #Insert new row updating the count
+         self.api_ip_address(ip_address, no_of_times) 
+
+   def api_ip_address(self, ip_address, no_of_times):
+      response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
+      country = re.findall(r'Country:\s+(.*)',response)
+      city    = re.findall(r'City:\s+(.*)\n',response)
+      row = ipaddress_table()
+      row.ip_address = ip_address
+      row.country = country[0]
+      row.city    = city[0] #Date field will add current time automatically ?
+      row.no_of_times = no_of_times + 1
+      row.save()
+         
 #Order.objects.order_by('-date')[0]
 def home(request):
    ip_address_object = ipaddress_class()
@@ -140,7 +137,7 @@ def showrecipe (request, recipetitle=""):
                  'comments': comment_table.objects.filter(recipeid=recipe_id),
                  'comment_reply_dictionary' : comment_reply_dictionary,
                  'total_comments'           : total_comments,
-                 'you_might_also_like'      : Article.objects.all().order_by('?')[:3]                 
+                 'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
 		})
 	    
    return render_to_response('show_recipe.html',c)
