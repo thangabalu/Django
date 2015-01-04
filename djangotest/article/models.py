@@ -4,7 +4,8 @@ import time
 # Create your models here.
 
 def get_upload_file_name(instance, filename):
-	return "uploaded_files/%s" % filename.replace(" ", "-")
+	return "uploaded_files/%s.jpg" % instance.title.replace(" ", "-")
+	#Todo - now adding jpg to all file name. Find the extension of the file and add it in the future
 
 class time_functions:
     def get_time(self):
