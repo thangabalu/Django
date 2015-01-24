@@ -128,13 +128,13 @@ def showrecipe (request, recipetitle=""):
    recipe.page_views = recipe.page_views + 1
    recipe.save()
    
-   c.update({    'article'                 : recipe,
-		 'latest_recipes_ten'     : Article.objects.all().order_by('-pub_date')[:10],
-		 'popular_recipes_ten'    : Article.objects.all().order_by('-likes')[:10],
-		 'ingredient'	           : ingredient_dictionary,
-                 'direction'               : directions_split,
-		 'recipe_title_url_format' : recipetitle,
-                 'comments': comment_table.objects.filter(recipeid=recipe_id),
+   c.update({    'article'                  : recipe,
+		 'latest_recipes_ten'       : Article.objects.all().order_by('-pub_date')[:10],
+		 'popular_recipes_ten'      : Article.objects.all().order_by('-likes')[:10],
+		 'ingredient'	            : ingredient_dictionary,
+                 'direction'                : directions_split,
+		 'recipe_title_url_format'  : recipetitle,
+                 'comments'                 : comment_rows,
                  'comment_reply_dictionary' : comment_reply_dictionary,
                  'total_comments'           : total_comments,
                  'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
