@@ -29,10 +29,20 @@ SECRET_KEY = '5+r&dnkrl)bj%2_3p!qazg28n+zx-q3(v@=4*68!x4*qa8c$!n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
+
+#ADMINS will be notified of 500 errors by email.
+#MANAGERS will be notified of 404 errors
+#Debug should be false
+#Your MIDDLEWARE_CLASSES setting includes django.middleware.common.BrokenLinkEmailsMiddleware.
+
+ADMINS = (
+     ('thangabalu', 'thangabalu@gmail.com'),
+)
+MANAGERS = ADMINS
 
 
 # Application definition
@@ -48,6 +58,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    #'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,9 +81,18 @@ TEMPLATE_DIRS = (
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'storage.db'),
+    #}
+     
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'storage.db'),
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'cookhouselocal',
+         'USER': 'prabhu',
+         'PASSWORD': 'saidapet',
+         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+         #'PORT': '3306',
     }
 }
 

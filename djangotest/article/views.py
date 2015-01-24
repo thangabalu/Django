@@ -2,6 +2,7 @@ import re
 import urllib
 import json
 
+
 from django.shortcuts import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
@@ -30,28 +31,31 @@ class ipaddress_class:
          ip_address = request.META.get("REMOTE_ADDR", "")
       
       #Check if ipaddress is already present. If not, add it. If present, increase the count
-      fetch_ip = ipaddress_table.objects.filter(ip_address = ip_address).count()
-      if fetch_ip == 0:
-         no_of_times = 0
-         self.api_ip_address(ip_address, no_of_times)
+      fetch_ip = ipaddress_table.objects.filter(ip_address = ip_address)
+
+      if fetch_ip:
+         #If it returns multiple ip records, it fetches the first one.
+         fetch_ip_address_row = fetch_ip[0]
+         fetch_ip_address_row.no_of_times = fetch_ip_address_row.no_of_times + 1
+         fetch_ip_address_row.save()
       else:
-         fetch_ip_address_row = ipaddress_table.objects.get(ip_address = ip_address)
-         no_of_times = fetch_ip_address_row.no_of_times
+         #Insert new row
+         self.api_ip_address(ip_address) 
 
-         #Delete the current row
-         ipaddress_table.objects.filter(ip_address = ip_address).delete()
-         #Insert new row updating the count
-         self.api_ip_address(ip_address, no_of_times) 
-
-   def api_ip_address(self, ip_address, no_of_times):
-      response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
-      country = re.findall(r'Country:\s+(.*)',response)
-      city    = re.findall(r'City:\s+(.*)\n',response)
+   def api_ip_address(self, ip_address):
+      #response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
+      #country = re.findall(r'Country:\s+(.*)',response)
+      #city    = re.findall(r'City:\s+(.*)\n',response)
+      #row = ipaddress_table()
+      #row.ip_address = ip_address
+      #row.country = country[0]
+      #row.city    = city[0] #Date field will add current time automatically ?
+      #row.no_of_times = 1
       row = ipaddress_table()
       row.ip_address = ip_address
-      row.country = country[0]
-      row.city    = city[0] #Date field will add current time automatically ?
-      row.no_of_times = no_of_times + 1
+      row.country = "no data"
+      row.city    = "no data" #Date field will add current time automatically ?
+      row.no_of_times = 1
       row.save()
          
 #Order.objects.order_by('-date')[0]
@@ -101,43 +105,39 @@ def showrecipe (request, recipetitle=""):
    directions_split = directions.split('\n')
     
    # Starting from here for reply comments.
-   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
-   comment_reply_number = 0 # This variable is used for counter total number of reply comments
-   comment_reply_dictionary = SortedDict()
-   for comment in comment_rows:
-      result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
-      comment_reply_number += len(result)
-      if result:
-         comment_reply_dictionary[comment.id] = []
-         for row in result:
-            row_date = row.date
-            row_comment  = row.comment
-            row_id = row.comment_reply_id_id
-            row_unique_id = row.id
-            row_name = row.name
-            comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
+#   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
+#   comment_reply_number = 0 # This variable is used for counter total number of reply comments
+#   comment_reply_dictionary = SortedDict()
+#   for comment in comment_rows:
+#      result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
+#      comment_reply_number += len(result)
+#      if result:
+#         comment_reply_dictionary[comment.id] = []
+#         for row in result:
+#            row_date = row.date
+#            row_comment  = row.comment
+#            row_id = row.comment_reply_id_id
+#            row_unique_id = row.id
+#            row_name = row.name
+#            comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
    #sum the number of comments and reply comments
-   comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
-   total_comments = comment_number +  comment_reply_number
+#   comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
+#   total_comments = comment_number +  comment_reply_number
 
    #Add page views count
-   count = recipe.page_views
-   count += 1
-   recipe.page_views = count
+   recipe.page_views = recipe.page_views + 1
    recipe.save()
    
-   c.update({    'article'                 : Article.objects.get(title=recipetitle.replace("-"," ")),
-		 'latest_recipes_nine'     : Article.objects.all().order_by('-pub_date')[:9],
-		 'latest_recipe_tenth'     : Article.objects.all().order_by('-pub_date')[9:10],                 
-		 'popular_recipes_nine'    : Article.objects.all().order_by('-likes')[:9],
-		 'popular_recipe_tenth'    : Article.objects.all().order_by('-likes')[9:10],            
+   c.update({    'article'                 : recipe,
+		 #'latest_recipes_ten'     : Article.objects.all().order_by('-pub_date')[:10],
+		 #'popular_recipes_ten'    : Article.objects.all().order_by('-likes')[:10],
 		 'ingredient'	           : ingredient_dictionary,
                  'direction'               : directions_split,
 		 'recipe_title_url_format' : recipetitle,
-                 'comments': comment_table.objects.filter(recipeid=recipe_id),
-                 'comment_reply_dictionary' : comment_reply_dictionary,
-                 'total_comments'           : total_comments,
-                 'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
+                 #'comments': comment_table.objects.filter(recipeid=recipe_id),
+                 #'comment_reply_dictionary' : comment_reply_dictionary,
+#                'total_comments'           : total_comments,
+                 #'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
 		})
 	    
    return render_to_response('show_recipe.html',c)
@@ -159,6 +159,17 @@ def recipes_all(request):
     return render_to_response('recipes_all.html',
 				{'articles': Article.objects.all()})
 
+
+class Email:
+
+    def __init__(self):
+        self.from_email = settings.EMAIL_HOST_USER
+        self.to_list    = ['thangabalu@gmail.com', 'surekhabe@gmail.com']
+
+    def send_email(self,subject, message):
+        send_mail(subject, message, self.from_email, self.to_list, fail_silently=True)
+    
+
 def recipes_comments(request):
     comment = request.POST.get('comment','')    
     name = request.POST.get('name','')
@@ -174,13 +185,10 @@ def recipes_comments(request):
         row = comment_table(comment=comment, name=name, recipeid_id=recipe_id)
         row.save()
 	#Send email
-        #Change the recipe url in the email content after buying a domain        
 	subject='Comment from %s' %(name)
 	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,recipe_title,comment)
-	from_email=settings.EMAIL_HOST_USER
-	to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
-	#to_list=['thangabalu@gmail.com']	
-	send_mail(subject,message,from_email,to_list,fail_silently=True)
+        Email_object = Email()
+        Email_object.send_email(subject, message)
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
 @csrf_exempt
@@ -194,21 +202,16 @@ def recipes_comments_reply(request):
    recipe_type = request.POST.get('recipe_type','')
    recipe_title = request.POST.get('recipe_title_url_format','')
 
-   #Add email
-
    if comment=="":
       return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
    else:        
       row = comment_reply_table(name=name, comment_reply_id_id=comment_id, comment=comment )
       row.save()
       #Send email
-      #Change the recipe url in the email content after buying a domain        
       subject='Comment from %s' %(name)
       message=' %s has replied for an existing comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_reply_table'%(name,recipe_title,recipe_type,recipe_title,comment)
-      from_email=settings.EMAIL_HOST_USER
-      to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
-      #to_list=['thangabalu@gmail.com']	
-      send_mail(subject,message,from_email,to_list,fail_silently=True)
+      Email_object = Email()
+      Email_object.send_email(subject, message)
       return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
    return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
@@ -254,8 +257,6 @@ def contact_submit(request):
    #Send email
    subject='Question from %s' %(name)
    message='Email id -%s\n Subject -%s\n Message-%s\n'%(email,question_subject,message)
-   from_email=settings.EMAIL_HOST_USER
-   #to_list=['thangabalu@gmail.com']
-   to_list=['thangabalu@gmail.com','surekhabe@gmail.com']
-   send_mail(subject,message,from_email,to_list,fail_silently=True)
+   Email_object = Email()
+   Email_object.send_email(subject, message)
    return HttpResponse(json.dumps("success"))
