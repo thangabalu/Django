@@ -105,39 +105,39 @@ def showrecipe (request, recipetitle=""):
    directions_split = directions.split('\n')
     
    # Starting from here for reply comments.
-#   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
-#   comment_reply_number = 0 # This variable is used for counter total number of reply comments
-#   comment_reply_dictionary = SortedDict()
-#   for comment in comment_rows:
-#      result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
-#      comment_reply_number += len(result)
-#      if result:
-#         comment_reply_dictionary[comment.id] = []
-#         for row in result:
-#            row_date = row.date
-#            row_comment  = row.comment
-#            row_id = row.comment_reply_id_id
-#            row_unique_id = row.id
-#            row_name = row.name
-#            comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
+   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
+   comment_reply_number = 0 # This variable is used for counter total number of reply comments
+   comment_reply_dictionary = SortedDict()
+   for comment in comment_rows:
+      result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
+      comment_reply_number += len(result)
+      if result:
+         comment_reply_dictionary[comment.id] = []
+         for row in result:
+            row_date = row.date
+            row_comment  = row.comment
+            row_id = row.comment_reply_id_id
+            row_unique_id = row.id
+            row_name = row.name
+            comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
    #sum the number of comments and reply comments
-#   comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
-#   total_comments = comment_number +  comment_reply_number
+   comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
+   total_comments = comment_number +  comment_reply_number
 
    #Add page views count
    recipe.page_views = recipe.page_views + 1
    recipe.save()
    
    c.update({    'article'                 : recipe,
-		 #'latest_recipes_ten'     : Article.objects.all().order_by('-pub_date')[:10],
-		 #'popular_recipes_ten'    : Article.objects.all().order_by('-likes')[:10],
+		 'latest_recipes_ten'     : Article.objects.all().order_by('-pub_date')[:10],
+		 'popular_recipes_ten'    : Article.objects.all().order_by('-likes')[:10],
 		 'ingredient'	           : ingredient_dictionary,
                  'direction'               : directions_split,
 		 'recipe_title_url_format' : recipetitle,
-                 #'comments': comment_table.objects.filter(recipeid=recipe_id),
-                 #'comment_reply_dictionary' : comment_reply_dictionary,
-#                'total_comments'           : total_comments,
-                 #'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
+                 'comments': comment_table.objects.filter(recipeid=recipe_id),
+                 'comment_reply_dictionary' : comment_reply_dictionary,
+                 'total_comments'           : total_comments,
+                 'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
 		})
 	    
    return render_to_response('show_recipe.html',c)
