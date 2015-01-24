@@ -14,6 +14,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
+from django.core.exceptions import ObjectDoesNotExist
 
 from article.models import Article
 from article.models import comment_table
@@ -85,7 +86,11 @@ def showrecipe (request, recipetitle=""):
 
    c={}
    c.update(csrf(request))
-   recipe = Article.objects.get(title=recipetitle.replace("-"," "))
+   try:
+      recipe = Article.objects.get(title=recipetitle.replace("-"," "))
+   except ObjectDoesNotExist:
+      return HttpResponseRedirect('404.html')
+
    recipe_id = recipe.id
    ingredients = recipe.ingredients
    ingredients_split = ingredients.split('\n')    
