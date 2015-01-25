@@ -65,10 +65,10 @@ def home(request):
    ip_address_object.save_ipaddress(request)
 
    #Total page views
-   total_page_views = ipaddress_table.objects.aggregate(Sum('no_of_times'))
+   #total_page_views = ipaddress_table.objects.aggregate(Sum('no_of_times'))
 
    return render_to_response('home.html', 
-				{'total_page_views'   : total_page_views["no_of_times__sum"],
+				{#'total_page_views'   : total_page_views["no_of_times__sum"],
                                  'latest_recipes_one' : Article.objects.all().order_by('-pub_date')[:1],
                               	 'popular_recipes_one' : Article.objects.all().order_by('-likes')[0:1]})
 
@@ -246,6 +246,11 @@ def like_article(request, recipetype="",recipetitle=""):
 	count += 1
 	a.likes = count
 	a.save()
+	subject='Someone liked your recipe'
+	message=' Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n'%(a.title, a.recipe_type, recipetitle)
+        Email_object = Email()
+        Email_object.send_email(subject, message)
+
     return HttpResponseRedirect('/recipes/%s/%s/'% (recipetype,recipetitle))
 
 def search(request):
