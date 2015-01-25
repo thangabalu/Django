@@ -23,14 +23,16 @@ from article.models import comment_reply_table
 from article.models import time_functions
 
 class ipaddress_class:
-   def save_ipaddress(self,request):
+   def get_ipaddress(self, request):
       ip_address = request.META.get("HTTP_X_FORWARDED_FOR", None)
       if ip_address:
          # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
          ip_address = ip_address.split(",")[0]
       else:
          ip_address = request.META.get("REMOTE_ADDR", "")
+      return ip_address
       
+   def save_ipaddress(self, ip_address):
       #Check if ipaddress is already present. If not, add it. If present, increase the count
       fetch_ip = ipaddress_table.objects.filter(ip_address = ip_address)
 
@@ -62,7 +64,8 @@ class ipaddress_class:
 #Order.objects.order_by('-date')[0]
 def home(request):
    ip_address_object = ipaddress_class()
-   ip_address_object.save_ipaddress(request)
+   ip_address        = ip_address_object.get_ipaddress(request)
+   ip_address_object.save_ipaddress(ip_address)
 
    #Total page views
    #total_page_views = ipaddress_table.objects.aggregate(Sum('no_of_times'))
@@ -74,7 +77,8 @@ def home(request):
 
 def recipetype (request, recipetype):
     ip_address_object = ipaddress_class()
-    ip_address_object.save_ipaddress(request)
+    ip_address        = ip_address_object.get_ipaddress(request)
+    ip_address_object.save_ipaddress(ip_address)
 
     return render_to_response('recipe_type_new.html',
 				{'type' : recipetype,
@@ -82,7 +86,8 @@ def recipetype (request, recipetype):
 
 def showrecipe (request, recipetitle=""):
    ip_address_object = ipaddress_class()
-   ip_address_object.save_ipaddress(request)
+   ip_address        = ip_address_object.get_ipaddress(request)
+   ip_address_object.save_ipaddress(ip_address)
 
    c={}
    c.update(csrf(request))
@@ -151,6 +156,13 @@ def showrecipe (request, recipetitle=""):
    #Popular recipes
    popular_recipes_ten = Article.objects.all().order_by('-likes')[:10]
 
+   #send mail - Ignore internal address, 10.35.63.79
+#   if ip_address != "10.35.63.79":
+#      subject='Ipaddress-%s, seen your recipe' %ip_address
+#      message=' Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n'%(recipe.title, recipe.recipe_type, recipetitle)
+#      Email_object = Email()
+#      Email_object.send_email(subject, message)
+
    c.update({    'article'                  : recipe,
 		 'latest_recipes_ten'       : latest_recipes_ten,
 		 'popular_recipes_ten'      : popular_recipes_ten,
@@ -166,18 +178,25 @@ def showrecipe (request, recipetitle=""):
    return render_to_response('show_recipe.html',c)
 
 def popular_recipes(request):
+    ip_address_object = ipaddress_class()
+    ip_address        = ip_address_object.get_ipaddress(request)
+    ip_address_object.save_ipaddress(ip_address)
     return render_to_response('popular_or_latest_recipes.html',
 				{'popular_or_latest_recipes_all': Article.objects.all().order_by('-likes'),
                                  'popular_or_latest'  : 'Popular recipes'})
 
 def latest_recipes(request):
+    ip_address_object = ipaddress_class()
+    ip_address        = ip_address_object.get_ipaddress(request)
+    ip_address_object.save_ipaddress(ip_address)
     return render_to_response('popular_or_latest_recipes.html',
 				{'popular_or_latest_recipes_all' : Article.objects.all().order_by('-pub_date'),
                                  'popular_or_latest'  : 'Latest recipes'})      
 
 def recipes_all(request):
     ip_address_object = ipaddress_class()
-    ip_address_object.save_ipaddress(request)
+    ip_address        = ip_address_object.get_ipaddress(request)
+    ip_address_object.save_ipaddress(ip_address)
 
     return render_to_response('recipes_all.html',
 				{'articles': Article.objects.all()})
@@ -246,7 +265,7 @@ def like_article(request, recipetype="",recipetitle=""):
 	count += 1
 	a.likes = count
 	a.save()
-	subject='Someone liked your recipe'
+	subject='Someone liked your showrecipe'
 	message=' Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n'%(a.title, a.recipe_type, recipetitle)
         Email_object = Email()
         Email_object.send_email(subject, message)
