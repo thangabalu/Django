@@ -108,41 +108,59 @@ def showrecipe (request, recipetitle=""):
    
    directions = recipe.directions
    directions_split = directions.split('\n')
-    
-   # Starting from here for reply comments.
-   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
-   comment_reply_number = 0 # This variable is used for counter total number of reply comments
-   comment_reply_dictionary = SortedDict()
-   for comment in comment_rows:
-      result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
-      comment_reply_number += len(result)
-      if result:
-         comment_reply_dictionary[comment.id] = []
-         for row in result:
-            row_date = row.date
-            row_comment  = row.comment
-            row_id = row.comment_reply_id_id
-            row_unique_id = row.id
-            row_name = row.name
-            comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
-   #sum the number of comments and reply comments
-   comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
-   total_comments = comment_number +  comment_reply_number
 
    #Add page views count
    recipe.page_views = recipe.page_views + 1
    recipe.save()
-   
+
+   # Starting from here for reply comments.
+   comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
+   if comment_rows:
+      comment_reply_number = 0 # This variable is used for counter total number of reply comments
+      comment_reply_dictionary = SortedDict()
+      for comment in comment_rows:
+         result = comment_reply_table.objects.filter(comment_reply_id= comment.id).order_by('date')
+         comment_reply_number += len(result)
+         if result:
+            comment_reply_dictionary[comment.id] = []
+            for row in result:
+               row_date = row.date
+               row_comment  = row.comment
+               row_id = row.comment_reply_id_id
+               row_unique_id = row.id
+               row_name = row.name
+               comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
+
+      #sum the number of comments and reply comments
+      comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
+      total_comments = comment_number +  comment_reply_number
+   else:
+      comment_rows = []
+      comment_reply_dictionary = []
+      total_comments = 0
+
+   #You might also like and ten latest recipes
+   you_might_also_like = []
+   latest_recipes_ten = Article.objects.all().order_by('-pub_date')[:10]
+   count = 0
+   for fetch_you_might in latest_recipes_ten:
+      if fetch_you_might.title != recipe.title and count < 3: #To ignore the current recipe
+         you_might_also_like.append(fetch_you_might)
+         count = count + 1
+
+   #Popular recipes
+   popular_recipes_ten = Article.objects.all().order_by('-likes')[:10]
+
    c.update({    'article'                  : recipe,
-		 'latest_recipes_ten'       : Article.objects.all().order_by('-pub_date')[:10],
-		 'popular_recipes_ten'      : Article.objects.all().order_by('-likes')[:10],
+		 'latest_recipes_ten'       : latest_recipes_ten,
+		 'popular_recipes_ten'      : popular_recipes_ten,
 		 'ingredient'	            : ingredient_dictionary,
                  'direction'                : directions_split,
 		 'recipe_title_url_format'  : recipetitle,
                  'comments'                 : comment_rows,
                  'comment_reply_dictionary' : comment_reply_dictionary,
                  'total_comments'           : total_comments,
-                 'you_might_also_like'      : Article.objects.all().exclude(title=recipetitle.replace("-"," ")).order_by('?')[:3]                 
+                 'you_might_also_like'      : you_might_also_like
 		})
 	    
    return render_to_response('show_recipe.html',c)
