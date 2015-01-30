@@ -1,4 +1,17 @@
 $(document).ready(function(){
+   //Menu bar - If "menu" is clicked, menu bar will be displayed. If clicked again, it will be disappeared
+   $('span.navmenu_button').click(function () {
+       $('div.navmenu').toggle();
+
+   })
+
+   $(window).resize(function () {
+       if ( $(window).width() > 510 ) {
+           $('div.navmenu').show();
+       }
+   })
+
+
    //When mouse key is down on the editable name div, it empties the content
    $(".content_block_show_recipe").on("mousedown", ".editable_div", function(){
       var input = $(this).text();
