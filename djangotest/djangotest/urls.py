@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'djangotest.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico')),
+    # url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico')),
     url(r'^$', 'article.views.home'),
     url(r'^contact/$', 'article.views.contact'),
     url(r'^contact_submit/$', 'article.views.contact_submit'),
