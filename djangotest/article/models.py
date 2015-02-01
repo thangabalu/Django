@@ -26,6 +26,7 @@ class Article(models.Model):
 
     Recipe_Choices = (
       ('baking', 'baking'),
+      ('breakfast', 'breakfast'),
       ('quick-food', 'quick food'),
       ('pastries', 'pastries'),
       ('variety-rice', 'variety rice'),
