@@ -75,14 +75,34 @@ def home(request):
                                  'latest_recipes_one' : Article.objects.all().order_by('-pub_date')[:1],
                               	 'popular_recipes_one' : Article.objects.all().order_by('-likes')[0:1]})
 
+def recipes_all(request):
+    ip_address_object = ipaddress_class()
+    ip_address        = ip_address_object.get_ipaddress(request)
+    ip_address_object.save_ipaddress(ip_address)
+
+    return render_to_response('recipes_all.html')
+
 def recipetype (request, recipetype):
     ip_address_object = ipaddress_class()
     ip_address        = ip_address_object.get_ipaddress(request)
     ip_address_object.save_ipaddress(ip_address)
 
-    return render_to_response('recipe_type_new.html',
-				{'type' : recipetype,
-				 'recipes': Article.objects.all()})
+    all_recipes = Article.objects.all()
+    choices = Article.Recipe_list
+    filtered_recipes = []
+    if recipetype in choices:
+        for recipe in all_recipes:
+            if recipe.recipe_type==recipetype:
+                filtered_recipes.append(recipe)
+            elif recipe.recipe_type_1==recipetype:
+                filtered_recipes.append(recipe)
+            elif recipe.recipe_type_2==recipetype:
+                filtered_recipes.append(recipe)
+        return render_to_response('recipe_type_new.html',
+				{'recipes': filtered_recipes,
+                                 'type' : recipetype})
+    else:
+        return HttpResponseRedirect('404.html')
 
 def showrecipe (request, recipetitle=""):
    ip_address_object = ipaddress_class()
@@ -192,15 +212,6 @@ def latest_recipes(request):
     return render_to_response('popular_or_latest_recipes.html',
 				{'popular_or_latest_recipes_all' : Article.objects.all().order_by('-pub_date'),
                                  'popular_or_latest'  : 'Latest recipes'})      
-
-def recipes_all(request):
-    ip_address_object = ipaddress_class()
-    ip_address        = ip_address_object.get_ipaddress(request)
-    ip_address_object.save_ipaddress(ip_address)
-
-    return render_to_response('recipes_all.html',
-				{'articles': Article.objects.all()})
-
 
 class Email:
 

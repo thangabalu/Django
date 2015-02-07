@@ -23,6 +23,8 @@ class time_functions:
 # I am making the title field unique, because I will use this in the part of the url
 # If changing the spelling of the fields or adding new fields, please change in pre_save_signal function
 class Article(models.Model):
+    #Having this list to use in recipetype function in views.py
+    Recipe_list = ['baking','breakfast','quick-food','pastries','variety-rice','one-pot-cooking','chutney','sides','gravy','others']
 
     Recipe_Choices = (
       ('baking', 'baking'),
