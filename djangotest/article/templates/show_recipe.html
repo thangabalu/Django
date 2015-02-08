@@ -187,6 +187,7 @@
 	  </div>
      </div> <!-- end of content_block_show_recipe-->
      <!--All <a> tags have font-weight:bold.. check base.html -->
+     {% if article.did_you_know %}
      <div class ="navigation_did_you_know_show_recipe">
 	  <ul style="line-height:31px; width:100%">
 	       <li class = "radial_gradient" style ="width:100%;">		
@@ -197,6 +198,10 @@
 	  </ul>
 	  <span style="color: #FE2E9A;">{{ article.did_you_know }}</span>
      </div>
+     {% else %}
+         <div class="no_did_you_know_show_recipe">
+         </div>
+     {% endif %}
 
      <div class = "navigation_show_recipe">
 	  <ul style="line-height:25px; width:100%;display: block;">

@@ -759,6 +759,8 @@
      text-decoration:underline;
   }
   .navigation_did_you_know_show_recipe{font-size: 13;line-height: 1.8em;text-align: justify;font-family: 'Tahoma', 'Geneva', 'sans-serif';}
+
+  .no_did_you_know_show_recipe{margin-top:103px; margin-bottom: 50px;}
   
   .navigation_show_recipe {width:20.408163265%;float:right;border-left: thin solid black;border-bottom: thin solid black; border-top: thin solid black;
 			  padding-top: 1%;padding-bottom: 1%;padding-left: 1%;padding-right: 1%;}
