@@ -53,11 +53,10 @@
 		    {% for key,value in ingredient.items %}
 			 <h4>{{ key }} </h4>
 			 <table>
-			      {% load my_custom_filters %}
 			      {% for val in value %}
 			      <tr>
-			           <td class="first_column_ingredients">{{ val | extract_first_td}}</td>
-			           <td class="second_column_ingredients">{{ val | extract_second_td}}</td>
+			           <td class="first_column_ingredients">{{ val.0 }}</td>
+			           <td class="second_column_ingredients">{{ val.1 }}</td>
 			      </tr>
 	     		     {% endfor %}
 			 </table><br>
