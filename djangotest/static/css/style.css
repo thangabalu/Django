@@ -669,22 +669,22 @@
 
   
    .first_column_ingredients{
-        width: 74.576271186%; padding:2.5%; font-size:0.8em; font-family: 'Tahoma', 'Geneva', 'sans-serif';
+        width: 69.576271186%; padding:2.5%; font-size:0.8em; font-family: 'Tahoma', 'Geneva', 'sans-serif';
 	display: inline-block; word-wrap: break-word;
    }
   
    .second_column_ingredients{
-        width:25.423728814%; padding:2.5%; font-size:0.8em; font-family: 'Tahoma', 'Geneva', 'sans-serif'; display: inline-block;
+        width:30.423728814%; padding:2.5%; font-size:0.8em; font-family: 'Tahoma', 'Geneva', 'sans-serif'; display: inline-block;
 	word-wrap: break-word;
    }
 
    table{
-      border-collapse: collapse;
+      border-collapse: collapse; table-layout: fixed; word-wrap:break-word; width:100%;
    }
   
    table,td
    {
-   	border:1px solid #000000; color: #666666;
+       border:1px solid #000000; color: #666666;
    }
    
      
