@@ -271,12 +271,15 @@ def recipes_comments_reply(request):
 
 def like_article(request, recipetype="",recipetitle=""):
     if recipetype and recipetitle:
+        ip_address_object = ipaddress_class()
+        ip_address        = ip_address_object.get_ipaddress(request)
+
         a = Article.objects.get(title=recipetitle.replace("-"," "))
         count = a.likes
 	count += 1
 	a.likes = count
 	a.save()
-	subject='Someone liked your showrecipe'
+	subject='IpAddress-%s, liked %s'%(str(ip_address), a.title)
 	message=' Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n'%(a.title, a.recipe_type, recipetitle)
         Email_object = Email()
         Email_object.send_email(subject, message)
