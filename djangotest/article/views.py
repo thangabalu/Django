@@ -234,11 +234,14 @@ def recipes_comments(request):
     #If comment field is empty, just redirect without writing to database
     if comment=="":
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
-    else:        
+    else:
+        ip_address_object = ipaddress_class()
+        ip_address        = ip_address_object.get_ipaddress(request)
+
         row = comment_table(comment=comment, name=name, recipeid_id=recipe_id)
         row.save()
 	#Send email
-	subject='Comment from %s' %(name)
+	subject='Comment from %s, Ipaddress -%s' %(name, str(ip_address))
 	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,recipe_title,comment)
         Email_object = Email()
         Email_object.send_email(subject, message)
@@ -258,10 +261,13 @@ def recipes_comments_reply(request):
    if comment=="":
       return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
    else:        
+      ip_address_object = ipaddress_class()
+      ip_address        = ip_address_object.get_ipaddress(request)
+
       row = comment_reply_table(name=name, comment_reply_id_id=comment_id, comment=comment )
       row.save()
       #Send email
-      subject='Comment from %s' %(name)
+      subject='Comment from %s, Ipaddress -%s' %(name, str(ip_address))
       message=' %s has replied for an existing comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_reply_table'%(name,recipe_title,recipe_type,recipe_title,comment)
       Email_object = Email()
       Email_object.send_email(subject, message)
