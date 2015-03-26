@@ -24,13 +24,13 @@ class time_functions:
 # If changing the spelling of the fields or adding new fields, please change in pre_save_signal function
 class Article(models.Model):
     #Having this list to use in recipetype function in views.py
-    Recipe_list = ['baking','breakfast','quick-food','pastries','variety-rice','one-pot-cooking','chutney','sides','gravy','others']
+    Recipe_list = ['baking','breakfast','quick-food','appetizers-and-snacks','variety-rice','one-pot-cooking','chutney','sides','gravy','others']
 
     Recipe_Choices = (
       ('baking', 'baking'),
       ('breakfast', 'breakfast'),
       ('quick-food', 'quick food'),
-      ('pastries', 'pastries'),
+      ('appetizers-and-snacks', 'Appetizers & Snacks'),
       ('variety-rice', 'variety rice'),
       ('one-pot-cooking', 'one pot cooking'),      
       ('chutney', 'chutney'),
