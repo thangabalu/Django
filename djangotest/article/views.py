@@ -22,6 +22,9 @@ from article.models import ipaddress_table
 from article.models import comment_reply_table
 from article.models import time_functions
 
+import logging
+logger = logging.getLogger(__name__)
+
 class ipaddress_class:
    def get_ipaddress(self, request):
       ip_address = request.META.get("HTTP_X_FORWARDED_FOR", None)
@@ -30,6 +33,8 @@ class ipaddress_class:
          ip_address = ip_address.split(",")[0]
       else:
          ip_address = request.META.get("REMOTE_ADDR", "")
+ 
+      logger.debug("Got the ip address")
       return ip_address
       
    def save_ipaddress(self, ip_address):
@@ -41,6 +46,7 @@ class ipaddress_class:
          fetch_ip_address_row = fetch_ip[0]
          fetch_ip_address_row.no_of_times = fetch_ip_address_row.no_of_times + 1
          fetch_ip_address_row.save()
+         logger.debug("Ip address already present in the table. Adding +1 to the existing count")
       else:
          #Insert new row
          self.api_ip_address(ip_address) 
@@ -60,12 +66,16 @@ class ipaddress_class:
       row.city    = "no data" #Date field will add current time automatically ?
       row.no_of_times = 1
       row.save()
+      logger.debug("New IP address. Inserted a new record into table")
          
 #Order.objects.order_by('-date')[0]
 def home(request):
+   logger.info("Entering the home view")
    ip_address_object = ipaddress_class()
    ip_address        = ip_address_object.get_ipaddress(request)
    ip_address_object.save_ipaddress(ip_address)
+
+   logger.info("Redirecting to home page")
 
    #Total page views
    #total_page_views = ipaddress_table.objects.aggregate(Sum('no_of_times'))
@@ -76,16 +86,21 @@ def home(request):
                               	 'popular_recipes_one' : Article.objects.all().order_by('-likes')[0:1]})
 
 def recipes_all(request):
+    logger.info("Entering the recipes_all view")
     ip_address_object = ipaddress_class()
     ip_address        = ip_address_object.get_ipaddress(request)
     ip_address_object.save_ipaddress(ip_address)
 
+    logger.info("Redirecting to recipes_all page")
     return render_to_response('recipes_all.html')
 
+
 def recipetype (request, recipetype):
+    logger.info("Entering the recipetype view")
     ip_address_object = ipaddress_class()
     ip_address        = ip_address_object.get_ipaddress(request)
     ip_address_object.save_ipaddress(ip_address)
+    logger.debug("Successfully stored the ip address in the table")
 
     all_recipes = Article.objects.all()
     choices = Article.Recipe_list
@@ -98,13 +113,16 @@ def recipetype (request, recipetype):
                 filtered_recipes.append(recipe)
             elif recipe.recipe_type_2==recipetype:
                 filtered_recipes.append(recipe)
+        logger.info("Successfully found the recipe type in the table. Now redirecting to recipe_type_new page")
         return render_to_response('recipe_type_new.html',
 				{'recipes': filtered_recipes,
                                  'type' : recipetype})
     else:
+        logger.error("Failed to find the recipe type in the table. Now redirecting to 404 page")
         return HttpResponseRedirect('404.html')
 
 def showrecipe (request, recipetitle=""):
+   logger.info("Entering the showtype view")
    ip_address_object = ipaddress_class()
    ip_address        = ip_address_object.get_ipaddress(request)
    ip_address_object.save_ipaddress(ip_address)
@@ -114,8 +132,10 @@ def showrecipe (request, recipetitle=""):
    try:
       recipe = Article.objects.get(title=recipetitle.replace("-"," "))
    except ObjectDoesNotExist:
+      logger.error("Failed to find the recipe in the table. Now redirecting to 404 page")
       return HttpResponseRedirect('404.html')
 
+   logger.debug("Building ingredient dictionary")
    recipe_id = recipe.id
    ingredients = recipe.ingredients
    ingredients_split = ingredients.split('\n')    
@@ -130,15 +150,16 @@ def showrecipe (request, recipetitle=""):
          match = re.search('(.*);\s*(.*)',ingredient)
          if match:
             ingredient_dictionary[key].append([match.group(1),match.group(2)])
-   
+
+   logger.debug("Building directions list")   
    directions = recipe.directions
    directions_split = directions.split('\n')
 
-   #Add page views count
+   logger.debug("Adding 1 to the recipe page views")
    recipe.page_views = recipe.page_views + 1
    recipe.save()
 
-   # Starting from here for reply comments.
+   logger.debug("Getting comments and comment reply")
    comment_rows = comment_table.objects.filter(recipeid=recipe_id).order_by('date')
    if comment_rows:
       comment_reply_number = 0 # This variable is used for counter total number of reply comments
@@ -157,14 +178,17 @@ def showrecipe (request, recipetitle=""):
                comment_reply_dictionary[comment.id].append([row_id,row_date,row_comment,row_unique_id,row_name])
 
       #sum the number of comments and reply comments
+      logger.debug("Add the number of comments and comment replies")
       comment_number =len(comment_table.objects.filter(recipeid=recipe_id))
       total_comments = comment_number +  comment_reply_number
    else:
       comment_rows = []
       comment_reply_dictionary = []
       total_comments = 0
+      logger.info("No comments for this recipe")
 
    #You might also like and ten latest recipes
+   logger.debug("Get the 'you might also like' list and 'latest_recipes_ten' list")
    you_might_also_like = []
    latest_recipes_ten = Article.objects.all().order_by('-pub_date')[:10]
    count = 0
@@ -174,6 +198,7 @@ def showrecipe (request, recipetitle=""):
          count = count + 1
 
    #Popular recipes
+   logger.debug("Get ten popular recipes list")
    popular_recipes_ten = Article.objects.all().order_by('-likes')[:10]
 
    #send mail - Ignore internal address, 10.35.63.79
@@ -194,21 +219,28 @@ def showrecipe (request, recipetitle=""):
                  'total_comments'           : total_comments,
                  'you_might_also_like'      : you_might_also_like
 		})
-	    
+
+   logger.info("Redirecting to show_recipe page")	    
    return render_to_response('show_recipe.html',c)
 
 def popular_recipes(request):
+    logger.info("Entering the popular_recipes view")
     ip_address_object = ipaddress_class()
     ip_address        = ip_address_object.get_ipaddress(request)
     ip_address_object.save_ipaddress(ip_address)
+
+    logger.info("Redirecting to popular_or_latest_recipes page")
     return render_to_response('popular_or_latest_recipes.html',
 				{'popular_or_latest_recipes_all': Article.objects.all().order_by('-likes'),
                                  'popular_or_latest'  : 'Popular recipes'})
 
 def latest_recipes(request):
+    logger.info("Entering the latest_recipes view")
     ip_address_object = ipaddress_class()
     ip_address        = ip_address_object.get_ipaddress(request)
     ip_address_object.save_ipaddress(ip_address)
+
+    logger.info("Redirecting to popular_or_latest_recipes page")
     return render_to_response('popular_or_latest_recipes.html',
 				{'popular_or_latest_recipes_all' : Article.objects.all().order_by('-pub_date'),
                                  'popular_or_latest'  : 'Latest recipes'})      
