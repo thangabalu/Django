@@ -15,6 +15,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 from article.models import Article
 from article.models import comment_table
@@ -25,6 +26,8 @@ from article.models import time_functions
 import logging
 logger = logging.getLogger(__name__)
 
+block_ip_addresses = ["46.161.41.199", "176.10.104.227"]
+
 class ipaddress_class:
    def get_ipaddress(self, request):
       ip_address = request.META.get("HTTP_X_FORWARDED_FOR", None)
@@ -33,8 +36,8 @@ class ipaddress_class:
          ip_address = ip_address.split(",")[0]
       else:
          ip_address = request.META.get("REMOTE_ADDR", "")
- 
-      logger.debug("Got the ip address")
+
+      logger.debug("Got the ip address - %s" %ip_address)
       return ip_address
       
    def save_ipaddress(self, ip_address):
@@ -49,7 +52,11 @@ class ipaddress_class:
          logger.debug("Ip address already present in the table. Adding +1 to the existing count")
       else:
          #Insert new row
-         self.api_ip_address(ip_address) 
+         self.api_ip_address(ip_address)
+
+      if ip_address in block_ip_addresses:
+         logger.error("Ip address in blocking list. Redirecting to 404 page")
+         raise Http404
 
    def api_ip_address(self, ip_address):
       #response = urllib.urlopen('http://api.hostip.info/get_html.php?ip=%s&position=true'%ip_address).read()
@@ -119,7 +126,7 @@ def recipetype (request, recipetype):
                                  'type' : recipetype})
     else:
         logger.error("Failed to find the recipe type in the table. Now redirecting to 404 page")
-        return HttpResponseRedirect('404.html')
+        raise Http404
 
 def showrecipe (request, recipetitle=""):
    logger.info("Entering the showtype view")
@@ -133,7 +140,7 @@ def showrecipe (request, recipetitle=""):
       recipe = Article.objects.get(title=recipetitle.replace("-"," "))
    except ObjectDoesNotExist:
       logger.error("Failed to find the recipe in the table. Now redirecting to 404 page")
-      return HttpResponseRedirect('404.html')
+      raise Http404
 
    logger.debug("Building ingredient dictionary")
    recipe_id = recipe.id
@@ -312,7 +319,12 @@ def like_article(request, recipetype="",recipetitle=""):
         ip_address_object = ipaddress_class()
         ip_address        = ip_address_object.get_ipaddress(request)
 
-        a = Article.objects.get(title=recipetitle.replace("-"," "))
+        try:
+            a = Article.objects.get(title=recipetitle.replace("-"," "))
+        except ObjectDoesNotExist:
+            logger.error("Failed to find the recipe in the table. Now redirecting to 404 page")
+            raise Http404
+
         count = a.likes
 	count += 1
 	a.likes = count
@@ -321,10 +333,15 @@ def like_article(request, recipetype="",recipetitle=""):
 	message=' Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n'%(a.title, a.recipe_type, recipetitle)
         Email_object = Email()
         Email_object.send_email(subject, message)
-
-    return HttpResponseRedirect('/recipes/%s/%s/'% (recipetype,recipetitle))
+        return HttpResponseRedirect('/recipes/%s/%s/'% (recipetype,recipetitle))
+    else:
+        logger.error("Failed to find the recipe type in the table. Now redirecting to 404 page")
+        raise Http404
 
 def search(request):
+   ip_address_object = ipaddress_class()
+   ip_address        = ip_address_object.get_ipaddress(request)
+
    c={}
    c.update(csrf(request))   
    return render_to_response('search.html',c)
@@ -343,11 +360,17 @@ def search_titles(request):
    return render_to_response('ajax_search.html',{'recipes':recipes})
 
 def contact(request):
+   ip_address_object = ipaddress_class()
+   ip_address        = ip_address_object.get_ipaddress(request)
+
    c={}
    c.update(csrf(request))   
    return render_to_response('contact.html',c)
 
 def contact_submit(request):
+   ip_address_object = ipaddress_class()
+   ip_address        = ip_address_object.get_ipaddress(request)
+
    name = request.POST.get('name','')    
    email = request.POST.get('email','')    
    question_subject = request.POST.get('subject','')
