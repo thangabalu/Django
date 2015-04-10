@@ -26,7 +26,7 @@ from article.models import time_functions
 import logging
 logger = logging.getLogger(__name__)
 
-block_ip_addresses = ["46.161.41.199", "176.10.104.227"]
+block_ip_addresses = ["46.161.41.199", "176.10.104.227", "176.10.104.234"]
 
 class ipaddress_class:
    def get_ipaddress(self, request):
@@ -129,7 +129,7 @@ def recipetype (request, recipetype):
         raise Http404
 
 def showrecipe (request, recipetitle=""):
-   logger.info("Entering the showtype view")
+   logger.info("Entering the showtype view. Recipe title - %s" %recipetitle)
    ip_address_object = ipaddress_class()
    ip_address        = ip_address_object.get_ipaddress(request)
    ip_address_object.save_ipaddress(ip_address)
@@ -162,7 +162,7 @@ def showrecipe (request, recipetitle=""):
    directions = recipe.directions
    directions_split = directions.split('\n')
 
-   logger.debug("Adding 1 to the recipe page views")
+   logger.info("Adding 1 to the recipe page views: %s" %recipe.page_views)
    recipe.page_views = recipe.page_views + 1
    recipe.save()
 
@@ -263,6 +263,7 @@ class Email:
     
 
 def recipes_comments(request):
+    logger.info("Entering the recipes_comments view")
     comment = request.POST.get('comment','')    
     name = request.POST.get('name','')
     if name == "":
@@ -272,10 +273,12 @@ def recipes_comments(request):
     recipe_title = request.POST.get('recipe_title','')
     #If comment field is empty, just redirect without writing to database
     if comment=="":
+        logger.info("Comment field is empty. Redirecting without doing anything")
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
     else:
         ip_address_object = ipaddress_class()
         ip_address        = ip_address_object.get_ipaddress(request)
+        ip_address_object.save_ipaddress(ip_address)
 
         row = comment_table(comment=comment, name=name, recipeid_id=recipe_id)
         row.save()
@@ -284,10 +287,13 @@ def recipes_comments(request):
 	message=' %s has left a comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_table'%(name,recipe_title,recipe_type,recipe_title,comment)
         Email_object = Email()
         Email_object.send_email(subject, message)
+        logger.info("Stored the comment in the database. Successfuly sent email and redirecting to show recipe page")
+        logger.info("subject - %s, message - %s" %(subject, message))
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
 @csrf_exempt
 def recipes_comments_reply(request):
+   logger.info("Entering the recipes_comments_reply view")
    name = request.POST.get('name','')
    if name == "":
       name="Anonymous"   
@@ -298,10 +304,12 @@ def recipes_comments_reply(request):
    recipe_title = request.POST.get('recipe_title_url_format','')
 
    if comment=="":
+      logger.info("Comment field is empty. Redirecting without doing anything")
       return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
    else:        
       ip_address_object = ipaddress_class()
       ip_address        = ip_address_object.get_ipaddress(request)
+      ip_address_object.save_ipaddress(ip_address)
 
       row = comment_reply_table(name=name, comment_reply_id_id=comment_id, comment=comment )
       row.save()
@@ -310,14 +318,16 @@ def recipes_comments_reply(request):
       message=' %s has replied for an existing comment for the below recipe:\n\n Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n Comment -> %s \n\n This comment is stored in the table comment_reply_table'%(name,recipe_title,recipe_type,recipe_title,comment)
       Email_object = Email()
       Email_object.send_email(subject, message)
+      logger.info("Stored the reply of the comment in the database. Successfuly sent email and redirecting to show recipe page")
+      logger.info("subject - %s, message - %s" %(subject, message))
       return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
-   return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
-
 def like_article(request, recipetype="",recipetitle=""):
+    logger.info("Entering the like_article view")
     if recipetype and recipetitle:
         ip_address_object = ipaddress_class()
         ip_address        = ip_address_object.get_ipaddress(request)
+        ip_address_object.save_ipaddress(ip_address)
 
         try:
             a = Article.objects.get(title=recipetitle.replace("-"," "))
@@ -326,9 +336,12 @@ def like_article(request, recipetype="",recipetitle=""):
             raise Http404
 
         count = a.likes
+        logger.info("Previous likes number is %s" %count)
 	count += 1
 	a.likes = count
 	a.save()
+        logger.info("New likes number is %s" %count)
+
 	subject='IpAddress-%s, liked %s'%(str(ip_address), a.title)
 	message=' Recipe title -> %s \n Recipe url -> surekha-cookhouse.rhcloud.com/recipes/%s/%s/ \n'%(a.title, a.recipe_type, recipetitle)
         Email_object = Email()
@@ -339,11 +352,14 @@ def like_article(request, recipetype="",recipetitle=""):
         raise Http404
 
 def search(request):
+   logger.info("Entering the search view")
    ip_address_object = ipaddress_class()
    ip_address        = ip_address_object.get_ipaddress(request)
+   ip_address_object.save_ipaddress(ip_address)
 
    c={}
-   c.update(csrf(request))   
+   c.update(csrf(request))
+   logger.info("Redirecting to search.html")   
    return render_to_response('search.html',c)
 
 def search_titles(request):
@@ -360,16 +376,21 @@ def search_titles(request):
    return render_to_response('ajax_search.html',{'recipes':recipes})
 
 def contact(request):
+   logger.info("Entering the contact view")
    ip_address_object = ipaddress_class()
    ip_address        = ip_address_object.get_ipaddress(request)
+   ip_address_object.save_ipaddress(ip_address)
 
    c={}
-   c.update(csrf(request))   
+   c.update(csrf(request))
+   logger.info("Redirecting to contact.html")   
    return render_to_response('contact.html',c)
 
 def contact_submit(request):
+   logger.info("Entering the contact_submit view")
    ip_address_object = ipaddress_class()
    ip_address        = ip_address_object.get_ipaddress(request)
+   ip_address_object.save_ipaddress(ip_address)
 
    name = request.POST.get('name','')    
    email = request.POST.get('email','')    
@@ -381,4 +402,6 @@ def contact_submit(request):
    message='Email id -%s\n Subject -%s\n Message-%s\n'%(email,question_subject,message)
    Email_object = Email()
    Email_object.send_email(subject, message)
+   logger.info("Sent the email for contact page contents")
+   logger.info("subject - %s, message - %s" %(subject, message))
    return HttpResponse(json.dumps("success"))
