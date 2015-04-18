@@ -149,12 +149,12 @@ def showrecipe (request, recipetitle=""):
    ingredient_dictionary= SortedDict()
    for ingredient in ingredients_split:
       if '<h>' in ingredient:
-         match = re.search('<h>(.*)',ingredient)
+         match = re.search('\s*<h>\s*(.*)',ingredient)
          if match:
             ingredient_dictionary[match.group(1)] =[]
             key=match.group(1)
       elif ';' in ingredient:
-         match = re.search('(.*);\s*(.*)',ingredient)
+         match = re.search('\s*(.*);\s*(.*)',ingredient)
          if match:
             ingredient_dictionary[key].append([match.group(1),match.group(2)])
 
