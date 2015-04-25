@@ -5,19 +5,21 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
+import ConfigParser
+import os
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+config = ConfigParser.ConfigParser()
+config.read(os.path.join(BASE_DIR, 'djangotest/username_password.ini'))
 #For sending email from gmail
 EMAIL_USE_TLS=True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'surekhascookhouse@gmail.com'
-EMAIL_HOST_PASSWORD='saidapet'
+EMAIL_HOST_USER = config.get('Email', 'Username')
+EMAIL_HOST_PASSWORD= config.get('Email', 'Password')
 EMAIL_PORT=587
 
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-#Returns the directory of the current pathname
-#BASE_DIR = '/home/suruprabhu/Documents/python/Helloworld/django-prabhu/djangotest'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
