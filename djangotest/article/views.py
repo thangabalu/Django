@@ -256,7 +256,7 @@ class Email:
 
     def __init__(self):
         self.from_email = settings.EMAIL_HOST_USER
-        self.to_list    = ['thangabalu@gmail.com', 'surekhabe@gmail.com']
+        self.to_list    = ['thangabalu@gmail.com', 'surekhascookhouse@gmail.com']
 
     def send_email(self,subject, message):
         send_mail(subject, message, self.from_email, self.to_list, fail_silently=True)
