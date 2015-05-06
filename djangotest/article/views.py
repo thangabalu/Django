@@ -26,7 +26,34 @@ from article.models import time_functions
 import logging
 logger = logging.getLogger(__name__)
 
+def generate_ipaddress(ipaddressrange):
+    logger.info("Generating ip address range - %s " %ipaddressrange)
+
+    ipaddress_split = ipaddressrange.split("-")
+    first_set = ipaddress_split[0]
+    dot_separated = first_set.split(".")
+
+    first_digit, second_digit, third_digit, last_digit = dot_separated
+    first_three_digits = first_digit+"."+second_digit+"."+third_digit
+
+    ipaddress_list = []
+
+    top_range = int(ipaddress_split[1])
+    current_ip = int(last_digit)
+
+    while (current_ip <= top_range):
+        ipaddress_list.append(str(first_three_digits)+'.'+str(current_ip))
+        current_ip += 1
+
+    logger.info("Completed generating ip address range. Returning list")
+    return ipaddress_list
+
+
 block_ip_addresses = ["46.161.41.199", "176.10.104.227", "176.10.104.234"]
+
+ipaddress_range    = generate_ipaddress("188.143.232.1-100")
+block_ip_addresses = block_ip_addresses + ipaddress_range
+
 
 class ipaddress_class:
    def get_ipaddress(self, request):
