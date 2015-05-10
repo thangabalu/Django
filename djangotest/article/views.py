@@ -298,14 +298,12 @@ def recipes_comments(request):
     recipe_id = request.POST.get('recipe_id','')
     recipe_type  = request.POST.get('recipe_type','')
     recipe_title = request.POST.get('recipe_title','')
-    #If comment field is empty, just redirect without writing to database
 
-    spam_list = ["href", "<a", "http"]
-    spam = set(spam_list).intersection(comment.split())
-    if spam:
+    if re.findall(r'.*(href).*',comment) or re.findall(r'.*(http).*',comment)or re.findall(r'.*(<a).*',comment) or re.findall(r'.*(www.).*',comment) :
         logger.info("Seems like spam comment. Redirecting without doing anything")
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
 
+    #If comment field is empty, just redirect without writing to database
     if comment=="":
         logger.info("Comment field is empty. Redirecting without doing anything")
         return HttpResponseRedirect('/recipes/%s/%s/'%(recipe_type,recipe_title))
